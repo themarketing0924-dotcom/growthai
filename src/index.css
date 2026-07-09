@@ -1,0 +1,712 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ═══════════════════════════════════════
+   DESIGN SYSTEM TOKENS
+   Gold/White/Black — Abraham.com prestige
+   Toss-style Korean typography
+═══════════════════════════════════════ */
+:root {
+  /* Font stacks */
+  --font-sans:    'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+
+  /* Gold palette */
+  --gold:         #C9A84C;
+  --gold-light:   #D4BA6A;
+  --gold-dark:    #A88330;
+  --gold-subtle:  rgba(201, 168, 76, 0.10);
+  --gold-border:  rgba(201, 168, 76, 0.25);
+  --gold-hover:   rgba(201, 168, 76, 0.35);
+
+  /* Toss-style type scale (Korean) — toss.im 기준 */
+  --text-hero:        clamp(3rem,    8vw,  6rem);    /* 48–96px  ★ Toss 대형 헤딩 */
+  --text-heading:     clamp(2rem,    5vw,  3.75rem); /* 32–60px */
+  --text-subheading:  clamp(1.375rem,2.5vw,2rem);   /* 22–32px */
+  --text-body-lg:     1.125rem;    /* 18px — Toss body large */
+  --text-body:        1rem;        /* 16px */
+  --text-sm:          0.9375rem;   /* 15px */
+  --text-xs:          0.875rem;    /* 14px */
+  --text-xxs:         0.8125rem;   /* 13px */
+
+  font-family: var(--font-sans);
+  letter-spacing: -0.015em;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  background: #000;
+  color: #fff;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+html {
+  scroll-padding-top: 5rem;
+}
+
+section {
+  scroll-margin-top: 5rem;
+}
+
+/* ── GOLD ACCENT UTILITIES ── */
+.gold-text         { color: var(--gold); }
+.gold-text-light   { color: var(--gold-light); }
+.gold-border       { border-color: var(--gold-border); }
+.gold-bg-subtle    { background-color: var(--gold-subtle); }
+
+/* Gold eyebrow label — replaces text-white/40 on section labels */
+.eyebrow-gold {
+  color: var(--gold);
+  opacity: 0.85;
+  font-size: 0.75rem;       /* 12px */
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+/* Gold hover border for cards */
+.hover-gold-border:hover {
+  border-color: var(--gold-hover) !important;
+}
+
+/* English prestige heading — Playfair Display */
+.font-display {
+  font-family: var(--font-display) !important;
+  letter-spacing: -0.015em;
+}
+
+/* Toss-style heading tracking */
+.tracking-toss { letter-spacing: -0.03em; }
+.tracking-toss-tight { letter-spacing: -0.04em; }
+
+/* ══════════════════════════════════════════════════════════
+   LIGHT MODE — Apple Luxury Edition
+   컨셉: 흰색 + 골드 + 블랙  ·  애플닷컴 수준의 프리미엄 라이트
+   배경: 순백(#ffffff) + 크림(#f9f5ee) 교차  ·  골드 포인트
+══════════════════════════════════════════════════════════ */
+
+/* ── 라이트 모드 CSS 변수 ── */
+html.light {
+  --lux-bg:          #ffffff;
+  --lux-bg-alt:      #f8f4ef;   /* 크림 — 섹션 교차 */
+  --lux-bg-card:     #ffffff;
+  --lux-text:        #1d1d1f;   /* Apple 메인 텍스트 */
+  --lux-text-sub:    #424245;   /* Apple 서브 텍스트 */
+  --lux-text-muted:  #6e6e73;   /* Apple 뮤트 텍스트 */
+  --lux-border:      rgba(201,168,76,0.18);   /* 골드 틴트 테두리 */
+  --lux-border-sub:  rgba(0,0,0,0.08);        /* 뉴트럴 테두리 */
+  --lux-shadow-card: 0 2px 24px rgba(0,0,0,0.07), 0 1px 4px rgba(0,0,0,0.04);
+  --lux-shadow-hover:0 8px 40px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06);
+}
+
+/* ── 기본 배경·텍스트 ── */
+html.light body {
+  background: var(--lux-bg);
+  color: var(--lux-text);
+}
+
+/* ── 메인 페이지 영역 ── */
+html.light .bg-black        { background-color: var(--lux-bg) !important; }
+html.light .bg-black\/60    { background-color: rgba(255,255,255,0.6) !important; }
+html.light .bg-black\/75    { background-color: rgba(255,255,255,0.72) !important; }
+html.light .bg-black\/80    { background-color: rgba(255,255,255,0.78) !important; }
+html.light .bg-black\/85    { background-color: rgba(255,255,255,0.84) !important; }
+html.light .bg-black\/90    { background-color: rgba(255,255,255,0.90) !important; }
+
+/* ── 흰색 배경 (카드 / 패널) ── */
+html.light .bg-white\/\[0\.01\] { background-color: rgba(201,168,76,0.03) !important; }
+html.light .bg-white\/\[0\.015\] { background-color: rgba(201,168,76,0.035) !important; }
+html.light .bg-white\/\[0\.02\] { background-color: rgba(201,168,76,0.04) !important; }
+html.light .bg-white\/\[0\.03\] { background-color: rgba(201,168,76,0.05) !important; }
+html.light .bg-white\/\[0\.04\] { background-color: rgba(201,168,76,0.06) !important; }
+html.light .bg-white\/5    { background-color: rgba(201,168,76,0.06) !important; }
+html.light .bg-white\/8    { background-color: rgba(201,168,76,0.08) !important; }
+html.light .bg-white\/10   { background-color: rgba(201,168,76,0.09) !important; }
+html.light .bg-white\/12   { background-color: rgba(201,168,76,0.10) !important; }
+html.light .bg-white\/15   { background-color: rgba(201,168,76,0.11) !important; }
+html.light .bg-white\/20   { background-color: rgba(201,168,76,0.13) !important; }
+
+/* ── 테두리 ── */
+html.light .border-white\/4  { border-color: rgba(0,0,0,0.05) !important; }
+html.light .border-white\/5  { border-color: rgba(0,0,0,0.06) !important; }
+html.light .border-white\/6  { border-color: rgba(0,0,0,0.07) !important; }
+html.light .border-white\/7  { border-color: rgba(0,0,0,0.07) !important; }
+html.light .border-white\/8  { border-color: rgba(0,0,0,0.08) !important; }
+html.light .border-white\/9  { border-color: rgba(0,0,0,0.08) !important; }
+html.light .border-white\/10 { border-color: rgba(0,0,0,0.09) !important; }
+html.light .border-white\/12 { border-color: rgba(0,0,0,0.10) !important; }
+html.light .border-white\/15 { border-color: rgba(0,0,0,0.11) !important; }
+html.light .border-white\/20 { border-color: rgba(0,0,0,0.13) !important; }
+html.light .border-white\/25 { border-color: rgba(0,0,0,0.16) !important; }
+html.light .border-white\/30 { border-color: rgba(0,0,0,0.18) !important; }
+
+/* ── 텍스트 — white → Apple dark palette ── */
+html.light .text-white       { color: var(--lux-text) !important; }
+html.light .text-white\/90   { color: rgba(29,29,31,0.92) !important; }
+html.light .text-white\/85   { color: rgba(29,29,31,0.86) !important; }
+html.light .text-white\/80   { color: rgba(29,29,31,0.82) !important; }
+html.light .text-white\/75   { color: rgba(29,29,31,0.76) !important; }
+html.light .text-white\/70   { color: rgba(29,29,31,0.70) !important; }
+html.light .text-white\/65   { color: rgba(29,29,31,0.64) !important; }
+html.light .text-white\/60   { color: rgba(29,29,31,0.58) !important; }
+html.light .text-white\/55   { color: rgba(29,29,31,0.52) !important; }
+html.light .text-white\/50   { color: rgba(29,29,31,0.46) !important; }
+html.light .text-white\/45   { color: rgba(29,29,31,0.40) !important; }
+html.light .text-white\/40   { color: rgba(29,29,31,0.36) !important; }
+html.light .text-white\/35   { color: rgba(29,29,31,0.32) !important; }
+html.light .text-white\/30   { color: rgba(29,29,31,0.28) !important; }
+html.light .text-white\/25   { color: rgba(29,29,31,0.24) !important; }
+html.light .text-white\/20   { color: rgba(29,29,31,0.20) !important; }
+html.light .text-white\/15   { color: rgba(29,29,31,0.15) !important; }
+html.light .text-black       { color: var(--lux-text) !important; }
+
+/* ── 그라데이션 텍스트 — 라이트 모드 재맵핑 ── */
+/* apple-white-gradient: 다크 배경용 흰 그라데이션 → 라이트에선 진한 블랙 */
+html.light .apple-white-gradient {
+  background-image: linear-gradient(180deg, #1a1a1a 0%, #3d3d3d 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+/* shimmer-white → 라이트에선 부드러운 다크 shimmer */
+html.light .apple-shimmer-white {
+  background-image: linear-gradient(
+    90deg,
+    #6e6e73 0%,
+    #1d1d1f 25%,
+    #424245 50%,
+    #1d1d1f 75%,
+    #6e6e73 100%
+  );
+  background-size: 400% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmerWhite 6s linear infinite;
+}
+
+/* ── Apple 카드 럭셔리 쉐도우 (라이트 모드) ── */
+html.light [class*="rounded-2xl"],
+html.light [class*="rounded-xl"] {
+  /* box-shadow는 inline style이 없는 경우에만 적용 */
+}
+
+/* 카드 그룹: 테두리+배경 조합 */
+html.light .border {
+  border-color: var(--lux-border-sub);
+}
+
+/* ── 토글 버튼, 뱃지 등 interactive ── */
+html.light .hover\:bg-white\/8:hover  { background-color: rgba(201,168,76,0.08) !important; }
+html.light .hover\:bg-white\/6:hover  { background-color: rgba(201,168,76,0.06) !important; }
+html.light .hover\:text-white:hover   { color: var(--lux-text) !important; }
+html.light .hover\:border-white\/25:hover { border-color: rgba(201,168,76,0.35) !important; }
+html.light .hover\:border-white\/18:hover { border-color: rgba(201,168,76,0.25) !important; }
+
+/* ── 섹션 — 크림/흰 교차 Apple 스타일 ── */
+html.light section:nth-child(even) {
+  background-color: var(--lux-bg-alt);
+}
+
+/* ── 럭셔리 카드 글로우 (light) ── */
+html.light .lux-card-light {
+  background: #ffffff;
+  border: 1px solid var(--lux-border);
+  box-shadow: var(--lux-shadow-card);
+  transition: box-shadow 0.3s ease, transform 0.25s ease;
+}
+html.light .lux-card-light:hover {
+  box-shadow: var(--lux-shadow-hover);
+  transform: translateY(-2px);
+}
+
+/* ── Apple 스타일 섹션 구분선 ── */
+html.light .lux-divider {
+  border-color: rgba(201,168,76,0.2) !important;
+}
+
+/* ── 스크롤바 (라이트) ── */
+html.light::-webkit-scrollbar       { width: 8px; }
+html.light::-webkit-scrollbar-track { background: #f5f5f7; }
+html.light::-webkit-scrollbar-thumb { background: rgba(201,168,76,0.4); border-radius: 4px; }
+html.light::-webkit-scrollbar-thumb:hover { background: rgba(201,168,76,0.65); }
+
+/* ── 텍스트 선택 ── */
+html.light *::selection {
+  background: rgba(201,168,76,0.25);
+  color: #1d1d1f;
+}
+
+/* ── eyebrow 레이블 (라이트 모드) ── */
+html.light .apple-eyebrow      { color: #6e6e73; }
+html.light .apple-eyebrow-gold { color: var(--gold); }
+html.light .eyebrow-gold       { color: var(--gold); }
+
+/* ── input / textarea (라이트) ── */
+html.light input,
+html.light textarea,
+html.light select {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+  color: var(--lux-text) !important;
+  border-color: rgba(0,0,0,0.12) !important;
+  color-scheme: light !important;
+}
+html.light input::placeholder,
+html.light textarea::placeholder { color: var(--lux-text-muted) !important; }
+
+/* ── FOOTER — 다크 배경 고정 → 라이트 모드에서도 흰색 텍스트 유지 ── */
+html.light footer .text-white       { color: #ffffff !important; }
+html.light footer .text-white\/90   { color: rgba(255,255,255,0.90) !important; }
+html.light footer .text-white\/80   { color: rgba(255,255,255,0.80) !important; }
+html.light footer .text-white\/75   { color: rgba(255,255,255,0.75) !important; }
+html.light footer .text-white\/70   { color: rgba(255,255,255,0.70) !important; }
+html.light footer .text-white\/65   { color: rgba(255,255,255,0.65) !important; }
+html.light footer .text-white\/60   { color: rgba(255,255,255,0.60) !important; }
+html.light footer .text-white\/55   { color: rgba(255,255,255,0.55) !important; }
+html.light footer .text-white\/50   { color: rgba(255,255,255,0.50) !important; }
+html.light footer .text-white\/45   { color: rgba(255,255,255,0.45) !important; }
+html.light footer .text-white\/40   { color: rgba(255,255,255,0.40) !important; }
+html.light footer .text-white\/30   { color: rgba(255,255,255,0.30) !important; }
+html.light footer .text-white\/25   { color: rgba(255,255,255,0.25) !important; }
+html.light footer .text-white\/20   { color: rgba(255,255,255,0.20) !important; }
+
+/* ── LIVE PAGE 배너 (인라인 스타일 고정 배경이므로 텍스트만) ── */
+html.light [style*="#0d0b00"] .text-white,
+html.light [style*="#1a1400"] .text-white { color: #ffffff !important; }
+
+/* ═══════════════════════════════════════════════════════════
+   [data-dark="true"] — 라이트 모드에서도 다크 배경 유지하는 섹션
+   텍스트·테두리·배경 모두 다크 모드 원본값으로 복원
+═══════════════════════════════════════════════════════════ */
+html.light [data-dark="true"] .text-white       { color: rgba(255,255,255,0.88) !important; }
+html.light [data-dark="true"] .text-white\/90   { color: rgba(255,255,255,0.90) !important; }
+html.light [data-dark="true"] .text-white\/80   { color: rgba(255,255,255,0.80) !important; }
+html.light [data-dark="true"] .text-white\/75   { color: rgba(255,255,255,0.75) !important; }
+html.light [data-dark="true"] .text-white\/70   { color: rgba(255,255,255,0.70) !important; }
+html.light [data-dark="true"] .text-white\/65   { color: rgba(255,255,255,0.65) !important; }
+html.light [data-dark="true"] .text-white\/60   { color: rgba(255,255,255,0.60) !important; }
+html.light [data-dark="true"] .text-white\/55   { color: rgba(255,255,255,0.55) !important; }
+html.light [data-dark="true"] .text-white\/50   { color: rgba(255,255,255,0.50) !important; }
+html.light [data-dark="true"] .text-white\/45   { color: rgba(255,255,255,0.45) !important; }
+html.light [data-dark="true"] .text-white\/40   { color: rgba(255,255,255,0.40) !important; }
+html.light [data-dark="true"] .text-white\/35   { color: rgba(255,255,255,0.35) !important; }
+html.light [data-dark="true"] .text-white\/30   { color: rgba(255,255,255,0.30) !important; }
+html.light [data-dark="true"] .text-white\/28   { color: rgba(255,255,255,0.28) !important; }
+html.light [data-dark="true"] .text-white\/25   { color: rgba(255,255,255,0.25) !important; }
+html.light [data-dark="true"] .text-white\/20   { color: rgba(255,255,255,0.20) !important; }
+html.light [data-dark="true"] .text-white\/15   { color: rgba(255,255,255,0.15) !important; }
+html.light [data-dark="true"] .text-white\/10   { color: rgba(255,255,255,0.10) !important; }
+
+/* 테두리 복원 */
+html.light [data-dark="true"] .border-white\/5  { border-color: rgba(255,255,255,0.05) !important; }
+html.light [data-dark="true"] .border-white\/6  { border-color: rgba(255,255,255,0.06) !important; }
+html.light [data-dark="true"] .border-white\/8  { border-color: rgba(255,255,255,0.08) !important; }
+html.light [data-dark="true"] .border-white\/10 { border-color: rgba(255,255,255,0.10) !important; }
+html.light [data-dark="true"] .border-white\/12 { border-color: rgba(255,255,255,0.12) !important; }
+html.light [data-dark="true"] .border-white\/20 { border-color: rgba(255,255,255,0.20) !important; }
+html.light [data-dark="true"] .border           { border-color: rgba(255,255,255,0.08) !important; }
+
+/* 배경 복원 */
+html.light [data-dark="true"] .bg-white\/\[0\.01\] { background-color: rgba(255,255,255,0.01) !important; }
+html.light [data-dark="true"] .bg-white\/\[0\.02\] { background-color: rgba(255,255,255,0.02) !important; }
+html.light [data-dark="true"] .bg-white\/\[0\.03\] { background-color: rgba(255,255,255,0.03) !important; }
+html.light [data-dark="true"] .bg-white\/5   { background-color: rgba(255,255,255,0.05) !important; }
+html.light [data-dark="true"] .bg-white\/8   { background-color: rgba(255,255,255,0.08) !important; }
+html.light [data-dark="true"] .bg-white\/10  { background-color: rgba(255,255,255,0.10) !important; }
+
+/* apple-white-gradient 복원 (다크 배경 위의 흰 그라디언트) */
+html.light [data-dark="true"] .apple-white-gradient {
+  background-image: linear-gradient(180deg, #ffffff 0%, rgba(255,255,255,0.80) 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+html.light [data-dark="true"] .apple-shimmer-white {
+  background-image: linear-gradient(90deg, #c0c0c0 0%, #ffffff 30%, #c0c0c0 60%, #ffffff 80%, #c0c0c0 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+/* hover 복원 */
+html.light [data-dark="true"] .hover\:text-white:hover   { color: rgba(255,255,255,1) !important; }
+html.light [data-dark="true"] .hover\:bg-white\/8:hover  { background-color: rgba(255,255,255,0.08) !important; }
+
+/* 카드 박스섀도 억제 — 다크 섹션 안 카드는 원래 스타일 유지 */
+html.light [data-dark="true"] div[class*="rounded-2xl"],
+html.light [data-dark="true"] div[class*="rounded-xl"]   { box-shadow: none !important; }
+
+/* ── 코드 블록 ── */
+html.light pre,
+html.light code {
+  background: rgba(0,0,0,0.04);
+  color: var(--lux-text);
+  border-color: rgba(0,0,0,0.09);
+}
+
+/* ══ Apple 스타일 글로벌 카드 피니시 (라이트) ══
+   border가 있고 rounded-2xl인 div에 자동으로 세련된 쉐도우 적용 */
+html.light div[class*="rounded-2xl"][class*="border-white"] {
+  box-shadow: 0 1px 16px rgba(0,0,0,0.06), 0 0 0 1px rgba(201,168,76,0.10);
+}
+html.light div[class*="rounded-xl"][class*="border-white"] {
+  box-shadow: 0 1px 10px rgba(0,0,0,0.05);
+}
+
+/* ══════════════════════════════════════════
+   APPLE-STYLE TYPOGRAPHY SYSTEM
+   Apple MacBook Pro 기준 — 고급 타이포
+   폰트: Pretendard (우리 사이트 유지)
+   크기·자간·굵기만 Apple 수준으로 업그레이드
+═══════════════════════════════════════════ */
+
+/* ── TYPE SCALE 변수 업데이트 (Apple 기준) ── */
+:root {
+  --apple-h1:   clamp(2.75rem, 8vw,  6rem);    /* 44–96px  — Apple hero */
+  --apple-h2:   clamp(2.25rem, 5.5vw, 4.5rem); /* 36–72px  — Apple section */
+  --apple-h3:   clamp(1.5rem,  3.5vw, 2.5rem); /* 24–40px  — Apple feature */
+  --apple-body: clamp(1.0625rem, 1.5vw, 1.3125rem); /* 17–21px — Apple body */
+  --apple-sub:  0.8125rem;                      /* 13px     — Apple eyebrow */
+  --apple-ease: cubic-bezier(0.4, 0, 0.15, 1); /* Apple easing */
+  --apple-ease-out: cubic-bezier(0.16, 1, 0.3, 1); /* 튕기는 느낌 없는 out */
+}
+
+/* ── H1 : 히어로 수준 — 매우 크고 타이트 ── */
+h1 {
+  font-family: var(--font-sans);
+  font-size: var(--apple-h1);
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 1.05;
+  word-break: keep-all;
+}
+
+/* ── H2 : 섹션 헤딩 — Apple "## 성능" 수준 ── */
+h2 {
+  font-family: var(--font-sans);
+  font-size: var(--apple-h2);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.08;
+  word-break: keep-all;
+}
+
+/* ── H3 : 피처 헤딩 — Apple "### AI를 위한" 수준 ── */
+h3 {
+  font-family: var(--font-sans);
+  font-size: var(--apple-h3);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.18;
+  word-break: keep-all;
+}
+
+/* ── H4, H5, H6 ── */
+h4, h5, h6 {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.28;
+  word-break: keep-all;
+}
+
+/* ── Body — Apple 17px 기준 ── */
+p, li {
+  font-family: var(--font-sans);
+  word-break: keep-all;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: 17px;
+  letter-spacing: -0.012em;
+  line-height: 1.65;
+  word-break: keep-all;
+}
+
+/* ── Apple 그라디언트 텍스트 유틸 ── */
+
+/* 골드 그라데이션 (강조 스팬용) */
+.apple-gradient-text {
+  background-image: linear-gradient(135deg, #D4BA6A 0%, #C9A84C 45%, #e8d08a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Apple 화이트 그라데이션 — 다크 배경 메인 헤딩 */
+/* Apple MacBook Pro 페이지 "M5. M5 Pro. M5 Max." 스타일 */
+.apple-white-gradient {
+  background-image: linear-gradient(180deg, #f5f5f7 0%, #c7c7cc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Apple 골드 메탈릭 그라데이션 — h1/h2 강조 스팬 */
+.apple-gold-gradient {
+  background-image: linear-gradient(180deg, #EED98A 0%, #D4BA6A 35%, #C9A84C 65%, #A07830 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* 인라인 골드 그라데이션 스타일 (JS에서 참조용) */
+/* backgroundImage: 'var(--apple-gold-grad)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' */
+:root {
+  --apple-gold-grad: linear-gradient(180deg, #EED98A 0%, #D4BA6A 35%, #C9A84C 65%, #A07830 100%);
+  --apple-white-grad: linear-gradient(180deg, #f5f5f7 0%, #c7c7cc 100%);
+}
+
+/* ── Apple eyebrow 레이블 ── */
+.apple-eyebrow {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #6e6e73;
+}
+.apple-eyebrow-gold {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* ── Apple 섹션 타이틀 센터 정렬 유틸 ── */
+.apple-section-title {
+  text-align: center;
+  font-size: var(--apple-h2);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.08;
+  word-break: keep-all;
+}
+
+/* ── Apple body 텍스트 ── */
+.apple-body {
+  font-size: var(--apple-body);
+  color: #86868b;
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+}
+
+/* ══════════════════════════════════════════
+   APPLE-STYLE 스크롤 애니메이션
+   toss blur 대신 — 깔끔한 fade+rise
+   Apple은 블러 없이 불투명도 + 위치만 변화
+═══════════════════════════════════════════ */
+
+/* ── keyframes ── */
+@keyframes appleReveal {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes appleRevealSlow {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes appleScaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes appleFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* 기존 호환성 유지 */
+@keyframes fadeUpBlur {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ── CSS scroll-driven (Chrome 115+ / Safari 18+) ── */
+@supports (animation-timeline: view()) {
+
+  /* Apple 기본 reveal — 텍스트/섹션 */
+  .apple-reveal {
+    animation: appleReveal 0.85s var(--apple-ease-out) both;
+    animation-timeline: view();
+    animation-range: entry 5% entry 35%;
+  }
+
+  /* Apple 느린 reveal — 큰 헤딩 */
+  .apple-reveal-slow {
+    animation: appleRevealSlow 1s var(--apple-ease-out) both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 30%;
+  }
+
+  /* Apple 스케일 — 이미지/카드/목업 */
+  .apple-scale {
+    animation: appleScaleUp 1s var(--apple-ease-out) both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 35%;
+  }
+
+  /* Apple 페이드 — 서브카피 */
+  .apple-fade {
+    animation: appleFadeIn 1s var(--apple-ease) both;
+    animation-timeline: view();
+    animation-range: entry 5% entry 30%;
+  }
+
+  /* Stagger delays */
+  .apple-reveal-d1 { animation-delay: 0.08s; }
+  .apple-reveal-d2 { animation-delay: 0.16s; }
+  .apple-reveal-d3 { animation-delay: 0.24s; }
+  .apple-reveal-d4 { animation-delay: 0.32s; }
+  .apple-reveal-d5 { animation-delay: 0.40s; }
+
+  /* 기존 클래스 호환 — 기존 페이지 깨지지 않게 유지 */
+  .toss-reveal {
+    animation: appleReveal 0.85s var(--apple-ease-out) both;
+    animation-timeline: view();
+    animation-range: entry 5% entry 32%;
+  }
+  .toss-title {
+    animation: appleReveal 0.85s var(--apple-ease-out) both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 28%;
+  }
+  .toss-scale {
+    animation: appleScaleUp 1s var(--apple-ease-out) both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 32%;
+  }
+}
+
+/* ══════════════════════════════════════════
+   APPLE SHIMMER — 프리미엄 그라데이션 애니메이션
+   "AI 시대" 같은 임팩트 헤딩에 사용
+═══════════════════════════════════════════ */
+
+@keyframes shimmerGold {
+  0%   { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+@keyframes shimmerWhite {
+  0%   { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50%       { opacity: 1;   transform: scale(1.04); }
+}
+
+/* 골드 shimmer — 메인 임팩트 헤딩 */
+.apple-shimmer-gold {
+  background-image: linear-gradient(
+    90deg,
+    #A07830 0%,
+    #C9A84C 20%,
+    #EED98A 35%,
+    #FFF5C0 50%,
+    #EED98A 65%,
+    #C9A84C 80%,
+    #A07830 100%
+  );
+  background-size: 400% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmerGold 5s linear infinite;
+}
+
+/* 화이트 shimmer — 서브 헤딩 */
+.apple-shimmer-white {
+  background-image: linear-gradient(
+    90deg,
+    #86868b 0%,
+    #c7c7cc 20%,
+    #f5f5f7 40%,
+    #ffffff 50%,
+    #f5f5f7 60%,
+    #c7c7cc 80%,
+    #86868b 100%
+  );
+  background-size: 400% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmerWhite 6s linear infinite;
+}
+
+/* 글로우 배경 펄스 */
+.apple-glow-pulse {
+  animation: glowPulse 3s ease-in-out infinite;
+}
+
+/* CSS-only reveal (Intersection Observer fallback) */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.85s var(--apple-ease-out, cubic-bezier(0.16,1,0.3,1)),
+              transform 0.85s var(--apple-ease-out, cubic-bezier(0.16,1,0.3,1));
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── SMOOTH SCROLL ── */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Lenis smooth scroll */
+.lenis.lenis-smooth         { scroll-behavior: auto !important; }
+.lenis.lenis-stopped        { overflow: hidden; }
+.lenis.lenis-scrolling iframe { pointer-events: none; }
