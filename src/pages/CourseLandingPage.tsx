@@ -617,11 +617,35 @@ export default function CourseLandingPage() {
   return (
     <div className="min-h-screen bg-black text-white" style={{ fontFamily: 'Pretendard, -apple-system, sans-serif' }}>
       <Seo
-        title={`${course.title} | GrowthAI`}
+        title={`${course.title} | AI 마케팅 강의 GrowthAI`}
         description={course.desc}
         canonical={`/course/${course.slug}`}
         image={DEFAULT_OG_IMAGE}
-        keywords={[course.title, 'AI 강의', '랜딩페이지', 'GrowthAI']}
+        keywords={[course.title, 'AI 마케팅 강의', '소상공인 강의', '1인창업가 강의', 'GrowthAI']}
+        schema={{
+          '@context': 'https://schema.org',
+          '@type': 'Course',
+          name: course.title,
+          description: course.desc,
+          provider: { '@type': 'Organization', name: 'GrowthAI', sameAs: 'https://www.growthai.kr/' },
+          offers: {
+            '@type': 'Offer',
+            price: course.price.replace(/[^0-9]/g, ''),
+            priceCurrency: 'KRW',
+            availability: 'https://schema.org/InStock',
+            url: `https://www.growthai.kr/course/${course.slug}`,
+          },
+          aggregateRating: {
+            '@type': 'AggregateRating',
+            ratingValue: course.rating,
+            reviewCount: course.reviewCount,
+          },
+          hasCourseInstance: {
+            '@type': 'CourseInstance',
+            courseMode: 'online',
+            courseWorkload: course.totalHours,
+          },
+        }}
       />
 
       {/* ── 상단 고정 바 (스크롤 시) ── */}

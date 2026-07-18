@@ -97,19 +97,49 @@ export default function App() {
       <Route path="/" element={
     <>
       <Seo
-        title="GrowthAI — 마케팅 × AI 실전 클래스"
-        description="랜딩페이지, 상세페이지, 프롬프트, 자동화, 강의 판매까지 연결되는 구매 전환형 AI 마케팅 사이트입니다."
+        title="GrowthAI — 소상공인·1인창업가를 위한 AI 마케팅 실전 클래스"
+        description="소상공인, 1인창업가, N잡러를 위한 AI 마케팅 실전 강의. 챗GPT·클로드로 카피라이팅, SNS 마케팅, 랜딩페이지, 자동화까지 — 매출로 연결되는 AI 마케팅 노하우를 배웁니다."
         canonical="/"
         image={DEFAULT_OG_IMAGE}
-        keywords={['AI 마케팅', '랜딩페이지', '상세페이지', '프롬프트', '자동화', '구매 전환']}
+        keywords={[
+          'AI 마케팅', '소상공인 마케팅', '1인창업가', '1인기업', 'AI 마케팅 강의',
+          '챗GPT 마케팅', '클로드 활용법', '소상공인 SNS 마케팅', '카피라이팅',
+          '콘텐츠 자동화', 'AI 부업', '온라인 부업', '퍼스널 브랜딩', 'GrowthAI',
+        ]}
         siteName={SITE_NAME}
-        schema={{
-          '@context': 'https://schema.org',
-          '@type': 'WebSite',
-          name: SITE_NAME,
-          url: SITE_URL,
-          description: 'AI 마케팅과 구매 전환 구조를 결합한 GrowthAI 메인 사이트',
-        }}
+        schema={[
+          {
+            '@context': 'https://schema.org',
+            '@type': 'WebSite',
+            name: SITE_NAME,
+            url: SITE_URL,
+            description: '소상공인·1인창업가를 위한 AI 마케팅 실전 강의, GrowthAI 메인 사이트',
+            inLanguage: 'ko',
+            potentialAction: {
+              '@type': 'SearchAction',
+              target: `${SITE_URL}/blog?q={search_term_string}`,
+              'query-input': 'required name=search_term_string',
+            },
+          },
+          {
+            '@context': 'https://schema.org',
+            '@type': 'EducationalOrganization',
+            name: SITE_NAME,
+            url: SITE_URL,
+            logo: `${SITE_URL}/favicon.svg`,
+            description: '소상공인, 1인창업가, N잡러를 위한 AI 마케팅 실전 강의를 제공하는 교육 기업입니다.',
+            founder: { '@type': 'Person', name: content.founder.name.replace('AI 멘토 ', '') },
+          },
+          {
+            '@context': 'https://schema.org',
+            '@type': 'FAQPage',
+            mainEntity: content.faq.items.map((item) => ({
+              '@type': 'Question',
+              name: item.question,
+              acceptedAnswer: { '@type': 'Answer', text: item.answer },
+            })),
+          },
+        ]}
       />
     <div className="bg-black text-white selection:bg-white selection:text-black min-h-screen" style={{ fontFamily: 'Pretendard, -apple-system, sans-serif' }}>
       <Navbar entranceComplete={entranceComplete} lang={lang} setLang={setLang} />

@@ -816,9 +816,9 @@ export default function BlogPage() {
       });
     } else {
       /* 목록 뷰 SEO */
-      document.title = `마케팅 인사이트 블로그 | ${SITE_NAME}`;
+      document.title = `AI 마케팅 인사이트 블로그 — 소상공인·1인창업가 필독 | ${SITE_NAME}`;
       setMeta('description', BLOG_DESCRIPTION);
-      setMeta('keywords', 'AI 마케팅, 디지털 마케팅, 유튜브 수익화, 소상공인 AI, 자동화, 콘텐츠 제작');
+      setMeta('keywords', 'AI 마케팅, 소상공인 마케팅, 1인창업가, 디지털 마케팅, 유튜브 수익화, 소상공인 AI, 자동화, 콘텐츠 제작, 카피라이팅');
       setMeta('robots', 'index, follow');
       setOg('og:type', 'website');
       setOg('og:title', `마케팅 인사이트 블로그 | ${SITE_NAME}`);

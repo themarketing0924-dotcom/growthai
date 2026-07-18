@@ -196,11 +196,11 @@ export default function PortfolioDetailPage() {
   return (
     <div className="min-h-screen bg-black text-white pt-16">
       <Seo
-        title={`${data.title} | GrowthAI`}
+        title={`${data.title} | 소상공인 AI 마케팅 성공사례 GrowthAI`}
         description={data.serviceTagline}
         canonical={`/portfolio/${data.id}`}
         image={DEFAULT_OG_IMAGE}
-        keywords={[data.category, '포트폴리오', '사례', 'GrowthAI']}
+        keywords={[data.category, '소상공인 성공사례', 'AI 마케팅 포트폴리오', 'GrowthAI']}
       />
 
       {/* ── 뒤로가기 ── */}

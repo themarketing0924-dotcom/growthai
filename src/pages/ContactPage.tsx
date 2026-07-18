@@ -17,11 +17,11 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen bg-black text-white pt-24 pb-20 px-6">
       <Seo
-        title="비즈니스 문의 | GrowthAI"
-        description="기업 교육, 강연, 제휴, 미디어 문의를 위한 연락 페이지입니다."
+        title="AI 마케팅 강의 문의 — 기업 교육/강연/제휴 | GrowthAI"
+        description="소상공인 AI 마케팅 기업 강연, 단체 교육, 제휴, 미디어 문의를 위한 연락 페이지입니다."
         canonical="/contact"
         image={DEFAULT_OG_IMAGE}
-        keywords={['비즈니스 문의', '기업 교육', '제휴', 'GrowthAI']}
+        keywords={['비즈니스 문의', 'AI 마케팅 강연', '기업 교육', '제휴', 'GrowthAI']}
       />
       <div className="max-w-5xl mx-auto">
 

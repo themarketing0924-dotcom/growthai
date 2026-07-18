@@ -127,11 +127,11 @@ export default function PromptsPage() {
   return (
     <div className="min-h-screen bg-black text-white pt-16">
       <Seo
-        title="무료 AI 프롬프트 맛보기 | GrowthAI"
-        description="33개 프롬프트 중 일부를 무료로 공개하는 맛보기 페이지입니다."
+        title="무료 AI 마케팅 프롬프트 33개 맛보기 — 챗GPT·클로드 활용 | GrowthAI"
+        description="소상공인·1인창업가를 위한 챗GPT·클로드 AI 마케팅 프롬프트 33개 중 일부를 무료로 공개하는 맛보기 페이지입니다."
         canonical="/prompts"
         image={DEFAULT_OG_IMAGE}
-        keywords={['AI 프롬프트', '무료 맛보기', 'GrowthAI']}
+        keywords={['AI 프롬프트', '챗GPT 프롬프트', '클로드 프롬프트', 'AI 마케팅 프롬프트', '무료 맛보기', 'GrowthAI']}
       />
 
       {/* ── HERO ── */}

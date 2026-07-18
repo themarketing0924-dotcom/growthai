@@ -2,5 +2,8 @@ User-agent: *
 Allow: /
 Disallow: /dashboard
 Disallow: /lesson
+Disallow: /homework
+Disallow: /community
+Disallow: /course/ai
 
 Sitemap: https://www.growthai.kr/sitemap.xml

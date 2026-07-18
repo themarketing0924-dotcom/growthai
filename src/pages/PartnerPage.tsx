@@ -21,11 +21,11 @@ export default function PartnerPage() {
   return (
     <div className="min-h-screen bg-black text-white pt-24 pb-20 px-6">
       <Seo
-        title="제휴 서비스 | GrowthAI"
-        description="수강생 전용 할인 혜택과 파트너 프로그램을 안내하는 제휴 페이지입니다."
+        title="파트너 제휴 프로그램 — AI 마케팅 툴 할인 | GrowthAI"
+        description="GrowthAI 수강생 전용 AI 마케팅 툴 할인 혜택과 파트너 제휴 프로그램을 안내하는 페이지입니다."
         canonical="/partner"
         image={DEFAULT_OG_IMAGE}
-        keywords={['제휴', '파트너 프로그램', '할인 혜택', 'GrowthAI']}
+        keywords={['제휴 프로그램', 'AI 마케팅 툴 할인', '파트너 프로그램', 'GrowthAI']}
       />
       <div className="max-w-5xl mx-auto">
 

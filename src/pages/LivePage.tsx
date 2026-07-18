@@ -276,11 +276,11 @@ export default function LivePage() {
   return (
     <div className="min-h-screen bg-black text-white" style={{ fontFamily: 'Pretendard, -apple-system, sans-serif' }}>
       <Seo
-        title="라이브 일정 | GrowthAI"
-        description="라이브 특강, 수강생 Q&A, 시즌별 일정과 지난 강의를 한 번에 확인하는 공개 일정 페이지입니다."
+        title="AI 마케팅 라이브 특강 일정 | GrowthAI"
+        description="소상공인·1인창업가를 위한 AI 마케팅 라이브 특강, 수강생 Q&A, 시즌별 일정과 지난 강의를 한 번에 확인하는 공개 일정 페이지입니다."
         canonical="/live"
         image={DEFAULT_OG_IMAGE}
-        keywords={['라이브 일정', 'Q&A', '특강', 'GrowthAI']}
+        keywords={['AI 마케팅 특강', '라이브 일정', 'Q&A', 'GrowthAI']}
       />
 
       {/* ══ 공지 배너 ══ */}

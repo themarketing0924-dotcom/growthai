@@ -193,11 +193,11 @@ export default function CeoPage() {
       style={{ fontFamily: 'Pretendard, -apple-system, sans-serif' }}
     >
       <Seo
-        title="CEO 소개 | GrowthAI"
-        description="AI 멘토와 브랜드 철학, 강의 설계 이유를 확인하는 소개 페이지입니다."
+        title="AI 마케팅 강사 소개 — GrowthAI 대표에게 배우는 AI 활용법 | GrowthAI"
+        description="소상공인·1인창업가들을 위해 AI 마케팅 강의를 설계한 GrowthAI 대표의 브랜드 철학과 강의 설계 이유를 확인하는 소개 페이지입니다."
         canonical="/ceo"
         image={DEFAULT_OG_IMAGE}
-        keywords={['CEO 소개', 'AI 멘토', 'GrowthAI', '브랜드 철학']}
+        keywords={['AI 마케팅 강사', 'CEO 소개', 'AI 멘토', '1인창업가 강의', 'GrowthAI', '브랜드 철학']}
       />
 
       {/* ══════════════════════════════════
