@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { Shield } from 'lucide-react';
@@ -6,30 +6,32 @@ import { IconHourglass, IconChartDown, IconAiNetwork } from './components/icons/
 import { PageTransition } from './components/PageTransition';
 import { Navbar } from './components/Navbar';
 import { ScrollReveal, StaggerReveal, StaggerItem, SectionTitle } from './components/ScrollReveal';
-import CeoPage from './pages/CeoPage';
-import BasicsPage from './pages/BasicsPage';
-import GalleryPage from './pages/GalleryPage';
-import LivePage from './pages/LivePage';
-import CommunityPage from './pages/CommunityPage';
-import HomeworkPage from './pages/HomeworkPage';
-import PartnerPage from './pages/PartnerPage';
-import ContactPage from './pages/ContactPage';
-import DashboardPage from './pages/DashboardPage';
-import EnrollPage from './pages/EnrollPage';
 import { VIDEO_URLS } from './config/videos';
 import { SITE_CONFIG } from './config/content';
 import { Footer } from './components/Footer';
-import BlogPage from './pages/BlogPage';
-import ToolDetailPage from './pages/ToolDetailPage';
-import PromptsPage from './pages/PromptsPage';
-import CourseLandingPage from './pages/CourseLandingPage';
-import CourseAIPage from './pages/CourseAIPage';
-import ToolSalesPage from './pages/ToolSalesPage';
-import PortfolioDetailPage from './pages/PortfolioDetailPage';
-import LessonPage from './pages/LessonPage';
-import TermsPage from './pages/TermsPage';
-import PrivacyPage from './pages/PrivacyPage';
-import NotFoundPage from './pages/NotFoundPage';
+
+/* ── 라우트별 코드 스플리팅: 각 페이지는 방문 시점에 로드 ── */
+const CeoPage = lazy(() => import('./pages/CeoPage'));
+const BasicsPage = lazy(() => import('./pages/BasicsPage'));
+const GalleryPage = lazy(() => import('./pages/GalleryPage'));
+const LivePage = lazy(() => import('./pages/LivePage'));
+const CommunityPage = lazy(() => import('./pages/CommunityPage'));
+const HomeworkPage = lazy(() => import('./pages/HomeworkPage'));
+const PartnerPage = lazy(() => import('./pages/PartnerPage'));
+const ContactPage = lazy(() => import('./pages/ContactPage'));
+const DashboardPage = lazy(() => import('./pages/DashboardPage'));
+const EnrollPage = lazy(() => import('./pages/EnrollPage'));
+const BlogPage = lazy(() => import('./pages/BlogPage'));
+const ToolDetailPage = lazy(() => import('./pages/ToolDetailPage'));
+const PromptsPage = lazy(() => import('./pages/PromptsPage'));
+const CourseLandingPage = lazy(() => import('./pages/CourseLandingPage'));
+const CourseAIPage = lazy(() => import('./pages/CourseAIPage'));
+const ToolSalesPage = lazy(() => import('./pages/ToolSalesPage'));
+const PortfolioDetailPage = lazy(() => import('./pages/PortfolioDetailPage'));
+const LessonPage = lazy(() => import('./pages/LessonPage'));
+const TermsPage = lazy(() => import('./pages/TermsPage'));
+const PrivacyPage = lazy(() => import('./pages/PrivacyPage'));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 import { Seo, DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from './components/Seo';
 
 export default function App() {
@@ -72,6 +74,7 @@ export default function App() {
   );
 
   return (
+    <Suspense fallback={null}>
     <AnimatePresence mode="wait">
     <Routes location={routeLocation} key={routeLocation.pathname}>
       <Route path="/ceo"       element={wrap(<CeoPage />)} />
@@ -899,5 +902,6 @@ export default function App() {
       <Route path="*" element={wrap(<NotFoundPage />)} />
     </Routes>
     </AnimatePresence>
+    </Suspense>
   );
 }

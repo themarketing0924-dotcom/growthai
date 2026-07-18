@@ -8,4 +8,15 @@ export default defineConfig({
     port: process.env.PORT ? Number(process.env.PORT) : 5173,
     strictPort: true,
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          react: ['react', 'react-dom', 'react-router-dom'],
+          firebase: ['firebase/app', 'firebase/auth', 'firebase/firestore'],
+          motion: ['framer-motion'],
+        },
+      },
+    },
+  },
 })
