@@ -452,11 +452,11 @@ export default function GalleryPage() {
   return (
     <div className="min-h-screen bg-black text-white" style={{ fontFamily: 'Pretendard, -apple-system, sans-serif' }}>
       <Seo
-        title="수강생 포트폴리오 | GrowthAI"
-        description="수강생의 실제 결과와 포트폴리오를 소개하는 사례 페이지입니다."
+        title="소상공인 AI 마케팅 성공 사례 — 수강생 포트폴리오 | GrowthAI"
+        description="AI 마케팅 강의를 수강한 소상공인·1인창업가의 실제 매출 성장 결과와 포트폴리오를 소개하는 사례 페이지입니다."
         canonical="/gallery"
         image={DEFAULT_OG_IMAGE}
-        keywords={['포트폴리오', '수강생 사례', '결과', 'GrowthAI']}
+        keywords={['수강생 포트폴리오', '소상공인 성공사례', 'AI 마케팅 후기', '결과', 'GrowthAI']}
       />
 
       {/* 모달 */}

@@ -30,11 +30,11 @@ export default function CommunityPage() {
   return (
     <div className="min-h-screen bg-black text-white pt-24 pb-20 px-6">
       <Seo
-        title="수강생 커뮤니티 | GrowthAI"
-        description="수강생이 질문하고 성과를 공유하는 커뮤니티 페이지입니다."
+        title="AI 마케팅 수강생 커뮤니티 | GrowthAI"
+        description="소상공인·1인창업가 수강생이 질문하고 성과를 공유하는 AI 마케팅 커뮤니티 페이지입니다."
         canonical="/community"
         image={DEFAULT_OG_IMAGE}
-        keywords={['커뮤니티', '수강생 후기', '성장', 'GrowthAI']}
+        keywords={['수강생 커뮤니티', 'AI 마케팅 후기', '소상공인 성장', 'GrowthAI']}
         noindex
       />
       <div className="max-w-4xl mx-auto">

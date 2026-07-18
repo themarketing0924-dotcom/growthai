@@ -160,11 +160,11 @@ export default function BasicsPage() {
   return (
     <div className="min-h-screen bg-black text-white" style={{ fontFamily: 'Pretendard, -apple-system, sans-serif' }}>
       <Seo
-        title="AI 1인 기업 무료 교재 | GrowthAI"
-        description="AI 1인 기업을 시작하려는 사람을 위한 무료 교재형 랜딩페이지입니다. 단계별 로드맵과 핵심 프롬프트를 공개합니다."
+        title="AI 1인 기업 무료 교재 — 소상공인·1인창업가 AI 마케팅 로드맵 | GrowthAI"
+        description="AI로 1인 기업을 시작하려는 소상공인, 1인창업가를 위한 무료 교재입니다. 챗GPT·클로드 활용법부터 단계별 로드맵과 핵심 프롬프트까지 무료로 공개합니다."
         canonical="/basics"
         image={DEFAULT_OG_IMAGE}
-        keywords={['AI 1인 기업', '무료 교재', '랜딩페이지', 'GrowthAI']}
+        keywords={['AI 1인 기업', '1인창업가', '소상공인 AI 활용', 'AI 부업', '무료 교재', 'AI 마케팅 로드맵', 'GrowthAI']}
       />
 
       {/* ══════════════════════════

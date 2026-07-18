@@ -606,11 +606,11 @@ export default function EnrollPage({ lang: _lang = 'ko' }: { lang?: 'ko' | 'en' 
   return (
     <div className="min-h-screen bg-black text-white" style={{ fontFamily: 'Pretendard, -apple-system, sans-serif' }}>
       <Seo
-        title="수강 신청 | GrowthAI"
-        description="AI 마케팅과 자동화 실전 강의를 선택하고 바로 구매할 수 있는 수강 신청 페이지입니다."
+        title="AI 마케팅 강의 수강 신청 — 소상공인·1인창업가 실전반 | GrowthAI"
+        description="소상공인·1인창업가를 위한 AI 마케팅과 자동화 실전 강의를 선택하고 바로 구매할 수 있는 수강 신청 페이지입니다."
         canonical="/enroll"
         image={DEFAULT_OG_IMAGE}
-        keywords={['수강 신청', 'AI 강의', 'GrowthAI', '구매 전환']}
+        keywords={['AI 마케팅 강의', '수강 신청', '소상공인 강의', '1인창업가 강의', 'GrowthAI']}
       />
 
       {/* ══ 히어로 — Apple iPhone 17 Pro 스타일 ══ */}

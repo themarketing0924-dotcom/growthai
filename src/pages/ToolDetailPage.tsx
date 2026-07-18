@@ -40,11 +40,11 @@ export default function ToolDetailPage({ lang }: { lang: 'ko' | 'en' }) {
   return (
     <div className="min-h-screen bg-black text-white" style={{ fontFamily: 'Pretendard, -apple-system, sans-serif' }}>
       <Seo
-        title={`${lang === 'ko' ? tool.title : tool.titleEn} | GrowthAI`}
+        title={`${lang === 'ko' ? tool.title : tool.titleEn} | AI 프롬프트 GrowthAI`}
         description={lang === 'ko' ? tool.desc : tool.descEn}
         canonical={`/tools/${slug}`}
         image={DEFAULT_OG_IMAGE}
-        keywords={[tool.title, 'AI 도구', '프롬프트', 'GrowthAI']}
+        keywords={[tool.title, 'AI 프롬프트', 'AI 마케팅 도구', '챗GPT 활용법', 'GrowthAI']}
       />
 
       {/* ── 상단 네비게이션 ── */}

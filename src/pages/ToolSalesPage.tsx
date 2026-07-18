@@ -180,11 +180,36 @@ export default function ToolSalesPage() {
   return (
     <div className="min-h-screen bg-black text-white pt-16">
       <Seo
-        title={`${data.title} 구매 | GrowthAI`}
+        title={`${data.title} 구매 | AI 마케팅 도구 GrowthAI`}
         description={data.tagline}
         canonical={`/product/${toolId}`}
         image={DEFAULT_OG_IMAGE}
-        keywords={[data.title, '상품 상세', '구매', 'GrowthAI']}
+        keywords={[data.title, 'AI 마케팅 도구', '소상공인 AI 도구', '상품 상세', 'GrowthAI']}
+        schema={[
+          {
+            '@context': 'https://schema.org',
+            '@type': 'Product',
+            name: data.title,
+            description: data.tagline,
+            brand: { '@type': 'Brand', name: 'GrowthAI' },
+            offers: {
+              '@type': 'Offer',
+              price: data.price.replace(/[^0-9]/g, ''),
+              priceCurrency: 'KRW',
+              availability: 'https://schema.org/InStock',
+              url: `https://www.growthai.kr/product/${toolId}`,
+            },
+          },
+          {
+            '@context': 'https://schema.org',
+            '@type': 'FAQPage',
+            mainEntity: data.faqs.map((f) => ({
+              '@type': 'Question',
+              name: f.q,
+              acceptedAnswer: { '@type': 'Answer', text: f.a },
+            })),
+          },
+        ]}
       />
 
       {/* ══════════════════════════════════
