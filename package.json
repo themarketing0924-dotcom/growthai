@@ -1,7 +1,7 @@
 {
-  "name": "vanguard",
+  "name": "growthai",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -26,8 +26,5 @@
     "tailwindcss": "^3.4.15",
     "typescript": "^5.6.3",
     "vite": "^5.4.11"
-  },
-  "optionalDependencies": {
-    "@rollup/rollup-linux-arm64-gnu": "^4.62.2"
   }
 }

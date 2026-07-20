@@ -62,7 +62,17 @@ export function Navbar({ entranceComplete, lang, setLang }: NavbarProps) {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const goTo   = (path: string) => { navigate(path); setMenuOpen(false); setActiveGroup(null); };
+  const goTo = (path: string) => {
+  setMenuOpen(false);
+  setActiveGroup(null);
+
+  if (path.endsWith('.html')) {
+    window.location.href = path;
+    return;
+  }
+
+  navigate(path);
+};
   const goHome = () => {
     if (location.pathname === '/') window.scrollTo({ top: 0, behavior: 'smooth' });
     else navigate('/');

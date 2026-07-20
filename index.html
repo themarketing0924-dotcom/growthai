@@ -2,25 +2,148 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GrowthAI — 마케팅 × AI 실전 클래스</title>
-    <meta name="description" content="랜딩페이지, 상세페이지, 프롬프트, 자동화, 강의 판매까지 연결되는 구매 전환형 AI 마케팅 사이트, GrowthAI입니다." />
 
-    <!-- Pretendard (Toss style Korean font) -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+
+    <title>GrowthAI | AI 마케팅·자동화 실전 교육</title>
+
+    <meta
+      name="description"
+      content="랜딩페이지, 상세페이지, AI 콘텐츠 제작, 프롬프트, 업무 자동화, 온라인 마케팅과 강의 판매까지 연결하는 GrowthAI 실전 교육 플랫폼입니다."
+    />
+
+    <meta
+      name="robots"
+      content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
+    />
+
+    <meta name="author" content="GrowthAI" />
+    <meta name="theme-color" content="#0a0a0a" />
+
+    <!-- 홈페이지 대표 주소 -->
+    <link rel="canonical" href="https://www.growthai.kr/" />
+
+    <!-- 파비콘: 실제 파일이 public에 있어야 합니다 -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Open Graph: 카카오톡, 텔레그램, 페이스북 등 -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="GrowthAI" />
+    <meta property="og:locale" content="ko_KR" />
+
+    <meta
+      property="og:title"
+      content="GrowthAI | AI 마케팅·자동화 실전 교육"
+    />
+
+    <meta
+      property="og:description"
+      content="AI 기획부터 콘텐츠 제작, 랜딩페이지, 고객 확보, 자동화와 수익화까지 배우는 실전형 교육 플랫폼입니다."
+    />
+
+    <meta property="og:url" content="https://www.growthai.kr/" />
+
+    <meta
+      property="og:image"
+      content="https://www.growthai.kr/ceo-photo-smooth.png"
+    />
+
+    <meta
+      property="og:image:alt"
+      content="GrowthAI AI 마케팅·자동화 실전 교육"
+    />
+
+    <!-- X/Twitter 공유 -->
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <meta
+      name="twitter:title"
+      content="GrowthAI | AI 마케팅·자동화 실전 교육"
+    />
+
+    <meta
+      name="twitter:description"
+      content="AI 기획부터 콘텐츠 제작, 랜딩페이지, 고객 확보, 자동화와 수익화까지 배우는 실전형 교육 플랫폼입니다."
+    />
+
+    <meta
+      name="twitter:image"
+      content="https://www.growthai.kr/ceo-photo-smooth.png"
+    />
+
+    <meta
+      name="twitter:image:alt"
+      content="GrowthAI AI 마케팅·자동화 실전 교육"
+    />
+
+    <!-- 홈페이지 기본 구조화 데이터 -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://www.growthai.kr/#organization",
+            "name": "GrowthAI",
+            "url": "https://www.growthai.kr/",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://www.growthai.kr/ceo-photo-smooth.png"
+            }
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://www.growthai.kr/#website",
+            "url": "https://www.growthai.kr/",
+            "name": "GrowthAI",
+            "inLanguage": "ko-KR",
+            "publisher": {
+              "@id": "https://www.growthai.kr/#organization"
+            }
+          }
+        ]
+      }
+    </script>
+
+    <!-- Pretendard -->
+    <link
+      rel="preconnect"
+      href="https://cdn.jsdelivr.net"
+      crossorigin
+    />
+
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
     />
-    <!-- Playfair Display (Abraham.com style English serif) -->
+
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+
     <link
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap"
       rel="stylesheet"
     />
   </head>
+
   <body>
+    <noscript>
+      GrowthAI 사이트를 이용하려면 브라우저에서 JavaScript를 활성화해 주세요.
+    </noscript>
+
     <div id="root"></div>
+
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

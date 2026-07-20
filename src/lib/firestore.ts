@@ -38,6 +38,7 @@ export const COLLECTIONS = {
   PRODUCTS: 'products',
   ENROLLMENTS: 'enrollments',
   REFERRALS: 'referrals',
+  LEADS: 'leads',
 } as const;
 
 // ── Data Types ──
@@ -120,6 +121,17 @@ export interface SubscriptionRecord {
   startDate: Timestamp;
   nextBillingDate?: Timestamp;
   cancelledAt?: Timestamp;
+}
+
+export interface LeadRecord {
+  id: string;
+  name: string;
+  email: string;
+  phone?: string | null;
+  company?: string | null;
+  goal?: string;
+  source: string;
+  createdAt: Timestamp;
 }
 
 // ── User Helpers ──
@@ -232,6 +244,20 @@ export async function getActiveSubscription(
 export async function deleteProduct(productId: string): Promise<void> {
   const ref = doc(db, COLLECTIONS.PRODUCTS, productId);
   await deleteDoc(ref);
+}
+
+// ── Lead Capture Helpers ──
+
+export async function createLeadCapture(
+  data: Omit<LeadRecord, 'id' | 'createdAt'>
+): Promise<string> {
+  const ref = doc(collection(db, COLLECTIONS.LEADS));
+  await setDoc(ref, {
+    ...data,
+    id: ref.id,
+    createdAt: serverTimestamp(),
+  });
+  return ref.id;
 }
 
 // ── Enrollment Helpers (강의 수강 접근권) ──

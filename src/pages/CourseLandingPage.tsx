@@ -622,6 +622,28 @@ export default function CourseLandingPage() {
         canonical={`/course/${course.slug}`}
         image={DEFAULT_OG_IMAGE}
         keywords={[course.title, 'AI 강의', '랜딩페이지', 'GrowthAI']}
+        schema={{
+          '@context': 'https://schema.org',
+          '@type': 'Course',
+          name: course.title,
+          description: course.desc,
+          provider: {
+            '@type': 'Organization',
+            name: 'GrowthAI',
+            sameAs: 'https://www.growthai.kr',
+          },
+          offers: {
+            '@type': 'Offer',
+            price: course.price.replace(/[^0-9]/g, ''),
+            priceCurrency: 'KRW',
+            category: course.period,
+          },
+          aggregateRating: {
+            '@type': 'AggregateRating',
+            ratingValue: course.rating,
+            reviewCount: course.reviewCount,
+          },
+        }}
       />
 
       {/* ── 상단 고정 바 (스크롤 시) ── */}

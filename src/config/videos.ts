@@ -15,7 +15,7 @@
 
 export const VIDEO_URLS = {
   // 히어로 섹션 — 마우스 움직임으로 스크럽되는 영상 (자동재생 X)
-  hero: '/15428477_1920_1080_30fps.mp4',
+  hero: '/landing/growthai-hero.mp4',
 
   // 시네마틱 텍스트 섹션 — 자동재생, 음소거, 반복
   section2: 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260622_092455_089c54f8-3b03-4966-9df1-e9746063d0ef.mp4',

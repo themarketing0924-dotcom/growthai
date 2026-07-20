@@ -67,3 +67,16 @@ node_modules/
 
 # dataconnect generated files
 .dataconnect
+
+# macOS
+.DS_Store
+__MACOSX/
+
+# Vite cache
+.vite/
+
+# VS Code
+.vscode/
+
+# Claude Code 개인 설정
+.claude/settings.local.json

@@ -9,8 +9,8 @@
 ═══════════════════════════════════════ */
 :root {
   /* Font stacks */
-  --font-sans:    'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-sans:    -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', system-ui, sans-serif;
+  --font-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', system-ui, sans-serif;
 
   /* Gold palette */
   --gold:         #C9A84C;
@@ -32,7 +32,9 @@
 
   font-family: var(--font-sans);
   letter-spacing: -0.015em;
+  line-height: 1.45;
 }
+
 
 * {
   margin: 0;
@@ -83,7 +85,9 @@ section {
 .font-display {
   font-family: var(--font-display) !important;
   letter-spacing: -0.015em;
+  line-height: 1.45;
 }
+
 
 /* Toss-style heading tracking */
 .tracking-toss { letter-spacing: -0.03em; }

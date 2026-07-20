@@ -618,6 +618,18 @@ export default function EnrollPage({ lang: _lang = 'ko' }: { lang?: 'ko' | 'en' 
         ref={heroRef}
         className="relative flex flex-col items-center justify-center text-center overflow-hidden px-5 sm:px-6 bg-black pt-28 pb-16 sm:pt-0 sm:pb-0 sm:min-h-[100dvh]"
       >
+        <video
+  autoPlay
+  muted
+  loop
+  playsInline
+  preload="metadata"
+  className="absolute inset-0 h-full w-full object-cover"
+>
+  <source src="/videos/enroll-hero.mp4" type="video/mp4" />
+</video>
+
+<div className="absolute inset-0 bg-black/55" />
         {/* 배경 글로우 레이어 (패럴랙스) */}
         <motion.div className="absolute inset-0 pointer-events-none" style={{ y: heroY }}>
           <div style={{ position: 'absolute', top: '40%', left: '50%', transform: 'translate(-50%,-50%)', width: 'min(900px, 130vw)', height: '500px', background: 'radial-gradient(ellipse, rgba(201,168,76,0.10) 0%, transparent 65%)', filter: 'blur(90px)' }} />

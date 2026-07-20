@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { Seo, DEFAULT_OG_IMAGE } from '../components/Seo';
 
-const inquiryTypes = ['강의 문의', '기업 교육 제안', '미디어·인터뷰', '제휴 제안', '기타'];
+const inquiryTypes = ['강의 문의', 'AI 에이전트 구독 문의', '기업 교육 제안', '미디어·인터뷰', '제휴 제안', '기타'];
 
 export default function ContactPage() {
   const [form, setForm] = useState({ name: '', company: '', email: '', type: '', message: '' });
