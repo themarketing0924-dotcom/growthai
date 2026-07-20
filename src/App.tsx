@@ -6,7 +6,8 @@ import { IconHourglass, IconChartDown, IconAiNetwork } from './components/icons/
 import { PageTransition } from './components/PageTransition';
 import { Navbar } from './components/Navbar';
 import { ScrollReveal, StaggerReveal, StaggerItem, SectionTitle } from './components/ScrollReveal';
-import CeoPage from './pages/CeoPage';
+import AboutPage from './pages/AboutPage';
+import DiagnosePage from './pages/DiagnosePage';
 import BasicsPage from './pages/BasicsPage';
 import GalleryPage from './pages/GalleryPage';
 import LivePage from './pages/LivePage';
@@ -74,7 +75,8 @@ export default function App() {
   return (
     <AnimatePresence mode="wait">
     <Routes location={routeLocation} key={routeLocation.pathname}>
-      <Route path="/ceo"       element={wrap(<CeoPage />)} />
+      <Route path="/about"       element={wrap(<AboutPage />)} />
+      <Route path="/diagnose"    element={wrap(<DiagnosePage />)} />
       <Route path="/basics"    element={wrap(<BasicsPage />)} />
       <Route path="/gallery"   element={wrap(<GalleryPage />)} />
       <Route path="/live"      element={wrap(<LivePage />)} />
