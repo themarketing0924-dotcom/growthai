@@ -5,10 +5,11 @@
 export const NAV_GROUPS = [
   {
     id: 'about',
-    labelKo: '소개',
+    labelKo: '사이트 소개',
     labelEn: 'About',
     items: [
       { path: '/ceo',    labelKo: 'CEO 소개',  labelEn: 'About CEO',  descKo: '강사 철학 & 프로필', descEn: 'Philosophy & Profile' },
+      {path: '/landing/growthai-lead-sales-page.html', labelKo: 'GrowthAI 소개', labelEn: 'About GrowthAI', descKo: 'AI 마케팅 교육 및 성장 시스템', descEn: 'AI Marketing Education & Growth System' },
       { path: '/basics', labelKo: '강의 교재', labelEn: 'Curriculum', descKo: '커리큘럼 & 자료',   descEn: 'Materials & Syllabus' },
     ],
   },
@@ -24,11 +25,21 @@ export const NAV_GROUPS = [
     ],
   },
   {
+    id: 'agents',
+    labelKo: 'AI 에이전트',
+    labelEn: 'AI Agents',
+    items: [
+      { path: '/guide', labelKo: '무료 가이드', labelEn: 'Free Guide', descKo: '거장 설득 PDF + 영상 교육', descEn: 'Master persuasion PDF + video training' },
+      { path: '/agents', labelKo: 'GPTs 구독', labelEn: 'GPTs Subscription', descKo: '33개 AI 에이전트 무제한 이용', descEn: 'Unlimited access to 33 AI agents' },
+    ],
+  },
+  {
     id: 'content',
     labelKo: '콘텐츠',
     labelEn: 'Content',
     items: [
       { path: '/blog',      labelKo: '블로그',     labelEn: 'Blog',      descKo: 'AI & 마케팅 인사이트', descEn: 'AI & Marketing Insights' },
+      { path: '/marketing-glossary.html', labelKo: '마케팅 용어집', labelEn: 'Marketing Glossary', descKo: '필수 마케팅 용어 사전', descEn: 'Essential Marketing Terms' },
       { path: '/gallery',   labelKo: '포트폴리오', labelEn: 'Portfolio', descKo: '수강생 성과 & 결과물', descEn: 'Student Results'          },
       { path: '/community', labelKo: '커뮤니티',   labelEn: 'Community', descKo: '수강생 전용 공간',     descEn: 'Student Community'        },
     ],
