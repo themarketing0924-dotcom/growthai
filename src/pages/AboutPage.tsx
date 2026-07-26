@@ -175,6 +175,35 @@ export default function AboutPage() {
         canonical="/about"
         image={DEFAULT_OG_IMAGE}
         siteName={SITE_NAME}
+        schema={{
+          '@context': 'https://schema.org',
+          '@graph': [
+            {
+              '@type': 'ProfilePage',
+              '@id': 'https://www.growthai.kr/about#webpage',
+              'url': 'https://www.growthai.kr/about',
+              'name': 'KOI LEE 프로필 | GrowthAI',
+              'mainEntity': {
+                '@id': 'https://www.growthai.kr/#person'
+              }
+            },
+            {
+              '@type': 'Person',
+              '@id': 'https://www.growthai.kr/#person',
+              'name': 'KOI LEE (이건희)',
+              'jobTitle': 'Founder & AI Marketing Architect',
+              'worksFor': {
+                '@type': 'Organization',
+                'name': 'GrowthAI',
+                'url': 'https://www.growthai.kr/'
+              },
+              'url': 'https://www.growthai.kr/about',
+              'image': 'https://www.growthai.kr/IMG_5545.PNG',
+              'description': '소상공인 및 1인 창업가를 위한 AI 자동화 수익화 퍼널 및 런치 프로토콜(KLP) 설계 마케터',
+              'knowsAbout': ['AI Marketing', 'SEO', 'AEO', 'GEO', 'Sales Funnel', 'Product Launch Formula']
+            }
+          ]
+        }}
       />
       <div
         className="bg-black text-white min-h-screen"

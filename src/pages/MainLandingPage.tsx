@@ -93,6 +93,35 @@ export default function MainLandingPage() {
         canonical="/"
         image={DEFAULT_OG_IMAGE}
         siteName={SITE_NAME}
+        schema={{
+          '@context': 'https://schema.org',
+          '@graph': [
+            {
+              '@type': 'WebSite',
+              '@id': 'https://www.growthai.kr/#website',
+              'url': 'https://www.growthai.kr/',
+              'name': 'GrowthAI',
+              'description': 'AI 온라인 강의와 수익화 퍼널 교육',
+              'inLanguage': 'ko-KR',
+              'publisher': {
+                '@id': 'https://www.growthai.kr/#organization'
+              }
+            },
+            {
+              '@type': 'EducationalOrganization',
+              '@id': 'https://www.growthai.kr/#organization',
+              'name': 'GrowthAI',
+              'url': 'https://www.growthai.kr/',
+              'logo': {
+                '@type': 'ImageObject',
+                'url': 'https://www.growthai.kr/ceo-photo-smooth.png'
+              },
+              'sameAs': [
+                'https://www.youtube.com/@aicitybuilders'
+              ]
+            }
+          ]
+        }}
       />
 
       <div
