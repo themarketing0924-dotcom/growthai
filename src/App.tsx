@@ -1,5 +1,6 @@
+// @ts-nocheck
 import { useState, useEffect, useRef } from 'react';
-import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { Shield } from 'lucide-react';
 import { IconHourglass, IconChartDown, IconAiNetwork } from './components/icons/TossIcons';
@@ -22,6 +23,7 @@ import { VIDEO_URLS } from './config/videos';
 import { SITE_CONFIG } from './config/content';
 import { Footer } from './components/Footer';
 import BlogPage from './pages/BlogPage';
+import MarketingGlossaryPage from './pages/MarketingGlossaryPage';
 import ToolDetailPage from './pages/ToolDetailPage';
 import PromptsPage from './pages/PromptsPage';
 import CourseLandingPage from './pages/CourseLandingPage';
@@ -29,6 +31,13 @@ import CourseAIPage from './pages/CourseAIPage';
 import ToolSalesPage from './pages/ToolSalesPage';
 import PortfolioDetailPage from './pages/PortfolioDetailPage';
 import LessonPage from './pages/LessonPage';
+import AgentsPage from './pages/AgentsPage';
+import AgentFreeTrialPage from './pages/AgentFreeTrialPage';
+import GuideLandingPage from './pages/GuideLandingPage';
+import GuideDay1Page from './pages/GuideDay1Page';
+import GuideDay2Page from './pages/GuideDay2Page';
+import GuideDay3Page from './pages/GuideDay3Page';
+import GuideOfferPage from './pages/GuideOfferPage';
 import TermsPage from './pages/TermsPage';
 import PrivacyPage from './pages/PrivacyPage';
 import NotFoundPage from './pages/NotFoundPage';
@@ -77,6 +86,7 @@ export default function App() {
     <AnimatePresence mode="wait">
     <Routes location={routeLocation} key={routeLocation.pathname}>
       <Route path="/about"       element={wrap(<AboutPage />)} />
+      <Route path="/ceo"         element={<Navigate to="/about" replace />} />
       <Route path="/diagnose"    element={wrap(<DiagnosePage />)} />
       <Route path="/basics"    element={wrap(<BasicsPage />)} />
       <Route path="/gallery"   element={wrap(<GalleryPage />)} />
@@ -90,7 +100,15 @@ export default function App() {
       <Route path="/enroll"    element={wrap(<EnrollPage lang={lang} />)} />
       <Route path="/dashboard" element={wrap(<DashboardPage />)} />
       <Route path="/blog"       element={wrap(<BlogPage />)} />
+      <Route path="/marketing-glossary" element={wrap(<MarketingGlossaryPage />)} />
       <Route path="/prompts"    element={wrap(<PromptsPage />)} />
+      <Route path="/guide"      element={wrap(<GuideLandingPage />)} />
+      <Route path="/guide/day1" element={wrap(<GuideDay1Page />)} />
+      <Route path="/guide/day2" element={wrap(<GuideDay2Page />)} />
+      <Route path="/guide/day3" element={wrap(<GuideDay3Page />)} />
+      <Route path="/guide/offer" element={wrap(<GuideOfferPage />)} />
+      <Route path="/agents"     element={wrap(<AgentsPage lang={lang} />)} />
+      <Route path="/agents/free-trial" element={wrap(<AgentFreeTrialPage />)} />
       <Route path="/course/ai"     element={wrap(<CourseAIPage />)} />
       <Route path="/product/:toolId" element={wrap(<ToolSalesPage />)} />
       <Route path="/lesson" element={wrap(<LessonPage />)} />

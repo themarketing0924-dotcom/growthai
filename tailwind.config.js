@@ -4,12 +4,10 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        // Korean (Toss-style) — default
-        sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
-        serif: ['Pretendard', 'sans-serif'],
-        mono: ['Pretendard', 'sans-serif'],
-        // English (Abraham.com-style) — prestige serif
-        display: ['"Playfair Display"', 'Georgia', '"Times New Roman"', 'serif'],
+        sans: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro KR"', '"SF Pro Display"', '"SF Pro Text"', 'Pretendard', 'system-ui', 'sans-serif'],
+        serif: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro KR"', 'Pretendard', 'sans-serif'],
+        mono: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro KR"', 'Pretendard', 'sans-serif'],
+        display: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro KR"', '"SF Pro Display"', '"SF Pro Text"', 'Pretendard', 'system-ui', 'sans-serif'],
         cormorant: ['"Cormorant Garamond"', 'Georgia', 'serif'],
       },
       colors: {

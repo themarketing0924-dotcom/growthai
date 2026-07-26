@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /landing/growthai-thank-you.html
+Disallow: /landing/growthai-masterclass.html
+Disallow: /landing/growthai-masterclass-step-1.html
+Disallow: /landing/growthai-masterclass-step-2.html
+Disallow: /landing/growthai-masterclass-step-3.html
+Disallow: /landing/growthai-masterclass-step-4.html
+
+Sitemap: https://growthai.kr/sitemap.xml

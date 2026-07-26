@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GrowthAI Masterclass | 1일차</title>
+    <meta name="description" content="GrowthAI 마스터클래스 1일차 영상 페이지" />
+    <style>
+      :root {
+        --bg: #050505;
+        --bg-2: #0a0a0a;
+        --panel: rgba(255,255,255,.035);
+        --panel-2: rgba(255,255,255,.055);
+        --line: rgba(255,255,255,.12);
+        --text: rgba(255,255,255,.96);
+        --muted: rgba(255,255,255,.7);
+        --accent: #f5c84c;
+        --accent-2: #fff0b1;
+        --max: 1180px;
+        --shadow: 0 24px 80px rgba(0,0,0,.42);
+      }
+      *{box-sizing:border-box}
+      html{scroll-behavior:smooth}
+      body{
+        margin:0;
+        font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",Arial,sans-serif;
+        background:radial-gradient(circle at top, rgba(245,200,76,.12), transparent 22%), linear-gradient(180deg,#050505 0%,#090909 48%,#050505 100%);
+        color:var(--text);
+        -webkit-font-smoothing:antialiased;
+        text-rendering:optimizeLegibility;
+      }
+      a{color:inherit;text-decoration:none}
+      h1,h2,h3,p{margin:0}
+      section{padding:100px 0;scroll-margin-top:90px}
+      .wrap{width:min(calc(100% - 40px), var(--max)); margin:0 auto}
+      .shell{border-radius:34px;border:1px solid rgba(255,255,255,.1);background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.028));box-shadow:var(--shadow)}
+      .button{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 20px;border-radius:999px;border:1px solid transparent;font-size:14px;font-weight:700;letter-spacing:-.01em;transition:transform .18s ease, opacity .18s ease, background .18s ease}
+      .button:hover{transform:translateY(-1px)}
+      .primary{background:linear-gradient(135deg,#fff0b1,#f5c84c);color:#081024}
+      .secondary{background:rgba(255,255,255,.04);border-color:var(--line);color:var(--text)}
+      .eyebrow{display:inline-flex;align-items:center;justify-content:center;padding:10px 16px;border-radius:999px;border:1px solid rgba(245,200,76,.24);background:rgba(245,200,76,.08);color:#ffedb8;font-size:12px;font-weight:700;letter-spacing:.24em;text-transform:uppercase}
+      .kicker{color:var(--accent);font-size:12px;font-weight:700;letter-spacing:.28em;text-transform:uppercase}
+      .topbar{position:sticky;top:0;z-index:20;backdrop-filter:blur(20px);background:rgba(5,5,5,.78);border-bottom:1px solid rgba(255,255,255,.08)}
+      .topbar-inner{min-height:74px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+      .brand{display:inline-flex;align-items:center;gap:10px;font-size:18px;font-weight:700;letter-spacing:-.03em}
+      .mark{width:11px;height:11px;border-radius:999px;background:linear-gradient(135deg,#fff0b1 0%,#f5c84c 55%,#9b760d 100%);box-shadow:0 0 18px rgba(245,200,76,.42)}
+      .nav{display:flex;align-items:center;gap:22px;color:rgba(255,255,255,.68);font-size:14px;white-space:nowrap}
+      .nav a:hover{color:var(--text)}
+      .hero{position:relative;overflow:hidden;padding:48px 0 28px}
+      .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;align-items:stretch}
+      .hero-copy{padding:40px 0 16px}
+      .hero-copy h1{margin-top:20px;max-width:760px;font-size:clamp(2.8rem,6vw,6.2rem);line-height:.94;letter-spacing:-.075em;font-weight:800}
+      .hero-copy h1 .accent{display:block;margin-top:12px;background:linear-gradient(90deg,#fff0b1 0%,#ffe07a 36%,#f5c84c 68%,#9b760d 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+      .lede{margin-top:20px;max-width:700px;color:var(--muted);font-size:clamp(1.02rem,1.45vw,1.22rem);line-height:1.9}
+      .lead-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+      .hero-notes{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+      .pill{padding:10px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03);color:rgba(255,255,255,.82);font-size:13px}
+      .featured{padding:18px}
+      .featured-top{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:0 4px 16px}
+      .featured-top strong{font-size:18px;letter-spacing:-.03em}
+      .featured-top span{color:var(--muted);font-size:13px}
+      .video-shell{overflow:hidden;border-radius:28px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.035)}
+      .video-stage{position:relative;aspect-ratio:16/9;display:grid;place-items:center;background:radial-gradient(circle at 50% 20%, rgba(245,200,76,.24), transparent 32%), linear-gradient(180deg,#191919 0%,#060606 100%)}
+      .video-stage video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.42;filter:saturate(.78) contrast(1.05)}
+      .video-stage::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg, rgba(5,5,5,.02), rgba(5,5,5,.48))}
+      .play{position:relative;z-index:2;width:96px;height:96px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);font-size:32px;box-shadow:0 16px 48px rgba(0,0,0,.38)}
+      .video-copy{padding:22px 18px 8px;text-align:center}
+      .video-copy h3{font-size:22px;line-height:1.18;letter-spacing:-.05em;font-weight:800}
+      .video-copy p{margin-top:12px;color:var(--muted);line-height:1.8}
+      .section-head{max-width:880px;margin:0 auto 34px;text-align:center}
+      .section-head h2{margin-top:16px;font-size:clamp(2rem,3.8vw,4rem);line-height:1.02;letter-spacing:-.06em;font-weight:800}
+      .section-head p{margin-top:16px;color:var(--muted);font-size:clamp(1rem,1.2vw,1.12rem);line-height:1.82}
+      .grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+      .grid-4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+      .card,.step{padding:24px;border-radius:26px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.035)}
+      .card h3,.step h3{font-size:18px;line-height:1.35;letter-spacing:-.03em;font-weight:800}
+      .card p,.step p{margin-top:12px;color:var(--muted);font-size:15px;line-height:1.8}
+      .step .num{display:inline-flex;width:38px;height:38px;align-items:center;justify-content:center;border-radius:999px;background:linear-gradient(135deg,#fff0b1,#f5c84c);color:#081024;font-size:14px;font-weight:900;margin-bottom:14px}
+      .timeline{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+      .timeline .item{padding:22px;border-radius:24px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.035)}
+      .timeline .item h3{font-size:16px;line-height:1.4;font-weight:800}
+      .timeline .item p{margin-top:10px;color:var(--muted);font-size:14px;line-height:1.8}
+      .flow-card{padding:28px}
+      .flow-line{display:grid;gap:14px}
+      .flow-line .row{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;padding:18px 0;border-top:1px solid rgba(255,255,255,.08)}
+      .flow-line .row:first-child{border-top:0;padding-top:0}
+      .flow-line .row strong{font-size:18px;letter-spacing:-.03em}
+      .flow-line .row span{color:var(--muted);font-size:14px;line-height:1.7;text-align:right;max-width:56%}
+      .footer{padding:36px 0 64px;text-align:center;color:rgba(255,255,255,.54);font-size:13px;line-height:1.8}
+      @media (max-width:980px){
+        .nav{display:none}
+        .hero-grid,.grid-2,.grid-4,.timeline{grid-template-columns:1fr}
+        section{padding:84px 0}
+        .hero-copy{padding-top:8px}
+      }
+      @media (max-width:560px){
+        .wrap{width:min(calc(100% - 24px), var(--max))}
+        section{padding:72px 0}
+        .hero-copy h1,.section-head h2{font-size:clamp(2.2rem,11vw,4.2rem)}
+        .button{width:100%}
+        .topbar .button{width:auto}
+        .lead-actions{flex-direction:column}
+        .flow-line .row{flex-direction:column}
+        .flow-line .row span{text-align:left;max-width:100%}
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="wrap topbar-inner">
+        <a class="brand" href="./growthai-masterclass.html?access=1"><span class="mark"></span><span>GrowthAI</span></a>
+        <nav class="nav">
+          <a href="./growthai-masterclass-step-2.html">2일차</a>
+          <a href="./growthai-masterclass-step-3.html">3일차</a>
+          <a href="./growthai-masterclass-step-4.html">4일차</a>
+          <a href="./growthai-thank-you.html">땡큐페이지</a>
+        </nav>
+        <a class="button primary" href="./growthai-masterclass-step-2.html">2일차로</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero wrap">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <div class="eyebrow">1일차 · 오전 10시</div>
+            <h1>신뢰를 먼저 만들면,<span class="accent">전환은 뒤따라 옵니다.</span></h1>
+            <p class="lede">도구 과잉 속에서 무엇부터 잡아야 하는지 보여주는 첫 번째 영상입니다. 문제를 선명하게 만들고, 다음 단계로 넘어갈 이유를 만듭니다.</p>
+            <div class="lead-actions">
+              <a class="button primary" href="#video">영상 보기</a>
+              <a class="button secondary" href="./growthai-masterclass-step-2.html">2일차로 이동</a>
+            </div>
+            <div class="hero-notes">
+              <span class="pill">문제 인식</span>
+              <span class="pill">기회 제시</span>
+              <span class="pill">다음 단계 연결</span>
+            </div>
+          </div>
+          <div class="shell featured">
+            <div class="featured-top">
+              <div><strong>Start Here</strong><br><span>첫 영상부터 시작하세요</span></div>
+              <span class="kicker">1일차</span>
+            </div>
+            <div class="video-shell" id="video">
+              <div class="video-stage">
+                <video autoplay muted loop playsinline>
+                  <source src="./growthai-hero.mp4" type="video/mp4" />
+                </video>
+                <div class="play">▶</div>
+              </div>
+              <div class="video-copy">
+                <h3>왜 이 구조가 먼저 필요한가</h3>
+                <p>첫 영상에서는 문제를 짧게 만들고, 다음 영상을 보고 싶게 만듭니다.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="wrap">
+        <div class="section-head">
+          <div class="kicker">1단계 구성</div>
+          <h2>가장 먼저, 머릿속에 있는 혼란을 줄입니다</h2>
+          <p>고객이 이미 알고 있는 문제를 더 선명하게 정리해야 다음 단계가 열립니다.</p>
+        </div>
+        <div class="grid-2">
+          <div class="card"><h3>영상 목적</h3><p>왜 이 흐름이 필요한지, 그리고 왜 지금 봐야 하는지를 정리합니다.</p></div>
+          <div class="card"><h3>다음 연결</h3><p>1일차가 끝나면 2일차에서 바로 적용 방법으로 넘어갑니다.</p></div>
+        </div>
+      </section>
+
+      <section class="wrap">
+        <div class="section-head">
+          <div class="kicker">오전 10시 흐름</div>
+          <h2>하루에 하나씩, 순서가 전환을 만듭니다</h2>
+          <p>프리런칭은 정보량이 아니라 리듬입니다. 같은 시간에 이어져야 기억에 남습니다.</p>
+        </div>
+        <div class="timeline">
+          <div class="item"><h3>오늘 10시</h3><p>문제와 기회, 그리고 왜 지금 봐야 하는지 안내합니다.</p></div>
+          <div class="item"><h3>내일 10시</h3><p>가치 제공 영상으로 적용 방법을 보여줍니다.</p></div>
+          <div class="item"><h3>모레 10시</h3><p>기대감을 높이고, 다음 행동을 준비시킵니다.</p></div>
+          <div class="item"><h3>마지막 10시</h3><p>오픈 카트와 구매 전환을 안내합니다.</p></div>
+        </div>
+      </section>
+
+      <section class="wrap">
+        <div class="shell flow-card">
+          <div class="kicker">전체 흐름</div>
+          <h2 style="margin-top:14px;font-size:clamp(1.8rem,3.2vw,3.2rem);line-height:1.06;letter-spacing:-.06em;font-weight:800;">인바운드부터 사후 관리까지, 하나의 시나리오로 연결됩니다</h2>
+          <p style="margin-top:14px;color:var(--muted);line-height:1.82;font-size:clamp(1rem,1.2vw,1.12rem);">영상은 내가 만들고, 페이지는 그 영상이 들어갈 길만 정확하게 만듭니다.</p>
+          <div class="flow-line" style="margin-top:22px;">
+            <div class="row"><strong>인바운드 트래픽</strong><span>YouTube Shorts / TikTok / Instagram Reels에서 3초 후킹으로 시작합니다.</span></div>
+            <div class="row"><strong>행동 유도(CTA)</strong><span>댓글과 클릭을 통해 신청 페이지로 이동시킵니다.</span></div>
+            <div class="row"><strong>명단 수집 / 전환</strong><span>이메일, 카톡 채널, 문자로 연결되는 리드 허브가 됩니다.</span></div>
+            <div class="row"><strong>사후 관리</strong><span>구매자에게는 후속 가치, 미구매자에게는 다음 런칭 대기를 보냅니다.</span></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer wrap">
+      <p><strong>GrowthAI</strong></p>
+      <p>1일차 영상 페이지</p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GrowthAI | Season 2-3 교육 허브</title>
+    <meta name="description" content="GrowthAI 리드 수집 이후 열리는 Season 2-3 교육 허브입니다. 4개의 에피소드 영상으로 이어집니다." />
+    <style>
+      :root{
+        --bg:#050505;
+        --bg-2:#090909;
+        --panel:rgba(255,255,255,.032);
+        --line:rgba(255,255,255,.12);
+        --text:rgba(255,255,255,.96);
+        --muted:rgba(255,255,255,.7);
+        --accent:#f5c84c;
+        --accent-2:#fff0b1;
+        --max:1120px;
+        --shadow:0 24px 80px rgba(0,0,0,.42);
+      }
+      *{box-sizing:border-box}
+      html{scroll-behavior:smooth}
+      body{
+        margin:0;
+        font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",Arial,sans-serif;
+        background:radial-gradient(circle at top, rgba(245,200,76,.12), transparent 24%), linear-gradient(180deg,#050505 0%,#090909 50%,#050505 100%);
+        color:var(--text);
+        -webkit-font-smoothing:antialiased;
+        text-rendering:optimizeLegibility;
+      }
+      a{color:inherit;text-decoration:none}
+      h1,h2,h3,p{margin:0}
+      section{padding:100px 0;scroll-margin-top:90px}
+      strong{color:#fff;font-weight:800}
+      .wrap{width:min(calc(100% - 40px), var(--max)); margin:0 auto}
+      .panel{border-radius:30px;border:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03));box-shadow:var(--shadow)}
+      .button{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 20px;border-radius:999px;border:1px solid transparent;font-size:14px;font-weight:700;letter-spacing:-.01em;transition:transform .18s ease,opacity .18s ease,background .18s ease}
+      .button:hover{transform:translateY(-1px)}
+      .primary{background:linear-gradient(135deg,#fff0b1,#f5c84c);color:#081024}
+      .secondary{background:rgba(255,255,255,.04);border-color:var(--line);color:var(--text)}
+      .ghost{background:transparent;border-color:rgba(245,200,76,.28);color:#ffedb8}
+      .eyebrow{display:inline-flex;align-items:center;justify-content:center;padding:10px 16px;border-radius:999px;border:1px solid rgba(245,200,76,.24);background:rgba(245,200,76,.08);color:#ffedb8;font-size:12px;font-weight:700;letter-spacing:.24em;text-transform:uppercase}
+      .kicker{color:var(--accent);font-size:12px;font-weight:700;letter-spacing:.28em;text-transform:uppercase}
+      .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+      .reveal.in-view{opacity:1;transform:translateY(0)}
+      .topbar{position:sticky;top:0;z-index:20;backdrop-filter:blur(20px);background:rgba(5,5,5,.78);border-bottom:1px solid rgba(255,255,255,.08)}
+      .topbar-inner{min-height:74px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+      .brand{display:inline-flex;align-items:center;gap:10px;font-size:18px;font-weight:700;letter-spacing:-.03em}
+      .mark{width:11px;height:11px;border-radius:999px;background:linear-gradient(135deg,#fff0b1 0%,#f5c84c 55%,#9b760d 100%);box-shadow:0 0 18px rgba(245,200,76,.42)}
+      .nav{display:flex;align-items:center;gap:22px;color:rgba(255,255,255,.68);font-size:14px;white-space:nowrap}
+      .nav a:hover{color:var(--text)}
+      .hero{position:relative;min-height:calc(100vh - 74px);display:flex;align-items:center;text-align:center;overflow:hidden}
+      .hero-media{position:absolute;inset:0;z-index:0;background:#000}
+      .hero-media video{width:100%;height:100%;object-fit:cover;object-position:center;opacity:.28;filter:saturate(.7) contrast(1.05)}
+      .hero-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(5,5,5,.48) 0%,rgba(5,5,5,.58) 46%,rgba(5,5,5,.9) 100%),radial-gradient(circle at center,rgba(245,200,76,.12),transparent 38%)}
+      .hero-content{position:relative;z-index:2;width:100%;padding:100px 0 86px}
+      .hero h1{margin:24px auto 0;max-width:1020px;font-size:clamp(3rem,6.2vw,6.6rem);line-height:.92;letter-spacing:-.075em;font-weight:800}
+      .hero h1 .accent{display:block;margin-top:12px;background:linear-gradient(90deg,#fff0b1 0%,#ffe07a 36%,#f5c84c 68%,#9b760d 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+      .lede{margin:24px auto 0;max-width:860px;color:var(--muted);font-size:clamp(1.05rem,1.45vw,1.28rem);line-height:1.88}
+      .lead-actions{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin-top:28px}
+      .season-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:28px}
+      .season-chip{padding:18px 16px;border-radius:22px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.035);text-align:left}
+      .season-chip.open{background:linear-gradient(180deg,rgba(245,200,76,.12),rgba(255,255,255,.03));border-color:rgba(245,200,76,.2)}
+      .season-chip .tag{display:block;color:var(--accent);font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase}
+      .season-chip .title{display:block;margin-top:10px;font-size:16px;line-height:1.35;font-weight:800;letter-spacing:-.03em}
+      .season-chip .meta{display:block;margin-top:8px;color:var(--muted);font-size:13px;line-height:1.7}
+      .summary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:18px}
+      .card{padding:24px;border-radius:24px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.035)}
+      .card h3{font-size:18px;line-height:1.35;letter-spacing:-.03em;font-weight:800}
+      .card p{margin-top:12px;color:var(--muted);font-size:15px;line-height:1.8}
+      .section-head{max-width:880px;margin:0 auto 34px;text-align:center}
+      .section-head h2{margin-top:16px;font-size:clamp(2rem,3.7vw,4rem);line-height:1.02;letter-spacing:-.06em;font-weight:800}
+      .section-head p{margin-top:16px;color:var(--muted);font-size:clamp(1rem,1.2vw,1.12rem);line-height:1.82}
+      .hub-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+      .hub-step{position:relative;overflow:hidden;padding:28px;border-radius:28px;border:1px solid rgba(255,255,255,.1);background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03))}
+      .hub-step::after{content:"";position:absolute;inset:auto -18% -38% auto;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle, rgba(245,200,76,.18), transparent 65%);pointer-events:none}
+      .hub-step.locked{border-color:rgba(255,255,255,.08);background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.02))}
+      .step-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+      .step-num{display:inline-flex;width:42px;height:42px;align-items:center;justify-content:center;border-radius:999px;background:linear-gradient(135deg,#fff0b1,#f5c84c);color:#081024;font-size:15px;font-weight:900;flex:none}
+      .step-lock{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);font-size:12px;font-weight:800;color:rgba(255,255,255,.7)}
+      .hub-step h3{margin-top:18px;font-size:24px;line-height:1.18;letter-spacing:-.05em;font-weight:800}
+      .hub-step p{margin-top:12px;color:var(--muted);font-size:15px;line-height:1.8}
+      .hub-step ul{margin:16px 0 0;padding:0 0 0 18px;color:rgba(255,255,255,.82);line-height:1.8;font-size:14px}
+      .hub-step li{margin:6px 0}
+      .step-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+      .locked-note{margin-top:18px;padding:14px 16px;border-radius:18px;background:rgba(245,200,76,.08);border:1px solid rgba(245,200,76,.18);color:#ffedb8;font-size:13px;line-height:1.75}
+      .locked-mask{position:absolute;inset:0;display:none;align-items:center;justify-content:center;background:linear-gradient(180deg,rgba(5,5,5,.12),rgba(5,5,5,.58));backdrop-filter:blur(2px);z-index:1}
+      .locked-mask .mask-box{width:min(100%, 320px);padding:18px 16px;border-radius:20px;border:1px solid rgba(255,255,255,.12);background:rgba(5,5,5,.72);text-align:center;box-shadow:var(--shadow)}
+      .locked-mask .mask-box strong{display:block;font-size:18px;line-height:1.3}
+      .locked-mask .mask-box span{display:block;margin-top:8px;color:var(--muted);font-size:13px;line-height:1.7}
+      .locked .locked-mask{display:flex}
+      .locked .step-actions a{pointer-events:none;opacity:.55;cursor:not-allowed}
+      .timeline{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+      .timeline .item{padding:22px;border-radius:24px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.035)}
+      .timeline .item h3{font-size:16px;line-height:1.4;font-weight:800}
+      .timeline .item p{margin-top:10px;color:var(--muted);font-size:14px;line-height:1.8}
+      .footer{padding:36px 0 64px;text-align:center;color:rgba(255,255,255,.54);font-size:13px;line-height:1.8}
+      @media (max-width:960px){
+        .nav{display:none}
+        .summary,.hub-grid,.timeline{grid-template-columns:1fr}
+        section{padding:84px 0}
+        .hero{min-height:auto}
+        .hero-content{padding:82px 0 64px}
+        .season-strip{grid-template-columns:1fr 1fr}
+      }
+      @media (max-width:560px){
+        .wrap{width:min(calc(100% - 24px),var(--max))}
+        section{padding:72px 0}
+        .hero h1{font-size:clamp(2.55rem,14vw,4.8rem)}
+        .section-head h2{font-size:clamp(1.8rem,8vw,3rem)}
+        .button{width:100%}
+        .topbar .button{width:auto}
+        .lead-actions{flex-direction:column}
+        .season-strip{grid-template-columns:1fr}
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="wrap topbar-inner">
+        <a class="brand" href="./growthai-masterclass.html?access=1">
+          <span class="mark"></span><span>GrowthAI</span>
+        </a>
+        <nav class="nav">
+          <a href="./growthai-lead-sales-page.html">리드 랜딩</a>
+          <a href="./growthai-thank-you.html">땡큐페이지</a>
+          <a href="#steps">4단계</a>
+          <a href="#flow">전체 흐름</a>
+        </nav>
+        <a class="button primary" href="./growthai-thank-you.html">땡큐페이지</a>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero wrap reveal">
+        <div class="hero-media" aria-hidden="true">
+          <video autoplay muted loop playsinline>
+            <source src="./growthai-hero.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="hero-overlay" aria-hidden="true"></div>
+        <div class="hero-content">
+          <div class="eyebrow" id="access-state">Season 2-3 · 잠금 교육 허브</div>
+          <h1>
+            <span>리드를 모으고,</span>
+            <span class="accent">4개의 에피소드로 전환까지 연결합니다.</span>
+          </h1>
+          <p class="lede" id="hero-lede">
+            이 페이지는 리드 수집 이후 열리는 내부 교육 시즌입니다.
+            1일차는 문제를 열고, 2일차는 적용을 보여주고, 3일차는 기대감을 쌓고, 4일차는 판매와 신청으로 마무리합니다.
+          </p>
+          <div class="lead-actions" id="hero-actions">
+            <a class="button primary" href="./growthai-lead-sales-page.html#form">무료 PDF 받기</a>
+            <a class="button secondary" href="./growthai-thank-you.html">땡큐페이지</a>
+          </div>
+          <div class="season-strip" id="season-strip">
+            <div class="season-chip open">
+              <span class="tag">EP.01 · 공개</span>
+              <span class="title">프리런칭</span>
+              <span class="meta">문제 인식 · 리드의 시선 잡기</span>
+            </div>
+            <div class="season-chip">
+              <span class="tag">EP.02 · 잠금</span>
+              <span class="title">가치 제공</span>
+              <span class="meta">적용 방법 · 실전 예시</span>
+            </div>
+            <div class="season-chip">
+              <span class="tag">EP.03 · 잠금</span>
+              <span class="title">기대감 증폭</span>
+              <span class="meta">후기 · 일정 · 다음 행동</span>
+            </div>
+            <div class="season-chip">
+              <span class="tag">EP.04 · 잠금</span>
+              <span class="title">전환</span>
+              <span class="meta">오픈 카트 · 신청 폼 · 판매</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="wrap reveal">
+        <div class="section-head">
+          <div class="kicker">이 시즌에서 얻는 것</div>
+          <h2>교육보다 먼저, 사람이 이해하는 순서를 만듭니다</h2>
+          <p>이 허브는 “무엇을 배우는가”보다 “어떤 순서로 열리고 닫히는가”를 보여주는 페이지입니다.</p>
+        </div>
+        <div class="summary">
+          <div class="card"><h3>리드 수집</h3><p>무료 PDF와 신청 폼으로 관심 있는 사람만 먼저 모읍니다.</p></div>
+          <div class="card"><h3>단계 공개</h3><p>1일차부터 4일차까지 같은 리듬으로 열리게 만듭니다.</p></div>
+        </div>
+      </section>
+
+      <section id="steps" class="wrap reveal">
+        <div class="section-head">
+          <div class="kicker">에피소드 구성</div>
+          <h2>잠금 해제되면, 아래 4개 에피소드가 순서대로 열립니다</h2>
+          <p>유튜브 쇼츠, 틱톡, 릴스로 들어온 사람이 리드가 되고, 리드가 다시 영상과 세일즈로 이어지는 구조입니다.</p>
+        </div>
+        <div class="hub-grid">
+          <article class="hub-step locked" data-step="1">
+            <div class="step-head">
+              <div class="step-num">1</div>
+              <div class="step-lock">EP.01 · 잠금</div>
+            </div>
+            <h3>프리런칭 · 문제를 여는 첫 장면</h3>
+            <p>문제와 기회를 선명하게 만들고, 왜 지금 봐야 하는지 알려주는 시작점입니다.</p>
+            <ul>
+              <li>문제 제기</li>
+              <li>신뢰 심기</li>
+              <li>첫 기대감 형성</li>
+            </ul>
+            <div class="step-actions">
+              <a class="button primary" href="./growthai-lead-sales-page.html#form">리드 랜딩으로</a>
+              <a class="button secondary" href="./growthai-thank-you.html">신청 완료 페이지</a>
+            </div>
+            <div class="locked-note">이 단계는 신청 완료 후에 열립니다.</div>
+            <div class="locked-mask" aria-hidden="true">
+              <div class="mask-box">
+                <strong>잠금 상태</strong>
+                <span>먼저 무료 PDF를 신청하면, 이 단계부터 순서대로 열립니다.</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="hub-step locked" data-step="2">
+            <div class="step-head">
+              <div class="step-num">2</div>
+              <div class="step-lock">EP.02 · 잠금</div>
+            </div>
+            <h3>가치 제공 · 적용 방법을 보여주는 장면</h3>
+            <p>실제 적용 방법과 예시를 보여주며, “쓸 수 있겠다”는 확신을 만드는 구간입니다.</p>
+            <ul>
+              <li>핵심 원리 설명</li>
+              <li>실전 예시</li>
+              <li>업종별 적용</li>
+            </ul>
+            <div class="step-actions">
+              <a class="button primary" href="./growthai-masterclass-step-2.html">2일차 영상</a>
+              <a class="button secondary" href="./growthai-masterclass-step-1.html">1일차로</a>
+            </div>
+            <div class="locked-note">리드가 확보되면 바로 2단계로 이어집니다.</div>
+            <div class="locked-mask" aria-hidden="true">
+              <div class="mask-box">
+                <strong>잠금 상태</strong>
+                <span>2단계는 1단계 이후 순서대로 연결됩니다.</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="hub-step locked" data-step="3">
+            <div class="step-head">
+              <div class="step-num">3</div>
+              <div class="step-lock">EP.03 · 잠금</div>
+            </div>
+            <h3>기대감 증폭 · 다음 장을 기다리게 하는 장면</h3>
+            <p>후기, 일정, 다음 행동을 섞어 기대감을 끌어올리고 이탈을 막는 구간입니다.</p>
+            <ul>
+              <li>사회적 증거</li>
+              <li>반복 노출</li>
+              <li>다음 행동 유도</li>
+            </ul>
+            <div class="step-actions">
+              <a class="button primary" href="./growthai-masterclass-step-3.html">3일차 영상</a>
+              <a class="button secondary" href="./growthai-masterclass-step-2.html">2일차로</a>
+            </div>
+            <div class="locked-note">열림 상태에서는 다음 단계로 넘어가기 쉬워집니다.</div>
+            <div class="locked-mask" aria-hidden="true">
+              <div class="mask-box">
+                <strong>잠금 상태</strong>
+                <span>기대감은 2단계에서 쌓이고, 3단계에서 폭발합니다.</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="hub-step locked" data-step="4">
+            <div class="step-head">
+              <div class="step-num">4</div>
+              <div class="step-lock">EP.04 · 잠금</div>
+            </div>
+            <h3>전환 · 판매와 신청이 만나는 마지막 장면</h3>
+            <p>세일즈 오픈, 희소성, 신청 폼이 한 번에 이어지는 최종 전환 구간입니다.</p>
+            <ul>
+              <li>오픈 카트</li>
+              <li>서비스 구매</li>
+              <li>신청 폼 전환</li>
+            </ul>
+            <div class="step-actions">
+              <a class="button primary" href="./growthai-masterclass-step-4.html">4일차 영상</a>
+              <a class="button secondary" href="./growthai-lead-sales-page.html#form">리드 폼으로</a>
+            </div>
+            <div class="locked-note">마지막 단계에서 판매와 신청이 이어집니다.</div>
+            <div class="locked-mask" aria-hidden="true">
+              <div class="mask-box">
+                <strong>잠금 상태</strong>
+                <span>4단계는 세일즈와 신청 전환을 담당합니다.</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="flow" class="wrap reveal">
+        <div class="section-head">
+          <div class="kicker">전체 흐름</div>
+          <h2>인바운드부터 사후 관리까지, 하나의 시나리오로 연결됩니다</h2>
+          <p>영상은 내가 만들고, 페이지는 그 영상이 들어갈 길만 정확하게 만듭니다.</p>
+        </div>
+        <div class="timeline">
+          <div class="item"><h3>인바운드 트래픽</h3><p>YouTube Shorts / TikTok / Instagram Reels에서 3초 후킹으로 시작합니다.</p></div>
+          <div class="item"><h3>행동 유도(CTA)</h3><p>댓글과 클릭을 통해 신청 페이지로 이동시킵니다.</p></div>
+          <div class="item"><h3>명단 수집 / 전환</h3><p>이메일, 카톡 채널, 문자로 연결되는 리드 허브가 됩니다.</p></div>
+          <div class="item"><h3>사후 관리</h3><p>구매자에게는 후속 가치, 미구매자에게는 다음 런칭 대기를 보냅니다.</p></div>
+        </div>
+      </section>
+
+      <section class="wrap reveal">
+        <div class="panel card">
+          <div class="kicker">잠금 해제 기준</div>
+          <h2 style="margin-top:16px;font-size:clamp(1.8rem,3vw,3rem);line-height:1.08;letter-spacing:-.06em;font-weight:800;">리드가 들어오면 시즌이 열리고, 시즌이 열리면 4개 에피소드가 시작됩니다</h2>
+          <p style="margin-top:14px;color:var(--muted);line-height:1.82;font-size:clamp(1rem,1.2vw,1.12rem);">
+            이 페이지는 독립 사이트가 아니라, 기존 GrowthAI 플랫폼 내부의 잠금 카테고리입니다.
+            신청 전에는 리드 랜딩으로, 신청 후에는 땡큐페이지와 4단계 영상으로 이어집니다.
+          </p>
+          <div class="lead-actions" style="margin-top:20px;">
+            <a class="button primary" href="./growthai-lead-sales-page.html#form">무료 PDF 받기</a>
+            <a class="button secondary" href="./growthai-thank-you.html">땡큐페이지 보기</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer wrap">
+      <p><strong style="color:rgba(255,255,255,.84);">GrowthAI</strong></p>
+      <p>리드 수집 후 열리는 잠금 마스터클래스 허브입니다.</p>
+    </footer>
+
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const unlocked = params.get('access') === '1' || params.get('unlocked') === '1';
+      const accessState = document.getElementById('access-state');
+      const heroLede = document.getElementById('hero-lede');
+      const heroActions = document.getElementById('hero-actions');
+      const steps = document.querySelectorAll('.hub-step');
+
+      if (unlocked) {
+        accessState.textContent = '오픈 상태 · 4개 에피소드 공개';
+        heroLede.innerHTML = '잠금이 풀린 상태입니다. 1일차부터 4일차까지 바로 이동하면서 프리런칭 → 가치 제공 → 기대감 증폭 → 판매 전환 순서로 볼 수 있습니다.';
+        heroActions.innerHTML = `
+          <a class="button primary" href="./growthai-masterclass-step-1.html">1일차 영상</a>
+          <a class="button secondary" href="./growthai-masterclass-step-2.html">2일차 영상</a>
+          <a class="button secondary" href="./growthai-masterclass-step-3.html">3일차 영상</a>
+          <a class="button secondary" href="./growthai-masterclass-step-4.html">4일차 영상</a>
+        `;
+        steps.forEach((step) => step.classList.remove('locked'));
+      }
+
+      const targets = document.querySelectorAll('.reveal');
+      const observer = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            observer.unobserve(entry.target);
+          }
+        }
+      }, { threshold: 0.18, rootMargin: '0px 0px -10% 0px' });
+      targets.forEach((target) => observer.observe(target));
+    </script>
+  </body>
+</html>

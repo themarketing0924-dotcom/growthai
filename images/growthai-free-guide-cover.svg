@@ -1,0 +1,47 @@
+<svg width="900" height="1200" viewBox="0 0 900 1200" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="GrowthAI 무료 PDF 책자 표지">
+  <defs>
+    <linearGradient id="bg" x1="120" y1="110" x2="760" y2="1120" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#101010"/>
+      <stop offset="1" stop-color="#050505"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="160" y1="120" x2="760" y2="1080" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFE9A2"/>
+      <stop offset="0.48" stop-color="#F5C84C"/>
+      <stop offset="1" stop-color="#D7A52A"/>
+    </linearGradient>
+    <linearGradient id="soft" x1="210" y1="260" x2="720" y2="960" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2E2A17" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#0E0E0E" stop-opacity="0.72"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="900" height="1200" rx="54" fill="url(#bg)"/>
+  <rect x="28" y="28" width="844" height="1144" rx="46" fill="url(#soft)" stroke="rgba(255,255,255,0.08)" stroke-width="2"/>
+
+  <circle cx="132" cy="154" r="18" fill="url(#gold)"/>
+  <text x="174" y="163" fill="white" font-size="38" font-weight="800" letter-spacing="-1.4" font-family="Inter, Pretendard, Arial, sans-serif">GrowthAI</text>
+
+  <rect x="106" y="250" width="688" height="690" rx="34" fill="#0B0B0B" stroke="rgba(255,255,255,0.08)" stroke-width="2"/>
+  <rect x="138" y="284" width="624" height="622" rx="26" fill="rgba(255,255,255,0.02)" stroke="rgba(245,200,76,0.18)" stroke-width="2"/>
+
+  <rect x="158" y="304" width="584" height="72" rx="20" fill="rgba(245,200,76,0.12)"/>
+  <text x="450" y="351" text-anchor="middle" fill="#F5C84C" font-size="28" font-weight="800" letter-spacing="3" font-family="Inter, Pretendard, Arial, sans-serif">FREE PDF · GUIDE</text>
+
+  <text x="450" y="475" text-anchor="middle" fill="#ffffff" font-size="62" font-weight="900" letter-spacing="-2.6" font-family="Inter, Pretendard, Arial, sans-serif">구매전환</text>
+  <text x="450" y="545" text-anchor="middle" fill="#ffffff" font-size="62" font-weight="900" letter-spacing="-2.6" font-family="Inter, Pretendard, Arial, sans-serif">요약집</text>
+
+  <text x="450" y="635" text-anchor="middle" fill="#D7D7D7" font-size="28" font-weight="700" letter-spacing="-0.8" font-family="Inter, Pretendard, Arial, sans-serif">12명의 마케팅 거장 원리</text>
+  <text x="450" y="680" text-anchor="middle" fill="#D7D7D7" font-size="28" font-weight="700" letter-spacing="-0.8" font-family="Inter, Pretendard, Arial, sans-serif">Google / Naver 기준 압축본</text>
+
+  <line x1="190" y1="732" x2="710" y2="732" stroke="rgba(245,200,76,0.45)" stroke-width="2"/>
+
+  <text x="450" y="790" text-anchor="middle" fill="#FFE9A2" font-size="28" font-weight="800" letter-spacing="-0.8" font-family="Inter, Pretendard, Arial, sans-serif">랜딩 · 블로그 · 영상 · 에이전트</text>
+  <text x="450" y="832" text-anchor="middle" fill="#FFE9A2" font-size="28" font-weight="800" letter-spacing="-0.8" font-family="Inter, Pretendard, Arial, sans-serif">바로 적용하는 실행용 책자</text>
+
+  <rect x="250" y="932" width="400" height="68" rx="34" fill="url(#gold)"/>
+  <text x="450" y="975" text-anchor="middle" fill="#0A0A0A" font-size="28" font-weight="900" letter-spacing="-0.6" font-family="Inter, Pretendard, Arial, sans-serif">무료 PDF 받기</text>
+
+  <path d="M0 1100C170 1032 252 995 450 995C648 995 730 1032 900 1100V1200H0V1100Z" fill="rgba(245,200,76,0.10)"/>
+  <circle cx="736" cy="112" r="74" fill="rgba(245,200,76,0.14)"/>
+  <circle cx="176" cy="1058" r="92" fill="rgba(245,200,76,0.08)"/>
+</svg>

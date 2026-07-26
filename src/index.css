@@ -8,9 +8,9 @@
    Toss-style Korean typography
 ═══════════════════════════════════════ */
 :root {
-  /* Font stacks */
-  --font-sans:    -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', system-ui, sans-serif;
-  --font-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', system-ui, sans-serif;
+  /* Font stacks — Apple System & Pretendard fallback */
+  --font-sans:    -apple-system, BlinkMacSystemFont, 'SF Pro KR', 'SF Pro Display', 'SF Pro Text', 'Pretendard', system-ui, sans-serif;
+  --font-display: -apple-system, BlinkMacSystemFont, 'SF Pro KR', 'SF Pro Display', 'SF Pro Text', 'Pretendard', system-ui, sans-serif;
 
   /* Gold palette */
   --gold:         #C9A84C;
@@ -20,19 +20,19 @@
   --gold-border:  rgba(201, 168, 76, 0.25);
   --gold-hover:   rgba(201, 168, 76, 0.35);
 
-  /* Toss-style type scale (Korean) — toss.im 기준 */
-  --text-hero:        clamp(3rem,    8vw,  6rem);    /* 48–96px  ★ Toss 대형 헤딩 */
-  --text-heading:     clamp(2rem,    5vw,  3.75rem); /* 32–60px */
-  --text-subheading:  clamp(1.375rem,2.5vw,2rem);   /* 22–32px */
-  --text-body-lg:     1.125rem;    /* 18px — Toss body large */
-  --text-body:        1rem;        /* 16px */
-  --text-sm:          0.9375rem;   /* 15px */
-  --text-xs:          0.875rem;    /* 14px */
-  --text-xxs:         0.8125rem;   /* 13px */
+  /* Apple-style fluid typography scale (MacBook Pro page standards) */
+  --text-hero:        clamp(2.5rem, 6vw, 5rem);          /* 40px–80px */
+  --text-heading:     clamp(1.75rem, 4vw, 3rem);         /* 28px–48px */
+  --text-subheading:  clamp(1.125rem, 2.5vw, 1.5rem);    /* 18px–24px */
+  --text-body-lg:     clamp(1.0625rem, 2vw, 1.1875rem);  /* 17px–19px */
+  --text-body:        clamp(0.9375rem, 1.8vw, 1.0625rem);/* 15px–17px */
+  --text-sm:          0.875rem;                          /* 14px */
+  --text-xs:          0.8125rem;                         /* 13px */
+  --text-xxs:         0.75rem;                           /* 12px */
 
   font-family: var(--font-sans);
   letter-spacing: -0.015em;
-  line-height: 1.45;
+  line-height: 1.47;
 }
 
 

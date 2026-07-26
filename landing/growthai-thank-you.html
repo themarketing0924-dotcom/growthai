@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GrowthAI | 신청 완료</title>
+    <meta name="description" content="GrowthAI 신청 완료 및 시즌형 4단계 영상 발송 안내 페이지입니다." />
+    <style>
+      :root{
+        --bg:#050505; --panel:rgba(255,255,255,.032); --line:rgba(255,255,255,.12);
+        --text:rgba(255,255,255,.96); --muted:rgba(255,255,255,.7);
+        --accent:#f5c84c; --accent-2:#fff0b1; --max:1120px; --shadow:0 24px 80px rgba(0,0,0,.42);
+      }
+      *{box-sizing:border-box} html{scroll-behavior:smooth}
+      body{
+        margin:0;
+        font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",Arial,sans-serif;
+        background:radial-gradient(circle at top, rgba(245,200,76,.12), transparent 24%), linear-gradient(180deg,#050505 0%,#090909 50%,#050505 100%);
+        color:var(--text); -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+      }
+      a{color:inherit;text-decoration:none}
+      h1,h2,h3,p{margin:0}
+      section{padding:100px 0; scroll-margin-top:90px}
+      .wrap{width:min(calc(100% - 40px), var(--max)); margin:0 auto}
+      .panel{border-radius:30px;border:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03));box-shadow:var(--shadow)}
+      .button{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 20px;border-radius:999px;border:1px solid transparent;font-size:14px;font-weight:700;letter-spacing:-.01em;transition:transform .18s ease,opacity .18s ease,background .18s ease}
+      .button:hover{transform:translateY(-1px)} .primary{background:linear-gradient(135deg,#fff0b1,#f5c84c);color:#081024} .secondary{background:rgba(255,255,255,.04);border-color:var(--line);color:var(--text)}
+      .eyebrow{display:inline-flex;align-items:center;justify-content:center;padding:10px 16px;border-radius:999px;border:1px solid rgba(245,200,76,.24);background:rgba(245,200,76,.08);color:#ffedb8;font-size:12px;font-weight:700;letter-spacing:.24em;text-transform:uppercase}
+      .kicker{color:var(--accent);font-size:12px;font-weight:700;letter-spacing:.28em;text-transform:uppercase}
+      .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease} .reveal.in-view{opacity:1;transform:translateY(0)}
+      .topbar{position:sticky;top:0;z-index:20;backdrop-filter:blur(20px);background:rgba(5,5,5,.78);border-bottom:1px solid rgba(255,255,255,.08)}
+      .topbar-inner{min-height:74px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+      .brand{display:inline-flex;align-items:center;gap:10px;font-size:18px;font-weight:700;letter-spacing:-.03em}
+      .mark{width:11px;height:11px;border-radius:999px;background:linear-gradient(135deg,#fff0b1 0%,#f5c84c 55%,#9b760d 100%);box-shadow:0 0 18px rgba(245,200,76,.42)}
+      .nav{display:flex;align-items:center;gap:22px;color:rgba(255,255,255,.68);font-size:14px;white-space:nowrap}
+      .nav a:hover{color:var(--text)}
+      .hero{position:relative;min-height:calc(100vh - 74px);display:flex;align-items:center;text-align:center;overflow:hidden}
+      .hero-media{position:absolute;inset:0;z-index:0;background:#000}
+      .hero-media video{width:100%;height:100%;object-fit:cover;object-position:center;opacity:.28;filter:saturate(.7) contrast(1.05)}
+      .hero-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(5,5,5,.48) 0%,rgba(5,5,5,.58) 46%,rgba(5,5,5,.9) 100%),radial-gradient(circle at center,rgba(245,200,76,.12),transparent 38%)}
+      .hero-content{position:relative;z-index:2;width:100%;padding:100px 0 86px}
+      .hero h1{margin:24px auto 0;max-width:980px;font-size:clamp(3rem,6.8vw,6.8rem);line-height:.92;letter-spacing:-.075em;font-weight:800}
+      .hero h1 .accent{display:block;margin-top:12px;background:linear-gradient(90deg,#fff0b1 0%,#ffe07a 36%,#f5c84c 68%,#9b760d 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+      .lede{margin:24px auto 0;max-width:820px;color:var(--muted);font-size:clamp(1.05rem,1.4vw,1.28rem);line-height:1.86}
+      .lead-actions{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin-top:28px}
+      .summary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:18px}
+      .card{padding:24px;border-radius:24px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.035)}
+      .card h3{font-size:18px;line-height:1.35;letter-spacing:-.03em;font-weight:800}
+      .card p{margin-top:12px;color:var(--muted);font-size:15px;line-height:1.8}
+      .section-head{max-width:860px;margin:0 auto 34px;text-align:center}
+      .section-head h2{margin-top:16px;font-size:clamp(2rem,3.6vw,4rem);line-height:1.02;letter-spacing:-.06em;font-weight:800}
+      .section-head p{margin-top:16px;color:var(--muted);font-size:clamp(1rem,1.2vw,1.12rem);line-height:1.82}
+      .step-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+      .step{padding:22px;border-radius:24px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.035)}
+      .num{display:inline-flex;width:34px;height:34px;align-items:center;justify-content:center;border-radius:999px;background:linear-gradient(135deg,#fff0b1,#f5c84c);color:#081024;font-size:14px;font-weight:800;margin-bottom:14px}
+      .step h3{font-size:16px;line-height:1.4;font-weight:800}
+      .step p{margin-top:10px;color:var(--muted);font-size:14px;line-height:1.8}
+      .footer{padding:36px 0 64px;text-align:center;color:rgba(255,255,255,.54);font-size:13px;line-height:1.8}
+      @media (max-width:960px){ .nav{display:none} .summary,.step-grid{grid-template-columns:1fr} section{padding:84px 0} .hero{min-height:auto} .hero-content{padding:82px 0 64px} }
+      @media (max-width:560px){ .wrap{width:min(calc(100% - 24px),var(--max))} section{padding:72px 0} .hero h1{font-size:clamp(2.55rem,14vw,4.8rem)} .section-head h2{font-size:clamp(1.8rem,8vw,3rem)} .button{width:100%} .topbar .button{width:auto} .lead-actions{flex-direction:column} }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="wrap topbar-inner">
+        <a class="brand" href="./growthai-masterclass.html?access=1">
+          <span class="mark"></span><span>GrowthAI</span>
+        </a>
+        <nav class="nav">
+          <a href="#steps">4단계</a>
+          <a href="#schedule">시간표</a>
+          <a href="#delivery">발송</a>
+          <a href="./growthai-lead-sales-page.html">리드 랜딩</a>
+        </nav>
+        <a class="button primary" href="#steps">1일차 보기</a>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero wrap reveal">
+        <div class="hero-media" aria-hidden="true">
+          <video autoplay muted loop playsinline>
+            <source src="./growthai-hero.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="hero-overlay" aria-hidden="true"></div>
+        <div class="hero-content">
+          <div class="eyebrow">신청 완료 · 시즌형 발송 구조</div>
+          <h1>
+            신청이 완료되었습니다.
+            <span class="accent">이제 4개의 에피소드를 순서대로 보시면 됩니다.</span>
+          </h1>
+          <p class="lede">
+            오늘부터 오전 <strong>10시</strong> 기준으로 1일차, 2일차, 3일차, 4일차 영상이 이어집니다.
+            카카오톡이나 문자 자동화와 연결하면, 이 페이지를 그대로 발송 허브로 쓸 수 있습니다.
+          </p>
+          <div class="lead-actions">
+            <a class="button primary" href="#steps">4단계 보기</a>
+            <a class="button secondary" href="./growthai-lead-sales-page.html">리드 랜딩으로 이동</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="steps" class="wrap reveal">
+        <div class="section-head">
+          <div class="kicker">다음 순서</div>
+          <h2>오전 10시마다 1개씩, 총 4개의 에피소드가 이어집니다</h2>
+          <p>프리런칭 → 가치 제공 → 기대감 증폭 → 오픈 카트의 흐름을 그대로 따라가면 됩니다.</p>
+        </div>
+        <div class="step-grid">
+          <div class="step"><div class="num">1</div><h3>오늘 10시</h3><p>문제와 기회, 그리고 왜 지금 봐야 하는지 안내합니다.</p></div>
+          <div class="step"><div class="num">2</div><h3>내일 10시</h3><p>가치 제공 영상으로 적용 방법을 보여줍니다.</p></div>
+          <div class="step"><div class="num">3</div><h3>모레 10시</h3><p>기대감을 높이고, 다음 행동을 준비시킵니다.</p></div>
+          <div class="step"><div class="num">4</div><h3>마지막 10시</h3><p>오픈 카트와 구매 전환을 안내합니다.</p></div>
+        </div>
+        <div class="lead-actions" style="margin-top:22px;">
+          <a class="button primary" href="./growthai-masterclass-step-1.html">1일차 영상</a>
+          <a class="button secondary" href="./growthai-masterclass-step-2.html">2일차 영상</a>
+          <a class="button secondary" href="./growthai-masterclass-step-3.html">3일차 영상</a>
+          <a class="button secondary" href="./growthai-masterclass-step-4.html">4일차 영상</a>
+        </div>
+      </section>
+
+      <section id="schedule" class="wrap reveal">
+        <div class="panel card">
+          <div class="kicker">10시 발송 기준</div>
+          <h2 style="margin-top:16px;font-size:clamp(1.8rem,3vw,3rem);line-height:1.08;letter-spacing:-.06em;font-weight:800;">당일부터 매일, 같은 시간에 도착해야 리듬이 생깁니다</h2>
+          <p style="margin-top:14px;color:var(--muted);line-height:1.82;font-size:clamp(1rem,1.2vw,1.12rem);">이 구조는 이메일, 카카오 알림톡, 문자 중 무엇으로 보내든 동일하게 동작합니다. 핵심은 <strong>순서</strong>와 <strong>시간</strong>입니다.</p>
+          <div class="summary" style="margin-top:18px;">
+            <div class="card"><h3>리드 수집</h3><p>이름 / 이메일 / 휴대폰 번호 / 동의 체크</p></div>
+            <div class="card"><h3>발송 방식</h3><p>카카오톡 또는 문자 자동화 연결</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="delivery" class="wrap reveal">
+        <div class="section-head">
+          <div class="kicker">발송 허브</div>
+          <h2>땡큐페이지는 끝이 아니라, 다음 영상으로 넘기는 시작점입니다</h2>
+          <p>이 페이지를 발송 링크로 쓰면, 리드가 들어온 직후 바로 1일차 영상으로 이동할 수 있습니다.</p>
+        </div>
+        <div class="summary">
+          <div class="card"><h3>카카오</h3><p>알림톡 / 채널 메시지로 땡큐페이지 링크 전송</p></div>
+          <div class="card"><h3>문자</h3><p>짧은 URL로 1일차 영상 페이지 바로 연결</p></div>
+        </div>
+        <div class="lead-actions" style="margin-top:22px;">
+          <a class="button primary" href="./growthai-masterclass.html?access=1">마스터클래스 허브 열기</a>
+          <a class="button secondary" href="./growthai-masterclass-step-1.html">1일차 영상 바로 보기</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer wrap">
+      <p><strong style="color: rgba(255,255,255,.84);">GrowthAI</strong></p>
+      <p>신청 완료 후 4단계 영상으로 연결되는 땡큐페이지입니다.</p>
+    </footer>
+
+    <script>
+      const targets = document.querySelectorAll('.reveal');
+      const observer = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            observer.unobserve(entry.target);
+          }
+        }
+      }, { threshold: 0.18, rootMargin: '0px 0px -10% 0px' });
+      targets.forEach((target) => observer.observe(target));
+    </script>
+  </body>
+</html>

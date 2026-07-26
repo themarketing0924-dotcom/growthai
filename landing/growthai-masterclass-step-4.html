@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GrowthAI Masterclass | 4일차</title>
+    <meta name="description" content="GrowthAI 마스터클래스 4일차 영상 페이지" />
+    <style>
+      :root {
+        --bg: #050505;
+        --panel: rgba(255, 255, 255, 0.04);
+        --panel-2: rgba(255, 255, 255, 0.02);
+        --line: rgba(255, 255, 255, 0.12);
+        --text: rgba(255, 255, 255, 0.97);
+        --muted: rgba(255, 255, 255, 0.7);
+        --accent: #f5c84c;
+        --accent-2: #fff0b1;
+        --max: 1180px;
+        --shadow: 0 24px 80px rgba(0, 0, 0, 0.42);
+      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+        background:
+          radial-gradient(circle at top, rgba(245, 200, 76, 0.13), transparent 24%),
+          linear-gradient(180deg, #050505 0%, #090909 45%, #050505 100%);
+        color: var(--text);
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      }
+      a { color: inherit; text-decoration: none; }
+      h1, h2, h3, p { margin: 0; }
+      section { padding: 100px 0; scroll-margin-top: 90px; }
+      .wrap { width: min(calc(100% - 40px), var(--max)); margin: 0 auto; }
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 48px;
+        padding: 0 20px;
+        border-radius: 999px;
+        border: 1px solid transparent;
+        font-size: 14px;
+        font-weight: 800;
+        letter-spacing: -0.01em;
+        transition: transform 0.18s ease, opacity 0.18s ease, background 0.18s ease;
+      }
+      .button:hover { transform: translateY(-1px); }
+      .primary { background: linear-gradient(135deg, #fff0b1, #f5c84c); color: #081024; }
+      .secondary { background: rgba(255, 255, 255, 0.04); border-color: var(--line); color: var(--text); }
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 16px;
+        border-radius: 999px;
+        border: 1px solid rgba(245, 200, 76, 0.24);
+        background: rgba(245, 200, 76, 0.08);
+        color: #ffedb8;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+      }
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        backdrop-filter: blur(20px);
+        background: rgba(5, 5, 5, 0.78);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .topbar-inner {
+        min-height: 74px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 18px;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+      }
+      .mark {
+        width: 11px;
+        height: 11px;
+        border-radius: 999px;
+        background: linear-gradient(135deg, #fff0b1 0%, #f5c84c 55%, #9b760d 100%);
+        box-shadow: 0 0 18px rgba(245, 200, 76, 0.42);
+      }
+      .nav {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+        color: rgba(255, 255, 255, 0.68);
+        font-size: 14px;
+        white-space: nowrap;
+      }
+      .nav a:hover { color: var(--text); }
+      .hero { padding: 48px 0 30px; }
+      .hero-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.05fr) minmax(380px, 0.95fr);
+        gap: 22px;
+        align-items: center;
+      }
+      .hero-copy { text-align: left; }
+      .hero-copy .eyebrow { margin-bottom: 22px; }
+      .hero h1 {
+        max-width: 720px;
+        font-size: clamp(3rem, 6.6vw, 6.5rem);
+        line-height: 0.95;
+        letter-spacing: -0.08em;
+        font-weight: 900;
+      }
+      .hero h1 .accent {
+        display: block;
+        margin-top: 10px;
+        background: linear-gradient(90deg, #fff0b1 0%, #ffe07a 36%, #f5c84c 68%, #9b760d 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      .lede {
+        margin-top: 24px;
+        max-width: 700px;
+        color: var(--muted);
+        font-size: clamp(1.02rem, 1.3vw, 1.2rem);
+        line-height: 1.86;
+      }
+      .lede strong { color: var(--text); font-weight: 800; }
+      .lead-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 26px;
+      }
+      .hero-panel {
+        position: relative;
+        border-radius: 32px;
+        padding: 22px;
+        background:
+          linear-gradient(180deg, rgba(245, 200, 76, 0.08), rgba(255, 255, 255, 0.02)),
+          rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: var(--shadow);
+      }
+      .hero-panel-inner {
+        border-radius: 24px;
+        padding: 28px;
+        background: linear-gradient(180deg, rgba(18, 18, 18, 0.92), rgba(7, 7, 7, 0.94));
+        border: 1px solid rgba(255, 255, 255, 0.07);
+      }
+      .hero-panel-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 20px;
+      }
+      .hero-panel-top strong {
+        font-size: 15px;
+        letter-spacing: -0.03em;
+      }
+      .hero-panel-top span {
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.56);
+      }
+      .video-shell {
+        overflow: hidden;
+        border-radius: 26px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.035);
+      }
+      .video-stage {
+        position: relative;
+        aspect-ratio: 16 / 9;
+        display: grid;
+        place-items: center;
+        background:
+          radial-gradient(circle at 50% 20%, rgba(245, 200, 76, 0.24), transparent 32%),
+          linear-gradient(180deg, #181818 0%, #060606 100%);
+      }
+      .video-stage::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(5, 5, 5, 0.04), rgba(5, 5, 5, 0.5));
+      }
+      .play {
+        position: relative;
+        z-index: 2;
+        width: 96px;
+        height: 96px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        font-size: 32px;
+        box-shadow: 0 16px 48px rgba(0, 0, 0, 0.38);
+      }
+      .stage-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 20px;
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 13px;
+        letter-spacing: -0.01em;
+      }
+      .stage-label .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--accent);
+        box-shadow: 0 0 14px rgba(245, 200, 76, 0.42);
+      }
+      .hero-notes {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 16px;
+      }
+      .note {
+        padding: 14px 16px;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        color: rgba(255, 255, 255, 0.78);
+        font-size: 13px;
+        line-height: 1.6;
+      }
+      .split {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
+      }
+      .card {
+        padding: 24px;
+        border-radius: 24px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.035);
+      }
+      .card h3 {
+        font-size: 18px;
+        line-height: 1.35;
+        letter-spacing: -0.03em;
+        font-weight: 900;
+      }
+      .card p {
+        margin-top: 12px;
+        color: var(--muted);
+        font-size: 15px;
+        line-height: 1.8;
+      }
+      .section-title {
+        margin-bottom: 32px;
+        font-size: clamp(1.8rem, 3vw, 2.8rem);
+        line-height: 1.08;
+        letter-spacing: -0.06em;
+        font-weight: 900;
+      }
+      .section-title .accent { color: var(--accent); }
+      .timeline {
+        display: grid;
+        gap: 18px;
+      }
+      .timeline-item {
+        display: grid;
+        grid-template-columns: 92px minmax(0, 1fr);
+        gap: 16px;
+        align-items: start;
+        padding: 18px 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.09);
+      }
+      .timeline-item:first-child { border-top: 0; padding-top: 0; }
+      .timeline-item b {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 36px;
+        border-radius: 999px;
+        border: 1px solid rgba(245, 200, 76, 0.24);
+        background: rgba(245, 200, 76, 0.08);
+        color: #ffedb8;
+        font-size: 12px;
+        letter-spacing: 0.18em;
+      }
+      .timeline-item p {
+        color: var(--muted);
+        font-size: 15px;
+        line-height: 1.85;
+      }
+      .timeline-item p strong { color: var(--text); font-weight: 800; }
+      .flow-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 18px;
+      }
+      .flow-card {
+        min-height: 170px;
+        padding: 20px;
+        border-radius: 22px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background:
+          linear-gradient(180deg, rgba(245, 200, 76, 0.06), rgba(255, 255, 255, 0.03)),
+          rgba(255, 255, 255, 0.025);
+      }
+      .flow-card .kicker {
+        display: inline-flex;
+        margin-bottom: 14px;
+        color: var(--accent-2);
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.18em;
+      }
+      .flow-card h3 {
+        font-size: 16px;
+        line-height: 1.35;
+        letter-spacing: -0.03em;
+        font-weight: 900;
+      }
+      .flow-card p {
+        margin-top: 10px;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.75;
+      }
+      .cta-panel {
+        border-radius: 30px;
+        padding: 26px;
+        border: 1px solid rgba(245, 200, 76, 0.18);
+        background:
+          linear-gradient(180deg, rgba(245, 200, 76, 0.08), rgba(255, 255, 255, 0.03)),
+          rgba(255, 255, 255, 0.03);
+      }
+      .cta-panel h2 {
+        font-size: clamp(1.8rem, 3vw, 2.6rem);
+        line-height: 1.08;
+        letter-spacing: -0.06em;
+        font-weight: 900;
+      }
+      .cta-panel p {
+        margin-top: 14px;
+        color: var(--muted);
+        font-size: 15px;
+        line-height: 1.8;
+      }
+      .footer {
+        padding: 36px 0 64px;
+        text-align: center;
+        color: rgba(255, 255, 255, 0.54);
+        font-size: 13px;
+        line-height: 1.8;
+      }
+      @media (max-width: 1024px) {
+        .hero-grid { grid-template-columns: 1fr; }
+        .hero-copy { text-align: center; }
+        .hero h1, .lede { margin-left: auto; margin-right: auto; }
+        .lead-actions { justify-content: center; }
+        .hero-notes { grid-template-columns: 1fr; }
+        .flow-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      }
+      @media (max-width: 960px) {
+        .nav { display: none; }
+        .split { grid-template-columns: 1fr; }
+        section { padding: 84px 0; }
+      }
+      @media (max-width: 640px) {
+        .wrap { width: min(calc(100% - 24px), var(--max)); }
+        .hero { padding-top: 34px; padding-bottom: 22px; }
+        .hero h1 { font-size: clamp(2.3rem, 12vw, 4.6rem); }
+        .button { width: 100%; }
+        .topbar .button { width: auto; }
+        .timeline-item { grid-template-columns: 1fr; gap: 10px; }
+        .flow-grid { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="wrap topbar-inner">
+        <a class="brand" href="./growthai-masterclass.html?access=1"><span class="mark"></span><span>GrowthAI</span></a>
+        <nav class="nav">
+          <a href="./growthai-masterclass-step-1.html">1일차</a>
+          <a href="./growthai-masterclass-step-2.html">2일차</a>
+          <a href="./growthai-masterclass-step-3.html">3일차</a>
+          <a href="./growthai-thank-you.html">땡큐페이지</a>
+        </nav>
+        <a class="button primary" href="./growthai-thank-you.html">처음으로</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero wrap">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <div class="eyebrow">4일차 · 오전 10시</div>
+            <h1>이제는 행동할 시간입니다.<span class="accent">오픈 카트와 구매 전환.</span></h1>
+            <p class="lede">
+              마지막 영상은 <strong>마감</strong>, <strong>희소성</strong>, <strong>구매 동기</strong>를 한 번에 정리해
+              다음 행동을 바로 만들도록 설계합니다.
+            </p>
+            <div class="lead-actions">
+              <a class="button primary" href="#video">영상 보기</a>
+              <a class="button secondary" href="./growthai-thank-you.html">땡큐페이지</a>
+            </div>
+            <div class="hero-notes">
+              <div class="note">4일차는 <strong>결정</strong>을 돕는 날입니다.</div>
+              <div class="note">마감은 강요가 아니라 <strong>이유</strong>입니다.</div>
+              <div class="note">버튼 앞에는 <strong>불안 제거 문장</strong>이 먼저 와야 합니다.</div>
+            </div>
+          </div>
+
+          <div class="hero-panel" id="video">
+            <div class="hero-panel-inner">
+              <div class="hero-panel-top">
+                <strong>Final Step · 오픈 카트 영상</strong>
+                <span>8~12분 / 구매 전환</span>
+              </div>
+              <div class="video-shell">
+                <div class="video-stage">
+                  <div class="play">▶</div>
+                </div>
+              </div>
+              <div class="stage-label"><span class="dot"></span><span>이제 고객은 “왜 사야 하는가”를 넘어서 “지금 사야 하는가”를 봅니다.</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="wrap">
+        <h2 class="section-title">4일차는 <span class="accent">구매 전환</span>을 마무리하는 날입니다.</h2>
+        <div class="split">
+          <div class="card">
+            <h3>무엇을 약속해야 하는가</h3>
+            <p>지금 결제하면 어떤 변화가 시작되는지 <strong>한 문장</strong>으로 또렷하게 정리합니다.</p>
+          </div>
+          <div class="card">
+            <h3>무엇을 제거해야 하는가</h3>
+            <p>복잡한 설명보다 <strong>불안</strong>, <strong>망설임</strong>, <strong>비교 피로</strong>를 먼저 줄입니다.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="wrap">
+        <h2 class="section-title">오전 10시 흐름</h2>
+        <div class="timeline">
+          <div class="timeline-item">
+            <b>01</b>
+            <p><strong>마지막 신뢰 정리</strong> - 이미 본 내용을 한 줄로 다시 묶습니다.</p>
+          </div>
+          <div class="timeline-item">
+            <b>02</b>
+            <p><strong>오픈 카트 안내</strong> - 지금 클릭해야 하는 이유를 분명하게 전달합니다.</p>
+          </div>
+          <div class="timeline-item">
+            <b>03</b>
+            <p><strong>구매 버튼 연결</strong> - 신청 또는 상담 버튼으로 자연스럽게 이동합니다.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="wrap">
+        <h2 class="section-title">전체 흐름</h2>
+        <div class="flow-grid">
+          <div class="flow-card">
+            <div class="kicker">FLOW 01</div>
+            <h3>결정 타이밍</h3>
+            <p>마지막 망설임을 지금 정리합니다.</p>
+          </div>
+          <div class="flow-card">
+            <div class="kicker">FLOW 02</div>
+            <h3>구매 이유</h3>
+            <p>왜 지금 결제해야 하는지 이유를 제공합니다.</p>
+          </div>
+          <div class="flow-card">
+            <div class="kicker">FLOW 03</div>
+            <h3>전환 버튼</h3>
+            <p>신청, 상담, 결제를 한 방향으로 모읍니다.</p>
+          </div>
+          <div class="flow-card">
+            <div class="kicker">FLOW 04</div>
+            <h3>후속 관리</h3>
+            <p>구매자와 미구매자를 다음 흐름으로 분리합니다.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="wrap">
+        <div class="cta-panel">
+          <h2>지금은 설명보다 <span class="accent">행동</span>이 먼저입니다.</h2>
+          <p>이 페이지는 오픈 카트의 마지막 단계이므로, 고객이 다음에 무엇을 해야 하는지만 또렷하게 보여주면 충분합니다.</p>
+          <div class="lead-actions">
+            <a class="button primary" href="./growthai-thank-you.html">땡큐페이지로 이동</a>
+            <a class="button secondary" href="./growthai-masterclass-step-1.html">1일차 다시 보기</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer wrap">
+      <p><strong>GrowthAI</strong></p>
+      <p>4일차 영상 페이지</p>
+    </footer>
+  </body>
+</html>
