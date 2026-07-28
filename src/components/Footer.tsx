@@ -74,6 +74,7 @@ export function Footer({ lang }: FooterProps) {
             {[
               { label: lang === 'ko' ? '이용약관' : 'Terms of Use', path: '/terms' },
               { label: lang === 'ko' ? '개인정보처리방침' : 'Privacy Policy', path: '/privacy' },
+              { label: lang === 'ko' ? '수익 및 성과 고지' : 'Earnings Disclaimer', path: '/earnings-disclaimer' },
               { label: lang === 'ko' ? '고객센터' : 'Support', path: '/contact' },
             ].map(({ label, path }) => (
               <button

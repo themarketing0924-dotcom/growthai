@@ -40,6 +40,7 @@ import GuideDay3Page from './pages/GuideDay3Page';
 import GuideOfferPage from './pages/GuideOfferPage';
 import TermsPage from './pages/TermsPage';
 import PrivacyPage from './pages/PrivacyPage';
+import EarningsDisclaimerPage from './pages/EarningsDisclaimerPage';
 import NotFoundPage from './pages/NotFoundPage';
 import { Seo, DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from './components/Seo';
 
@@ -103,6 +104,7 @@ export default function App() {
       <Route path="/contact"   element={wrap(<ContactPage />)} />
       <Route path="/terms"     element={wrap(<TermsPage />)} />
       <Route path="/privacy"   element={wrap(<PrivacyPage />)} />
+      <Route path="/earnings-disclaimer" element={wrap(<EarningsDisclaimerPage />)} />
       <Route path="/enroll"    element={wrap(<EnrollPage lang={lang} />)} />
       <Route path="/dashboard" element={wrap(<DashboardPage />)} />
       <Route path="/blog"       element={wrap(<BlogPage />)} />
