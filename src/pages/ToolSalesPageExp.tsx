@@ -94,15 +94,15 @@ export default function ToolSalesPageExp() {
             </div>
           </div>
 
-          {/* 댄 케네디식 역보증 환불 안내 */}
+          {/* 100% 공정 미션 수행 조건부 역보증 환불 안내 */}
           <div className="p-6 rounded-2xl bg-[#C9A84C]/10 border border-[#C9A84C]/40 flex items-start gap-4">
             <ShieldCheck className="w-8 h-8 text-[#C9A84C] shrink-0 mt-1" />
             <div>
               <h4 className="font-bold text-white text-base mb-1">
-                댄 케네디식 100% 무위험 강력 역보증 (Better-Than-Risk-Free Guarantee)
+                🛡️ 100% 미션 수행 조건부 실행 보증 (Action-Based Guarantee)
               </h4>
               <p className="text-xs text-white/70 leading-relaxed">
-                강의를 수강하시고 30일 동안 실행해보세요. 만약 제공된 골조 프롬프트와 템플릿으로 본인 서비스의 런치 스크립트와 퍼널을 구축하지 못하시거나 만족스럽지 않다면 100% 조건 없이 환불해 드립니다. 환불하시더라도 보너스로 제공된 모든 템플릿과 프롬프트는 소장하셔도 좋습니다.
+                GrowthAI의 노하우는 단기간 악의적 녹화 후 맹목적 환불을 요구하는 체리피커를 방지하고 진정성 있는 대표님의 성장을 위해 **공정한 미션 환불제**를 채택합니다. VOD 수강 후 제공된 **실습 숙제 템플릿과 AI 골조 프롬프트 과제를 모두 실행했음에도** 본인의 세일즈 퍼널 스크립트가 완성되지 않는다면 100% 환불해 드립니다. (※ 전자상거래법 제17조 제2항에 따라 디지털 콘텐츠 열람 시 진도율 차감 및 파일 다운로드 가액 정산 후 환불 기준 적용)
               </p>
             </div>
           </div>
