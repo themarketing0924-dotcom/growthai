@@ -43,6 +43,12 @@ import PrivacyPage from './pages/PrivacyPage';
 import NotFoundPage from './pages/NotFoundPage';
 import { Seo, DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from './components/Seo';
 
+// Experimental Funnel Pages (기존 페이지 훼손 없이 검증하기 위한 별도 라우트 전용)
+import MainLandingPageExp from './pages/MainLandingPageExp';
+import DiagnosePageExp from './pages/DiagnosePageExp';
+import GuideDay1PageExp from './pages/GuideDay1PageExp';
+import ToolSalesPageExp from './pages/ToolSalesPageExp';
+
 export default function App() {
   const [entranceComplete, setEntranceComplete] = useState(false);
   const [lang, setLang] = useState<'ko' | 'en'>('ko');
@@ -115,6 +121,12 @@ export default function App() {
       <Route path="/portfolio/:workId" element={wrap(<PortfolioDetailPage />)} />
       <Route path="/course/:slug" element={wrap(<CourseLandingPage />)} />
       <Route path="/tools/:slug" element={<ToolDetailPage lang={lang} />} />
+      {/* Experimental Funnel Routes (별도 검증용 라우트) */}
+      <Route path="/experimental" element={wrap(<MainLandingPageExp />)} />
+      <Route path="/experimental/diagnose" element={wrap(<DiagnosePageExp />)} />
+      <Route path="/experimental/guide/day1" element={wrap(<GuideDay1PageExp />)} />
+      <Route path="/experimental/product/:toolId" element={wrap(<ToolSalesPageExp />)} />
+
       <Route path="/" element={wrap(<MainLandingPage />)} />
       <Route path="*" element={wrap(<NotFoundPage />)} />
     </Routes>

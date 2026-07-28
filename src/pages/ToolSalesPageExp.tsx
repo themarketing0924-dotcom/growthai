@@ -1,0 +1,213 @@
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ShieldCheck, CheckCircle2, Sparkles, Lock, ArrowRight, BookOpen } from 'lucide-react';
+import { Seo } from '../components/Seo';
+
+export default function ToolSalesPageExp() {
+  const navigate = useNavigate();
+
+  const [selectedPlan, setSelectedPlan] = useState<'standard' | 'pro'>('pro');
+  const [isOrdering, setIsOrdering] = useState(false);
+  const [orderComplete, setOrderComplete] = useState(false);
+
+  const handleOrder = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsOrdering(true);
+    setTimeout(() => {
+      setIsOrdering(false);
+      setOrderComplete(true);
+    }, 1200);
+  };
+
+  return (
+    <div className="min-h-screen bg-[#0A0D14] text-white pt-24 pb-20 px-4 sm:px-6">
+      <Seo title="AI PLF 동영상 마스터클래스 | GrowthAI" description="내 서비스만 넣으면 3시간 만에 터지는 동영상 런치 퍼널" />
+      <div className="max-w-4xl mx-auto">
+        {/* 헤더 오퍼 타이틀 */}
+        <div className="text-center mb-10">
+          <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-[#C9A84C]/10 text-[#C9A84C] border border-[#C9A84C]/30 mb-4">
+            <Sparkles className="w-3.5 h-3.5 text-[#C9A84C]" />
+            2026 대한민국 맞춤형 초스피드 마케팅 강좌
+          </span>
+          <h1 className="text-3xl sm:text-5xl font-extrabold mb-4 leading-tight break-keep">
+            내 서비스/제품명만 입력하면 3시간 만에 완성!<br />
+            <span className="bg-gradient-to-r from-[#C9A84C] via-[#E5C365] to-amber-200 bg-clip-text text-transparent">
+              AI PLF 동영상 런치 마스터클래스 (VOD + 골조 프롬프트)
+            </span>
+          </h1>
+          <p className="text-white/60 text-base sm:text-lg max-w-2xl mx-auto">
+            이론부터 구현, 실습 숙제 템플릿, 그리고 내 사업 설명만 넣으면 3분 만에 런치 스크립트를 짜주는 마스터 골조 프롬프트까지 풀세트 제공
+          </p>
+        </div>
+
+        {/* 4모듈 VOD 커리큘럼 테이블 */}
+        <div className="bg-white/5 border border-white/10 rounded-2xl p-6 sm:p-8 mb-10 shadow-2xl">
+          <h2 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
+            <BookOpen className="w-5 h-5 text-[#C9A84C]" />
+            <span>📚 실전 VOD 4단계 커리큘럼 & 패키지 포함 내역</span>
+          </h2>
+
+          <div className="space-y-4 mb-8">
+            <div className="p-4 sm:p-5 rounded-xl bg-black/40 border border-white/10">
+              <div className="flex items-center gap-2 mb-1">
+                <span className="bg-[#C9A84C] text-black font-bold text-xs px-2.5 py-0.5 rounded">Module 1</span>
+                <h3 className="font-bold text-white text-base">한국형 PLF 런치 이론 & 성공 사례 분석</h3>
+              </div>
+              <p className="text-xs text-white/60 leading-relaxed ml-1">
+                제프 워커의 런치 구조를 2026년 대한민국 카카오톡, 문자, 숏폼 실정에 맞춰 재해석. 잠재고객의 심리를 예열하는 3단계 질문 공식.
+              </p>
+            </div>
+
+            <div className="p-4 sm:p-5 rounded-xl bg-black/40 border border-white/10">
+              <div className="flex items-center gap-2 mb-1">
+                <span className="bg-[#C9A84C] text-black font-bold text-xs px-2.5 py-0.5 rounded">Module 2</span>
+                <h3 className="font-bold text-white text-base">카메라 없이 제작하는 VSL 구현 & 스토리 비유법</h3>
+              </div>
+              <p className="text-xs text-white/60 leading-relaxed ml-1">
+                얼굴 노출 없이 10분 만에 타격형 런치 영상을 제작하는 법. 뻔하지 않은 스토리를 입혀 구매 의사를 극대화하는 비유와 화법.
+              </p>
+            </div>
+
+            <div className="p-4 sm:p-5 rounded-xl bg-black/40 border border-white/10">
+              <div className="flex items-center gap-2 mb-1">
+                <span className="bg-[#C9A84C] text-black font-bold text-xs px-2.5 py-0.5 rounded">Module 3</span>
+                <h3 className="font-bold text-white text-base">실습 숙제 템플릿 (Workbook) 워크시트</h3>
+              </div>
+              <p className="text-xs text-white/60 leading-relaxed ml-1">
+                강의만 듣고 끝나지 않도록 제공되는 단계별 실습 과제 sheet. 내 서비스의 타겟, 셀링 포인트, 런치 일정을 빈칸만 채우며 정리.
+              </p>
+            </div>
+
+            <div className="p-5 rounded-xl bg-gradient-to-r from-[#C9A84C]/20 via-black to-black border-2 border-[#C9A84C]">
+              <div className="flex items-center justify-between mb-1">
+                <div className="flex items-center gap-2">
+                  <span className="bg-amber-400 text-black font-extrabold text-xs px-2.5 py-0.5 rounded">핵심 보너스</span>
+                  <h3 className="font-bold text-white text-base">초스피드 제작 마스터 골조 프롬프트 (Skeleton Prompts)</h3>
+                </div>
+                <span className="text-xs text-[#C9A84C] font-bold">정가 450,000원 ➔ 무료 증정</span>
+              </div>
+              <p className="text-xs text-white/80 leading-relaxed">
+                🚀 <strong>"대표님의 서비스/상품명 하나만 입력하면 끝!"</strong> AI가 제프 워커 1-2-3 동영상 스크립트, 문자 문구, 세일즈 카피를 3분 만에 초스피드로 뽑아냅니다.
+              </p>
+            </div>
+          </div>
+
+          {/* 댄 케네디식 역보증 환불 안내 */}
+          <div className="p-6 rounded-xl bg-[#C9A84C]/10 border border-[#C9A84C]/40 flex items-start gap-4">
+            <ShieldCheck className="w-8 h-8 text-[#C9A84C] shrink-0 mt-1" />
+            <div>
+              <h4 className="font-bold text-white text-base mb-1">
+                댄 케네디식 100% 무위험 강력 역보증 (Better-Than-Risk-Free Guarantee)
+              </h4>
+              <p className="text-xs text-white/70 leading-relaxed">
+                강의를 수강하시고 30일 동안 실행해보세요. 만약 제공된 골조 프롬프트와 템플릿으로 본인 서비스의 런치 스크립트와 퍼널을 구축하지 못하시거나 만족스럽지 않다면 100% 조건 없이 환불해 드립니다. 환불하시더라도 보너스로 제공된 모든 템플릿과 프롬프트는 소장하셔도 좋습니다.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* 수강 신청 및 옵션 선택 */}
+        <div className="bg-white/5 border border-white/10 rounded-2xl p-6 sm:p-8 mb-10">
+          <h3 className="text-xl font-bold text-white mb-6 text-center">수강 플랜 선택 및 즉시 수강 신청</h3>
+
+          {!orderComplete ? (
+            <form onSubmit={handleOrder} className="space-y-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div 
+                  onClick={() => setSelectedPlan('standard')}
+                  className={`p-5 rounded-xl border cursor-pointer transition-all ${
+                    selectedPlan === 'standard'
+                      ? 'border-[#C9A84C] bg-[#C9A84C]/10'
+                      : 'border-white/10 bg-black/30 hover:border-white/20'
+                  }`}
+                >
+                  <h4 className="font-bold text-white mb-1">VOD 단독 수강권</h4>
+                  <p className="text-xs text-white/50 mb-3">VOD 4모듈 + 실습 숙제 템플릿 열람권</p>
+                  <div className="text-2xl font-extrabold text-[#C9A84C]">99,000원</div>
+                </div>
+
+                <div 
+                  onClick={() => setSelectedPlan('pro')}
+                  className={`p-5 rounded-xl border cursor-pointer relative transition-all ${
+                    selectedPlan === 'pro'
+                      ? 'border-[#C9A84C] bg-[#C9A84C]/10'
+                      : 'border-white/10 bg-black/30 hover:border-white/20'
+                  }`}
+                >
+                  <div className="absolute top-0 right-0 bg-[#C9A84C] text-black font-bold text-[10px] px-2.5 py-0.5 rounded-bl">
+                    추천 95% 선택
+                  </div>
+                  <h4 className="font-bold text-white mb-1">풀 패키지 마스터 패스</h4>
+                  <p className="text-xs text-white/50 mb-3">VOD 4모듈 + 숙제 템플릿 + **마스터 골조 프롬프트**</p>
+                  <div className="text-2xl font-extrabold text-[#C9A84C]">199,000원</div>
+                </div>
+              </div>
+
+              <div className="space-y-4 pt-4 border-t border-white/10">
+                <div>
+                  <label className="block text-xs font-semibold text-white/70 mb-1">수강생 성함 *</label>
+                  <input 
+                    type="text" 
+                    required 
+                    placeholder="홍길동" 
+                    className="w-full px-4 py-3 rounded-lg bg-black/50 border border-white/10 text-white text-sm focus:outline-none focus:border-[#C9A84C]"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-white/70 mb-1">이메일 주소 (VOD 강의실 계정 발송용) *</label>
+                  <input 
+                    type="email" 
+                    required 
+                    placeholder="name@company.com" 
+                    className="w-full px-4 py-3 rounded-lg bg-black/50 border border-white/10 text-white text-sm focus:outline-none focus:border-[#C9A84C]"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-white/70 mb-1">휴대폰 번호 (수강 접속 문자 알림용) *</label>
+                  <input 
+                    type="tel" 
+                    required 
+                    placeholder="010-1234-5678" 
+                    className="w-full px-4 py-3 rounded-lg bg-black/50 border border-white/10 text-white text-sm focus:outline-none focus:border-[#C9A84C]"
+                  />
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                disabled={isOrdering}
+                className="w-full py-4 rounded-xl bg-[#C9A84C] hover:bg-[#d9b85c] text-black font-bold text-base transition-all duration-200 shadow-xl shadow-[#C9A84C]/25 flex items-center justify-center gap-2"
+              >
+                {isOrdering ? (
+                  <span>수강 신청 수속 중...</span>
+                ) : (
+                  <>
+                    <Lock className="w-4 h-4" />
+                    <span>30일 100% 무위험 즉시 수강 신청하기</span>
+                    <ArrowRight className="w-5 h-5" />
+                  </>
+                )}
+              </button>
+            </form>
+          ) : (
+            <div className="text-center py-8">
+              <div className="w-16 h-16 rounded-full bg-[#C9A84C]/20 border border-[#C9A84C] text-[#C9A84C] flex items-center justify-center mx-auto mb-4">
+                <CheckCircle2 className="w-10 h-10" />
+              </div>
+              <h4 className="text-2xl font-bold text-white mb-2">수강 신청이 완료되었습니다!</h4>
+              <p className="text-sm text-white/60 max-w-md mx-auto mb-6">
+                입력하신 휴대폰 번호와 이메일로 3분 이내에 VOD 강의실 접속 링크 및 마스터 골조 프롬프트 다운로드 안내가 전송됩니다.
+              </p>
+              <button
+                onClick={() => navigate('/experimental')}
+                className="px-6 py-2.5 rounded-lg bg-white/10 hover:bg-white/20 text-white text-sm font-semibold transition"
+              >
+                실험실 메인으로 이동
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
