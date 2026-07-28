@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
-import { Sparkles, ArrowRight, CheckCircle2, Lock, User, Mail, Phone, HelpCircle, BookOpen } from 'lucide-react';
+import { Sparkles, ArrowRight, CheckCircle2, Lock, User, Mail, Phone, HelpCircle, BookOpen, ShieldCheck } from 'lucide-react';
 import { Seo, SITE_NAME } from '../components/Seo';
 import { Footer } from '../components/Footer';
 import { useNavigate } from 'react-router-dom';
 import { submitLeadToN8n } from '../services/n8nService';
 
 const TEN_SOLUTIONS = [
-  "상세페이지 글귀 100번 고쳐도 매출이 0원이었던 진짜 이유와 퍼널 해결책",
-  "100개의 AI 도구를 외우느라 지친 대표님을 위한 단 1개의 3초 완출 골조 프롬프트",
-  "블로그 방문자는 있는데 연락처(DB)를 수집하지 못해 고객을 놓치는 배관 누수 방지법",
-  "카메라 노출 없이 10분 만에 런치 동영상(VSL) 제작하는 스토리 비유 공식",
-  "글 1개로 유튜브 숏폼·인스타 카드뉴스·스레드 5개 채널에 자동 배포하는 옴니채널 비밀",
-  "수강생과 잠재고객의 구매 저항과 가격 부담을 100% 허무는 가치 오퍼(Value Offer) 구성",
-  "체리피커와 악의적 환불 요구를 100% 막아내는 공정 미션 수행 조건부 실행 보증",
-  "단순 가격 비교 고객을 차단하고 24시간 나를 선택하게 만드는 3단계 신뢰 예열법",
-  "구글/네이버 검색 상위 노출을 위한 E-E-A-T 기반 AI 콘텐츠 집필 시크릿",
-  "자가 진단부터 특강 릴리즈, 카운트다운 결제창까지 24시간 입금시키는 자동화 배관 지도"
+  "상세페이지 글귀 100번 고쳐도 매출 0원인 진짜 이유와 퍼널 해결책",
+  "100개의 AI 도구 공부보다 낫다! 3초 완출 골조 프롬프트 사용법",
+  "블로그 방문자는 있는데 DB 수집을 못 해 고객을 놓치는 배관 수리법",
+  "카메라 노출 없이 10분 만에 런치 동영상(VSL) 제작하는 비유 공식",
+  "글 1개로 유튜브·인스타·스레드 5개 채널에 배포하는 옴니채널 비밀",
+  "수강생의 구매 저항과 가격 부담을 100% 허무는 가치 오퍼 구성",
+  "체리피커와 악의적 환불 요구를 막는 공정 미션 수행 조건부 보증",
+  "단순 가격 비교 고객을 차단하고 24시간 나를 선택하게 하는 예열법",
+  "구글/네이버 상위 노출을 위한 E-E-A-T 기반 AI 콘텐츠 집필 시크릿",
+  "자가 진단부터 릴리즈, 결제창까지 24시간 입금시키는 자동화 배관"
 ];
 
 export default function LeadBookPage() {
@@ -36,7 +36,6 @@ export default function LeadBookPage() {
 
     setIsSubmitting(true);
 
-    // n8n 비동기 웹훅 연동
     await submitLeadToN8n({
       name,
       email,
@@ -63,23 +62,22 @@ export default function LeadBookPage() {
         siteName={SITE_NAME}
       />
 
-      {/* 이탈 방지를 위해 Navbar 제거된 100% 단일 전용 스퀴즈 페이지 (Single Focused Squeeze Page) */}
       <div className="bg-[#000000] text-[#F5F5F7] min-h-screen font-sans flex flex-col selection:bg-[#C9A84C] selection:text-black">
         
-        {/* 최소 상단 브랜드 로고 바 */}
-        <header className="py-6 px-6 border-b border-white/10 text-center bg-[#000000]/80 backdrop-blur-md sticky top-0 z-50">
-          <div className="max-w-6xl mx-auto flex items-center justify-between">
+        {/* 상단 100% 단일 스퀴즈 헤더 (이탈 방지) */}
+        <header className="py-5 px-6 border-b border-white/10 text-center bg-[#000000]/90 backdrop-blur-md sticky top-0 z-50">
+          <div className="max-w-5xl mx-auto flex items-center justify-between">
             <span className="text-xl font-extrabold text-[#C9A84C] tracking-tight">GrowthAI</span>
-            <span className="text-xs text-white/50 bg-white/10 px-3 py-1 rounded-full border border-white/10">
-              🔒 100% 무료 소책자 즉시 다운로드
+            <span className="text-xs text-white/60 bg-white/10 px-3.5 py-1 rounded-full border border-white/15">
+              🔒 100% 비매품 소책자 즉시 다운로드
             </span>
           </div>
         </header>
 
-        <main className="flex-1 pt-10 pb-24 px-6 sm:px-10 md:px-12 lg:px-16 max-w-6xl mx-auto w-full">
+        <main className="flex-1 pt-12 pb-24 px-6 sm:px-10 md:px-12 lg:px-16 max-w-5xl mx-auto w-full">
           
-          {/* 상단 타격 뱃지 & 헤드카피 */}
-          <div className="text-center mb-12">
+          {/* 상단 헤드카피 (5xl 그리드 규격과 완벽 대칭 동기화) */}
+          <div className="text-center mb-14">
             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold bg-[#C9A84C]/10 text-[#C9A84C] border border-[#C9A84C]/30 mb-5 shadow-[0_0_15px_rgba(201,168,76,0.15)]">
               <Sparkles className="w-3.5 h-3.5 text-[#C9A84C]" />
               2026 대한민국 1인 창업가·소상공인 한정 비매품 소책자
@@ -92,61 +90,50 @@ export default function LeadBookPage() {
               </span>
             </h1>
 
-            <p className="text-white/70 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed break-keep">
+            <p className="text-white/70 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed break-keep font-normal">
               ChatGPT, 클로드 기능 익히다 지쳐버린 대표님을 위한 단 한 권의 해답.<br />
               자면서도 고객 DB를 모으고 결제시키는 <strong className="text-white font-bold">[2026 AI 퍼널 마케팅 바이블 소책자]</strong>를 문자로 3초 만에 발송해 드립니다.
             </p>
           </div>
 
-          {/* 해외 표준 스퀴즈 2컬럼 그리드: [좌: 소책자 3D 커버 + 10가지 목차] VS [우: 신청서 폼 카드] */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          {/* 좌우 높이 및 시각적 1:1 대칭 밸런스 2컬럼 카격 그리드 */}
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch">
             
-            {/* 👈 좌측 (Left Column, lg:col-span-6): 소책자 이미지 + 10가지 기법 해결 목차 */}
-            <div className="lg:col-span-6 space-y-8">
-              
-              {/* 소책자 입체 3D 커버 박스 */}
-              <div className="bg-[#161617] border border-white/10 rounded-3xl p-6 sm:p-8 flex flex-col sm:flex-row items-center gap-6 shadow-xl">
-                <div className="w-44 shrink-0 aspect-[3/4] bg-gradient-to-br from-[#C9A84C] via-amber-600 to-yellow-800 rounded-2xl p-5 text-black shadow-2xl flex flex-col justify-between border border-white/30 transform hover:scale-105 transition-transform duration-300">
+            {/* 👈 좌측 (Left Column, md:col-span-6): 소책자 커버 & 10가지 핵심 해결 목차 완벽 통합 카드 */}
+            <div className="md:col-span-6 bg-[#161617] border border-white/10 rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-2xl">
+              <div>
+                {/* 소책자 시각 헤더 */}
+                <div className="flex items-center gap-4 mb-6 pb-6 border-b border-white/10">
+                  <div className="w-24 shrink-0 aspect-[3/4] bg-gradient-to-br from-[#C9A84C] via-amber-600 to-yellow-800 rounded-xl p-3 text-black shadow-xl flex flex-col justify-between border border-white/30">
+                    <span className="text-[7px] font-extrabold uppercase bg-black text-[#C9A84C] px-1.5 py-0.5 rounded w-max">BIBLE</span>
+                    <h3 className="text-xs font-extrabold text-black leading-tight">2026 AI 퍼널<br />마케팅 바이블</h3>
+                    <span className="text-[8px] text-black/80 font-bold">KOI LEE 저</span>
+                  </div>
+
                   <div>
-                    <span className="text-[9px] font-extrabold uppercase tracking-widest bg-black text-[#C9A84C] px-2 py-0.5 rounded">GrowthAI Special</span>
-                    <h2 className="text-lg font-extrabold text-black mt-3 leading-tight">
-                      2026 AI 퍼널<br />마케팅 바이블
-                    </h2>
-                    <p className="text-[10px] text-black/85 mt-2 font-semibold">
-                      글 1개로 5개 채널 파이프라인 자동화 & 세일즈 배관
+                    <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#C9A84C]/10 text-[#C9A84C] text-[11px] font-bold border border-[#C9A84C]/30 mb-1.5">
+                      <BookOpen size={12} /> 비매품 한정 소책자
+                    </div>
+                    <h3 className="text-base font-bold text-white mb-1">소책자에 수록된 핵심 가치</h3>
+                    <p className="text-xs text-white/60 leading-relaxed">
+                      도구 공부 제로! 24시간 파는 1개의 구매전환 퍼널 구축 노하우 100% 수록.
                     </p>
                   </div>
-                  <div className="pt-3 border-t border-black/20 flex justify-between items-center text-[10px] font-bold">
-                    <span>KOI LEE 저</span>
-                    <span>PDF 가이드북</span>
-                  </div>
                 </div>
 
-                <div>
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#C9A84C]/10 text-[#C9A84C] text-xs font-bold border border-[#C9A84C]/30 mb-3">
-                    <BookOpen size={14} /> 비매품 한정 무료 공개
-                  </div>
-                  <h3 className="text-lg font-bold text-white mb-2">2026 AI 퍼널 마케팅 바이블</h3>
-                  <p className="text-xs text-white/70 leading-relaxed">
-                    도구 공부 제로! 내 노하우만으로 24시간 고객을 모으고 입금시키는 최상위 세일즈 배관의 비밀을 100% 무료로 담았습니다.
-                  </p>
-                </div>
-              </div>
+                {/* 10가지 핵심 해결 체크리스트 */}
+                <h4 className="text-xs font-bold text-white/80 uppercase tracking-wider mb-3.5 flex items-center gap-1.5">
+                  <HelpCircle size={14} className="text-[#C9A84C]" />
+                  <span>이 책으로 즉시 해결되는 10가지 고통:</span>
+                </h4>
 
-              {/* 10가지 핵심 문제 해결 서브 카피 목차 */}
-              <div className="bg-[#161617] border border-white/10 rounded-3xl p-6 sm:p-8 shadow-xl">
-                <h3 className="text-lg font-bold text-white mb-5 flex items-center gap-2 border-b border-white/10 pb-4">
-                  <HelpCircle className="w-5 h-5 text-[#C9A84C]" />
-                  <span>이 소책자 단 한 권으로 해결되는 10가지 핵심 목차</span>
-                </h3>
-
-                <div className="space-y-3.5">
+                <div className="space-y-2.5">
                   {TEN_SOLUTIONS.map((sol, idx) => (
-                    <div key={idx} className="flex items-start gap-3 p-3 rounded-xl bg-black/40 border border-white/5">
-                      <div className="w-5 h-5 rounded-full bg-[#C9A84C]/20 border border-[#C9A84C]/40 text-[#C9A84C] font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">
+                    <div key={idx} className="flex items-start gap-2.5 p-2.5 rounded-xl bg-black/40 border border-white/5">
+                      <div className="w-4 h-4 rounded-full bg-[#C9A84C]/20 border border-[#C9A84C]/40 text-[#C9A84C] font-bold text-[10px] flex items-center justify-center shrink-0 mt-0.5">
                         {idx + 1}
                       </div>
-                      <p className="text-xs text-white/85 leading-relaxed">
+                      <p className="text-xs text-white/80 leading-snug">
                         {sol}
                       </p>
                     </div>
@@ -154,15 +141,18 @@ export default function LeadBookPage() {
                 </div>
               </div>
 
+              <div className="mt-6 pt-4 border-t border-white/10 flex items-center gap-1.5 text-xs text-[#C9A84C] font-semibold">
+                <ShieldCheck size={14} /> <span>100% 무료 PDF 및 10분 VSL 특강 포함</span>
+              </div>
             </div>
 
-            {/* 👉 우측 (Right Column, lg:col-span-6): 3필드 신청서 폼 카드 (Sticky Card) */}
-            <div className="lg:col-span-6 lg:sticky lg:top-24">
-              <div className="bg-[#161617] border-2 border-[#C9A84C] rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
-                <div className="absolute top-0 right-0 bg-[#C9A84C] text-black font-extrabold text-[10px] px-4 py-1.5 rounded-bl-xl uppercase tracking-wider">
-                  선착순 무료 배포 중
-                </div>
+            {/* 👉 우측 (Right Column, md:col-span-6): 3필드 신청서 폼 카드 (1:1 세로 대칭 밸런스) */}
+            <div className="md:col-span-6 bg-[#161617] border-2 border-[#C9A84C] rounded-3xl p-6 sm:p-8 shadow-2xl flex flex-col justify-between relative overflow-hidden">
+              <div className="absolute top-0 right-0 bg-[#C9A84C] text-black font-extrabold text-[10px] px-4 py-1.5 rounded-bl-xl uppercase tracking-wider">
+                선착순 무료 배포 중
+              </div>
 
+              <div>
                 <div className="mb-6 border-b border-white/10 pb-4">
                   <h3 className="text-xl font-bold text-white mb-1">🎁 소책자 즉시 무료 신청</h3>
                   <p className="text-xs text-white/60">성함, 이메일, 휴대폰 번호를 입력하시면 3초 만에 문자로 PDF가 발송됩니다.</p>
@@ -188,7 +178,7 @@ export default function LeadBookPage() {
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold text-white/80 mb-1.5">이메일 주소 (소책자 PDF 리포트 발송용) *</label>
+                      <label className="block text-xs font-semibold text-white/80 mb-1.5">이메일 주소 (소책자 PDF 발송용) *</label>
                       <div className="relative">
                         <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-white/40">
                           <Mail size={16} />
@@ -205,7 +195,7 @@ export default function LeadBookPage() {
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold text-white/80 mb-1.5">휴대폰 번호 (소책자문자 & 10분 무료 특강 발송용) *</label>
+                      <label className="block text-xs font-semibold text-white/80 mb-1.5">휴대폰 번호 (소책자문자 & 10분 특강 발송용) *</label>
                       <div className="relative">
                         <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-white/40">
                           <Phone size={16} />
@@ -250,7 +240,7 @@ export default function LeadBookPage() {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full py-5 sm:py-6 rounded-full bg-[#C9A84C] hover:bg-[#d9b85c] text-black font-extrabold text-base sm:text-lg transition duration-200 shadow-[0_0_30px_rgba(201,168,76,0.35)] flex items-center justify-center gap-2 cursor-pointer border-none mt-4"
+                      className="w-full py-5 sm:py-5.5 rounded-full bg-[#C9A84C] hover:bg-[#d9b85c] text-black font-extrabold text-base sm:text-lg transition duration-200 shadow-[0_0_30px_rgba(201,168,76,0.35)] flex items-center justify-center gap-2 cursor-pointer border-none mt-4"
                     >
                       {isSubmitting ? (
                         <span>소책자 발송 수속 중...</span>
