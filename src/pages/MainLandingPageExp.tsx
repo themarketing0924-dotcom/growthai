@@ -33,7 +33,7 @@ export default function MainLandingPageExp() {
         <Navbar entranceComplete={true} lang="ko" setLang={() => {}} />
 
         {/* HERO SECTION - 애플 스타일 중앙 축 완벽 대칭 */}
-        <section ref={heroRef} className="relative pt-36 pb-24 px-4 sm:px-6 overflow-hidden">
+        <section ref={heroRef} className="relative pt-36 pb-24 px-6 sm:px-10 md:px-12 lg:px-16 overflow-hidden">
           {/* 배경 조명 효과 */}
           <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-[#C9A84C]/10 rounded-full blur-[150px] pointer-events-none" />
 
@@ -121,7 +121,7 @@ export default function MainLandingPageExp() {
         </section>
 
         {/* 2열 대칭 애플 카드 섹션 (Apple Dual Cards) */}
-        <section className="py-20 px-4 sm:px-6 bg-[#000000] border-t border-white/10">
+        <section className="py-20 px-6 sm:px-10 md:px-12 lg:px-16 bg-[#000000] border-t border-white/10">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-14">
               <span className="text-[#C9A84C] font-bold text-xs uppercase tracking-widest block mb-2">SYSTEM ARCHITECTURE</span>

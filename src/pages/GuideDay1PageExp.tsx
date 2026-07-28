@@ -30,7 +30,7 @@ export default function GuideDay1PageExp() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#07090E] text-white pt-28 pb-24 px-4 sm:px-6 font-sans">
+    <div className="min-h-screen bg-[#07090E] text-white pt-28 pb-24 px-6 sm:px-10 md:px-12 lg:px-16 font-sans">
       <Seo title="2026 AI PLF 10분 무료 특강 | GrowthAI" description="내 서비스를 빠르게 파는 동영상 런치 공식 특강" />
       
       {/* 폭과 사이즈를 완벽히 하나로 일치시키는 동일 컨테이너 (max-w-3xl) */}

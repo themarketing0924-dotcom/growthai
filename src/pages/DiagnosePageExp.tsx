@@ -89,7 +89,7 @@ export default function DiagnosePageExp() {
       <div className="bg-[#07090E] text-[#f7f7f5] min-h-screen font-sans flex flex-col">
         <Navbar entranceComplete={true} lang="ko" setLang={() => {}} />
 
-        <main className="flex-1 flex items-center justify-center pt-28 pb-16 px-4 sm:px-6">
+        <main className="flex-1 flex items-center justify-center pt-28 pb-16 px-6 sm:px-10 md:px-12 lg:px-16">
           <div className="max-w-2xl w-full">
             
             <AnimatePresence mode="wait">

@@ -20,7 +20,7 @@ export default function ToolSalesPageExp() {
   };
 
   return (
-    <div className="min-h-screen bg-[#000000] text-white pt-28 pb-24 px-4 sm:px-6 font-sans">
+    <div className="min-h-screen bg-[#000000] text-white pt-28 pb-24 px-6 sm:px-10 md:px-12 lg:px-16 font-sans">
       <Seo title="AI PLF 동영상 마스터클래스 | GrowthAI" description="변호사, 의사, 트레이너, 인테리어 등 내 노하우만 파는 3시간 퍼널 구축" />
       <div className="max-w-4xl mx-auto">
         
