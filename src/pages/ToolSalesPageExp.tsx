@@ -21,13 +21,13 @@ export default function ToolSalesPageExp() {
 
   return (
     <div className="min-h-screen bg-[#0A0D14] text-white pt-24 pb-20 px-4 sm:px-6">
-      <Seo title="AI PLF 동영상 마스터클래스 | GrowthAI" description="내 서비스만 넣으면 3시간 만에 터지는 동영상 런치 퍼널" />
+      <Seo title="AI PLF 동영상 마스터클래스 | GrowthAI" description="변호사, 의사, 트레이너, 인테리어 등 내 노하우만 파는 3시간 퍼널 구축" />
       <div className="max-w-4xl mx-auto">
         {/* 헤더 오퍼 타이틀 */}
         <div className="text-center mb-10">
           <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-[#C9A84C]/10 text-[#C9A84C] border border-[#C9A84C]/30 mb-4">
             <Sparkles className="w-3.5 h-3.5 text-[#C9A84C]" />
-            2026 대한민국 맞춤형 초스피드 마케팅 강좌
+            2026 대한민국 12인 거장 프레임워크 × AI 자동 세일즈 시스템
           </span>
           <h1 className="text-3xl sm:text-5xl font-extrabold mb-4 leading-tight break-keep">
             내 서비스/제품명만 입력하면 3시간 만에 완성!<br />
@@ -36,7 +36,7 @@ export default function ToolSalesPageExp() {
             </span>
           </h1>
           <p className="text-white/60 text-base sm:text-lg max-w-2xl mx-auto">
-            이론부터 구현, 실습 숙제 템플릿, 그리고 내 사업 설명만 넣으면 3분 만에 런치 스크립트를 짜주는 마스터 골조 프롬프트까지 풀세트 제공
+            변호사, 의사, 트레이너, 골퍼, 인테리어, 설비, 마사지, 네트워크 마케터 등 내 노하우를 24시간 파는 온라인 자동 세일즈 퍼널 구축
           </p>
         </div>
 
@@ -51,20 +51,20 @@ export default function ToolSalesPageExp() {
             <div className="p-4 sm:p-5 rounded-xl bg-black/40 border border-white/10">
               <div className="flex items-center gap-2 mb-1">
                 <span className="bg-[#C9A84C] text-black font-bold text-xs px-2.5 py-0.5 rounded">Module 1</span>
-                <h3 className="font-bold text-white text-base">한국형 PLF 런치 이론 & 성공 사례 분석</h3>
+                <h3 className="font-bold text-white text-base">한국형 PLF 런치 이론 & 12인 거장 성공 사례</h3>
               </div>
               <p className="text-xs text-white/60 leading-relaxed ml-1">
-                제프 워커의 런치 구조를 2026년 대한민국 카카오톡, 문자, 숏폼 실정에 맞춰 재해석. 잠재고객의 심리를 예열하는 3단계 질문 공식.
+                제프 워커의 런치 구조를 대한민국 문자/카카오톡 90% 열람 실정에 맞춰 재해석. 잠재고객의 심리를 예열하는 3단계 질문 공식.
               </p>
             </div>
 
             <div className="p-4 sm:p-5 rounded-xl bg-black/40 border border-white/10">
               <div className="flex items-center gap-2 mb-1">
                 <span className="bg-[#C9A84C] text-black font-bold text-xs px-2.5 py-0.5 rounded">Module 2</span>
-                <h3 className="font-bold text-white text-base">카메라 없이 제작하는 VSL 구현 & 스토리 비유법</h3>
+                <h3 className="font-bold text-white text-base">카메라 노출 없이 10분 만에 만드는 VSL 구현법</h3>
               </div>
               <p className="text-xs text-white/60 leading-relaxed ml-1">
-                얼굴 노출 없이 10분 만에 타격형 런치 영상을 제작하는 법. 뻔하지 않은 스토리를 입혀 구매 의사를 극대화하는 비유와 화법.
+                얼굴 노출 부담 없이 타격형 런치 동영상을 제작하는 비유 화법과, 물고기 잡는 법(퍼널 스스로 만들기 및 다듬기) 전수.
               </p>
             </div>
 
@@ -87,7 +87,7 @@ export default function ToolSalesPageExp() {
                 <span className="text-xs text-[#C9A84C] font-bold">정가 450,000원 ➔ 무료 증정</span>
               </div>
               <p className="text-xs text-white/80 leading-relaxed">
-                🚀 <strong>"대표님의 서비스/상품명 하나만 입력하면 끝!"</strong> AI가 제프 워커 1-2-3 동영상 스크립트, 문자 문구, 세일즈 카피를 3분 만에 초스피드로 뽑아냅니다.
+                🚀 <strong>{`"{대표님의 서비스/상품명}"`} 1개만 괄호 안에 입력하면 끝!</strong> AI가 제프 워커 1-2-3 동영상 스크립트, 문자 문구, 세일즈 카피를 3분 만에 초스피드로 뽑아냅니다. 초보자/연로자도 100% 실행 가능!
               </p>
             </div>
           </div>

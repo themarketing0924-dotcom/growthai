@@ -8,19 +8,19 @@ import { useNavigate } from 'react-router-dom';
 const QUESTIONS = [
   {
     id: 1,
-    text: "현재 대표님의 비즈니스 자산 상태는 어디에 해당하나요?",
+    text: "대표님의 현재 전문 분야/업종은 무엇인가요?",
     options: [
-      "자산 제로: 내 상품도 없고, 연락할 잠재고객 연락처(DB)도 없다.",
-      "트래픽 보유: 블로그/유튜브/SNS/기존 고객 등 트래픽이나 관심 고객은 있다."
+      "전문직 / 서비스업 (변호사, 의사, 약사, 인테리어, 설비, 마사지, 헬스트레이너, 프로골퍼 등)",
+      "지식 창업 / 교육업 (강사, 코치, 전자책 저자, 컨설턴트 등)",
+      "네트워크 마케팅 / 유통 / 커머스 / 기타 1인 기업"
     ]
   },
   {
     id: 2,
-    text: "방문자가 사이트나 블로그에 들어왔을 때 결제나 문의로 이어지는 비율은 어느 정도인가요?",
+    text: "현재 대표님의 온라인 세일즈 배관(리드 수집 ➔ 결제) 상태는 어떠한가요?",
     options: [
-      "1% 미만 (거의 문의나 결제가 발생하지 않는다)",
-      "1% ~ 5% (가끔 문의나 결제가 있다)",
-      "수치를 모르거나 아예 측정하고 있지 않다"
+      "자산 제로: 내 노하우는 있으나, 고객 DB 수집 및 자동 판매 배관이 전혀 없다.",
+      "트래픽 보유: 블로그/유튜브/SNS/기존 고객 등 트래픽은 있으나 결제 전환율이 미비하다."
     ]
   },
   {
@@ -62,26 +62,27 @@ export default function DiagnosePageExp() {
     if (!name || !email || !phone || !agree) return;
     
     setSubmitted(true);
-    const isNoAsset = answers[0] === 0;
+    const isNoAsset = answers[1] === 0;
     setTimeout(() => {
       navigate('/experimental/guide/day1', { 
         state: { 
           name, 
           email, 
           phone, 
+          profession: QUESTIONS[0].options[answers[0]],
           segment: isNoAsset ? 'no-asset' : 'has-traffic' 
         } 
       });
     }, 1500);
   };
 
-  const isNoAsset = answers[0] === 0;
+  const isNoAsset = answers[1] === 0;
 
   return (
     <>
       <Seo
-        title="2026 AI PLF 3분 무료 진단 | GrowthAI"
-        description="내 서비스가 안 팔린 이유 진단 및 무료 VOD 특강 문자 전송"
+        title="2026 업종별 AI PLF 3분 무료 진단 | GrowthAI"
+        description="노하우를 가진 누구나 {00} 입력으로 자동 판매 퍼널 진단"
         canonical="/experimental/diagnose"
         siteName={SITE_NAME}
       />
@@ -107,7 +108,7 @@ export default function DiagnosePageExp() {
                   </div>
                   
                   <span className="text-[#C9A84C] font-bold text-xs sm:text-sm tracking-widest uppercase mb-3 block">
-                    2026 퍼널 진단 질문 {step + 1} / {QUESTIONS.length}
+                    업종별 퍼널 진단 질문 {step + 1} / {QUESTIONS.length}
                   </span>
                   <h2 className="text-xl sm:text-2xl font-bold mb-6 leading-relaxed">
                     {QUESTIONS[step].text}
@@ -137,8 +138,8 @@ export default function DiagnosePageExp() {
                   className="text-center py-20"
                 >
                   <Loader2 size={56} className="animate-spin text-[#C9A84C] mx-auto mb-6" />
-                  <h2 className="text-2xl font-bold mb-3">대표님의 비즈니스 세그먼트를 분석 중입니다...</h2>
-                  <p className="text-white/60 text-sm">한국 시장 맞춤 런치 배관 & 마케팅 거장 12인 뼈대 매핑 중</p>
+                  <h2 className="text-2xl font-bold mb-3">대표님의 업종별 세그먼트를 분석 중입니다...</h2>
+                  <p className="text-white/60 text-sm">마케팅 거장 12인 뼈대 & {`{내 업종}`} 마스터 골조 프롬프트 매핑 중</p>
                 </motion.div>
               )}
 
@@ -152,15 +153,15 @@ export default function DiagnosePageExp() {
                   <div className="bg-red-500/10 border-b border-red-500/20 p-6 sm:p-8 text-center">
                     <h2 className="text-lg sm:text-xl font-bold mb-2">🚨 진단 결과: 
                       {isNoAsset ? (
-                        <span className="text-red-400"> [초기 잠재고객 결핍 및 DB 누수] 단계</span>
+                        <span className="text-red-400"> [초기 잠재고객 DB 수집 및 세일즈 배관 누수] 단계</span>
                       ) : (
                         <span className="text-red-400"> [전환 배관 부재 및 오퍼 저항] 단계</span>
                       )}
                     </h2>
                     <p className="text-white/80 text-xs sm:text-sm mt-2 leading-relaxed">
                       {isNoAsset 
-                        ? "연락 가능한 잠재고객 DB가 없는 상태에서 프롬프트만 공부하고 계십니다. 제프 워커의 'ASK 진단 런치 퍼널'부터 이식해야 합니다."
-                        : "트래픽은 유입되나 결제 전환 배관이 막혔습니다. 알렉스 하모지의 '가치 방정식'을 적용해 구매 저항을 없애야 합니다."
+                        ? "대표님의 독보적인 노하우가 있으나, 24시간 자동으로 고객 DB를 모으고 결제시키는 퍼널 시스템이 부재합니다. 3초 만에 완출되는 마스터 골조 프롬프트로 배관을 잡아야 합니다."
+                        : "방문자나 트래픽은 있으나 가격 저항을 없애는 하모지식 가치 오퍼 배관이 막혔습니다. AI PLF 동영상 퍼널을 이식해야 합니다."
                       }
                     </p>
                   </div>
@@ -170,8 +171,8 @@ export default function DiagnosePageExp() {
                       <div className="flex flex-col sm:flex-row gap-6 items-center mb-8">
                         <div className="w-full sm:w-1/3 aspect-[3/4] bg-gradient-to-br from-[#C9A84C] to-yellow-700 rounded-xl flex items-center justify-center p-5 text-center shadow-lg transform -rotate-1 border border-white/20">
                           <div className="bg-black/60 p-3 rounded-lg backdrop-blur-sm w-full h-full flex flex-col justify-center">
-                            <span className="text-[10px] font-bold text-[#C9A84C] mb-1 uppercase">2026 VOD + PDF Package</span>
-                            <h3 className="font-bold text-xs sm:text-sm mb-1">한국형 AI PLF 실전 가이드북 & VOD</h3>
+                            <span className="text-[10px] font-bold text-[#C9A84C] mb-1 uppercase">2026 VOD + Prompt Package</span>
+                            <h3 className="font-bold text-xs sm:text-sm mb-1">업종별 {`{00}`} 마스터 골조 프롬프트 & VOD</h3>
                             <p className="text-[10px] text-white/50 line-through mt-auto">정가 99,000원</p>
                           </div>
                         </div>
@@ -179,7 +180,7 @@ export default function DiagnosePageExp() {
                           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-yellow-500/20 text-yellow-400 text-xs font-bold border border-yellow-500/30">
                             <Gift size={14} /> 맞춤 진단 솔루션 즉시 발송
                           </div>
-                          <h3 className="text-lg font-bold">이 병목을 3시간 만에 해결할 VOD 특강과 골조 템플릿을 드립니다.</h3>
+                          <h3 className="text-lg font-bold">대표님의 노하우를 24시간 파는 VOD 특강과 골조 템플릿을 드립니다.</h3>
                           <p className="text-white/70 text-xs leading-relaxed">
                             아래에 **성함, 이메일, 휴대폰 번호**를 입력하시면 10분 마스터클래스 영상 링크와 PDF 가이드북이 문자와 이메일로 3초 만에 발송됩니다.
                           </p>
