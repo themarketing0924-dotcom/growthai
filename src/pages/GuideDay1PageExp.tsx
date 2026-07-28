@@ -32,30 +32,34 @@ export default function GuideDay1PageExp() {
   return (
     <div className="min-h-screen bg-[#07090E] text-white pt-28 pb-24 px-4 sm:px-6 font-sans">
       <Seo title="2026 AI PLF 10분 무료 특강 | GrowthAI" description="내 서비스를 빠르게 파는 동영상 런치 공식 특강" />
-      <div className="max-w-4xl mx-auto">
+      
+      {/* 폭과 사이즈를 완벽히 하나로 일치시키는 동일 컨테이너 (max-w-3xl) */}
+      <div className="max-w-3xl mx-auto space-y-8">
         
-        {/* 상단 뱃지 */}
-        <div className="text-center mb-6">
-          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold bg-[#C9A84C]/10 text-[#C9A84C] border border-[#C9A84C]/30 shadow-[0_0_15px_rgba(201,168,76,0.15)]">
+        {/* 헤더 세션 - 뱃지, 문단 나눠진 헤드라인, 서브카피 */}
+        <div className="text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold bg-[#C9A84C]/10 text-[#C9A84C] border border-[#C9A84C]/30 shadow-[0_0_15px_rgba(201,168,76,0.15)] mb-6">
             <Sparkles className="w-3.5 h-3.5 text-[#C9A84C]" />
-            2026 대한민국 맞춤형 AI PLF 무료 특강 : PLC 1 [기회와 서사]
-          </span>
+            <span>2026 대한민국 맞춤형 AI PLF 무료 특강 : PLC 1 [기회와 서사]</span>
+          </div>
+
+          <h1 className="text-2xl sm:text-4xl font-extrabold text-center mb-5 leading-snug break-keep text-white tracking-tight">
+            {userName}님을 위한 10분 무료 특강:<br />
+            <span className="bg-gradient-to-r from-[#C9A84C] via-[#E5C365] to-amber-200 bg-clip-text text-transparent block mt-1">
+              "왜 99%의 AI 카피라이팅은<br />
+              내 서비스를 팔지 못하는가?"
+            </span>
+          </h1>
+
+          <p className="text-center text-white/65 text-sm sm:text-base leading-relaxed break-keep max-w-2xl mx-auto">
+            단순히 글귀만 고치는 것은 아무 소용이 없습니다.<br />
+            {`"{내 서비스명}"`} 1개만 입력하면 3시간 만에 완성되는 한국형 3단계 동영상 런치 퍼널의 비밀을 공개합니다.
+          </p>
         </div>
 
-        {/* 메인 비디오 타이틀 */}
-        <h1 className="text-2xl sm:text-4xl font-extrabold text-center mb-4 leading-snug break-keep text-white">
-          {userName}님을 위한 10분 특강:<br />
-          <span className="bg-gradient-to-r from-[#C9A84C] via-[#E5C365] to-amber-200 bg-clip-text text-transparent">
-            "왜 99%의 AI 카피라이팅은 내 서비스를 팔지 못하는가?"
-          </span>
-        </h1>
-        <p className="text-center text-white/60 text-sm sm:text-base max-w-2xl mx-auto mb-10 leading-relaxed break-keep">
-          단순히 글귀만 고치는 것은 아무 소용이 없습니다. 내 서비스명만 입력하면 3시간 만에 완성되는 한국형 3단계 동영상 런치 퍼널의 비밀.
-        </p>
-
-        {/* 시네마틱 비디오 프레임 */}
+        {/* 시네마틱 비디오 프레임 - 헤드라인 좌우 폭에 완전 통일 (w-full) */}
         <div 
-          className="relative rounded-3xl overflow-hidden border border-[#C9A84C]/30 bg-black/80 shadow-[0_0_50px_rgba(201,168,76,0.1)] mb-12 aspect-video flex flex-col items-center justify-center group cursor-pointer"
+          className="relative rounded-3xl overflow-hidden border border-[#C9A84C]/30 bg-black/80 shadow-[0_0_50px_rgba(201,168,76,0.12)] aspect-video flex flex-col items-center justify-center group cursor-pointer w-full"
           onClick={() => setIsPlaying(!isPlaying)}
         >
           {!isPlaying ? (
@@ -82,7 +86,7 @@ export default function GuideDay1PageExp() {
             </div>
           )}
 
-          <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs text-white/60 bg-black/70 backdrop-blur-md px-4 py-2.5 rounded-xl border border-white/10">
+          <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs text-white/60 bg-black/75 backdrop-blur-md px-4 py-2.5 rounded-xl border border-white/10">
             <span className="flex items-center gap-1.5">
               <Clock className="w-3.5 h-3.5 text-[#C9A84C]" /> 시청 시간: 10분 15초
             </span>
@@ -90,13 +94,13 @@ export default function GuideDay1PageExp() {
           </div>
         </div>
 
-        {/* 강의 요약 리포트 노트 */}
-        <div className="bg-black/50 border border-white/10 rounded-3xl p-6 sm:p-10 mb-12 backdrop-blur-xl">
-          <h2 className="text-lg font-bold text-white mb-6 flex items-center gap-2 border-b border-white/10 pb-4">
+        {/* 강의 요약 리포트 노트 - 동일한 max-w-3xl 폭 적용 */}
+        <div className="bg-black/50 border border-white/10 rounded-3xl p-6 sm:p-8 backdrop-blur-xl w-full">
+          <h2 className="text-lg font-bold text-white mb-5 flex items-center gap-2 border-b border-white/10 pb-4">
             <Award className="w-5 h-5 text-[#C9A84C]" />
             이 무료 특강에서 밝혀지는 3가지 한국형 마케팅 비밀
           </h2>
-          <ul className="space-y-5 text-sm text-white/80">
+          <ul className="space-y-4.5 text-sm text-white/80">
             <li className="flex items-start gap-3.5">
               <CheckCircle2 className="w-5 h-5 text-[#C9A84C] shrink-0 mt-0.5" />
               <div>
@@ -121,10 +125,10 @@ export default function GuideDay1PageExp() {
           </ul>
         </div>
 
-        {/* 오퍼 해금 영역 */}
-        <div className="text-center">
+        {/* 오퍼 해금 영역 - 동일한 max-w-3xl 폭 적용 */}
+        <div className="text-center w-full">
           {!showOffer ? (
-            <div className="p-8 rounded-3xl bg-black/40 border border-dashed border-[#C9A84C]/40 text-center">
+            <div className="p-8 rounded-3xl bg-black/40 border border-dashed border-[#C9A84C]/40 text-center w-full">
               <p className="text-sm text-white/70 mb-3 flex items-center justify-center gap-2">
                 <Clock className="w-4 h-4 text-[#C9A84C] animate-spin" />
                 VOD 마스터클래스 & 골조 프롬프트 오퍼 신청 버튼이 <span className="text-[#C9A84C] font-bold">{timerSeconds}초</span> 후 활성화됩니다.
@@ -141,7 +145,7 @@ export default function GuideDay1PageExp() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, ease: 'easeOut' }}
-              className="p-8 sm:p-10 rounded-3xl bg-gradient-to-b from-[#C9A84C]/15 via-black/80 to-black border-2 border-[#C9A84C] text-center shadow-2xl relative overflow-hidden backdrop-blur-xl"
+              className="p-8 sm:p-10 rounded-3xl bg-gradient-to-b from-[#C9A84C]/15 via-black/80 to-black border-2 border-[#C9A84C] text-center shadow-2xl relative overflow-hidden backdrop-blur-xl w-full"
             >
               <div className="absolute top-0 right-0 bg-[#C9A84C] text-black font-bold text-xs px-4 py-1.5 rounded-bl-xl">
                 한정 오퍼 오픈
