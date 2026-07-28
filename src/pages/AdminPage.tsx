@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
-  Lock, Key, Users, BookOpen, FileText, Send, Download, 
-  CheckCircle2, XCircle, Calendar, Sparkles, RefreshCw, Plus, Edit3, Trash2, Eye, ShieldCheck 
+  Lock, Key, Users, Send, Download, 
+  CheckCircle2, XCircle, Sparkles, RefreshCw, ShieldCheck 
 } from 'lucide-react';
 import { Seo } from '../components/Seo';
 import { Navbar } from '../components/Navbar';
@@ -55,7 +55,7 @@ export default function AdminPage() {
   const [activeTab, setActiveTab] = useState<'leads' | 'members' | 'blog' | 'settings'>('leads');
 
   // 리드 및 회원 상태
-  const [leads, setLeads] = useState(INITIAL_LEADS);
+  const [leads] = useState(INITIAL_LEADS);
   const [members, setMembers] = useState(INITIAL_MEMBERS);
   const [posts, setPosts] = useState(INITIAL_POSTS);
 
