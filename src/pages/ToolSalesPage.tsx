@@ -1,578 +1,232 @@
-/**
- * ToolSalesPage — AI GPT 도구 개별 세일즈 페이지
- * /product/:toolId
- * aicitybuilders.com/ai-money-video-prompts 구조 벤치마킹
- * 상단 카피라이팅 → 소개 영상 → 세일즈 문구 → 결제 CTA
- *
- * 현재 예시: pt1 — 전자책 출판 지원 솔루션 (전자책 완성 시스템)
- * 승인 후 33개 모두 동일 구조로 확장 적용 예정
- */
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
-import PayPalCheckoutButton from '../components/payment/PayPalCheckoutButton';
-import TossCheckoutButton from '../components/payment/TossCheckoutButton';
-import { PRODUCTS } from '../lib/paypal';
-import { TOSS_PRODUCTS } from '../lib/toss';
-import { createOrder } from '../lib/firestore';
-import { Seo, DEFAULT_OG_IMAGE } from '../components/Seo';
-import {
-  Check, ChevronDown, Play, ArrowRight,
-  Zap, Shield, Star, X,
-} from 'lucide-react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ShieldCheck, CheckCircle2, Sparkles, Lock, ArrowRight, BookOpen, User, Mail, Phone } from 'lucide-react';
+import { Seo } from '../components/Seo';
 
-/* ─── 도구별 세일즈 데이터 (확장 예정: 33개) ─── */
-interface ToolSalesData {
-  id: string;
-  title: string;
-  tagline: string;
-  price: string;
-  priceNote: string;
-  videoSrc?: string;        // YouTube embed or placeholder
-  heroHeadline: string;
-  heroSub: string;
-  pains: string[];
-  oldWayTitle: string;
-  oldWayItems: string[];
-  solutionTitle: string;
-  solutionDesc: string;
-  solutionItems: string[];
-  howTitle: string;
-  howItems: string[];
-  resultsItems: string[];
-  whyTitle: string;
-  whyItems: string[];
-  beforeItems: string[];
-  afterItems: string[];
-  faqs: { q: string; a: string }[];
-  ctaText: string;
-  badge?: string;
-}
-
-const TOOL_SALES: Record<string, ToolSalesData> = {
-  'ebook-writer': {
-    id: 'ebook-writer',
-    title: '전자책 완성 시스템',
-    tagline: '아이디어부터 홍보까지 — AI가 끝까지 데려다 줍니다',
-    price: '₩49,000',
-    priceNote: '단일 결제 · 평생 사용',
-    heroHeadline: '한 권의 책을\n\'아이디어부터 홍보까지\'\n완성하는 실행 시스템',
-    heroSub: '생각은 있는데, 책은 못 쓰고 계신가요?',
-    pains: [
-      '무엇부터 시작해야 할지 모릅니다',
-      '쓰다가 흐름이 끊깁니다',
-      '끝까지 완성해본 경험이 없습니다',
-      '기획, 집필, 홍보가 따로 놀고 있습니다',
-    ],
-    oldWayTitle: '기존 방식의 한계',
-    oldWayItems: [
-      '글쓰기 방법만 알려줍니다',
-      '시작은 쉬운데 끝까지 못 갑니다',
-      '구조 없이 감으로 진행합니다',
-      '완성 이후를 고려하지 않습니다',
-    ],
-    solutionTitle: '해결 방식은 다릅니다',
-    solutionDesc: '단순 글쓰기 방법이 아닙니다. "책을 완성시키는 전체 시스템"입니다.',
-    solutionItems: [
-      '주제 발굴부터 자동으로 방향을 잡습니다',
-      '단계별로 흐름이 끊기지 않게 설계됩니다',
-      '기획 → 집필 → 홍보까지 이어집니다',
-      '중간에 멈출 틈 없이 다음 단계로 진행됩니다',
-    ],
-    howTitle: '실제로 무엇을 해주나요',
-    howItems: [
-      '주제, 제목, 타깃을 명확히 잡게 만듭니다',
-      '독자가 원하는 가치를 구조화합니다',
-      '실행 가능한 목차를 자동으로 설계합니다',
-      '장 단위로 끊어서 끝까지 쓰게 만듭니다',
-      '완성 후 바로 사용할 홍보 콘텐츠까지 만듭니다',
-    ],
-    resultsItems: [
-      '막막함 없이 시작할 수 있습니다',
-      '중간에 멈추지 않고 끝까지 갑니다',
-      '책의 흐름이 자연스럽게 이어집니다',
-      '완성 후 바로 판매/홍보가 가능합니다',
-    ],
-    whyTitle: '이 시스템이 다른 이유',
-    whyItems: [
-      "'생각 정리'가 아니라 '완성'까지 설계됩니다",
-      "질문이 아니라 '결과 중심 구조'로 움직입니다",
-      "단계가 아니라 '흐름'으로 이어집니다",
-      '실행을 멈추지 않게 강제합니다',
-    ],
-    beforeItems: [
-      '아이디어만 있고 실행이 안 됨',
-      '글을 쓰다 멈추는 반복',
-      '구조 없이 막연하게 진행',
-      '완성 경험 없음',
-    ],
-    afterItems: [
-      '주제부터 명확하게 정리됨',
-      '단계 따라가면 자연스럽게 완성',
-      '흐름이 끊기지 않음',
-      '한 권의 책 완성 경험 확보',
-    ],
-    faqs: [
-      { q: '정말 끝까지 쓸 수 있을까요?', a: '단계가 자동으로 이어지기 때문에 멈출 지점이 없습니다.' },
-      { q: '글을 잘 못 써도 괜찮을까요?', a: "잘 쓰는 것이 아니라 '구조대로 완성하는 것'에 집중합니다." },
-      { q: '아이디어가 부족한데 가능할까요?', a: '초기 단계에서 주제부터 도출되도록 설계되어 있습니다.' },
-      { q: '혼자 진행해도 괜찮나요?', a: '각 단계가 다음 행동을 자연스럽게 이어줍니다.' },
-    ],
-    ctaText: '지금 바로 시작하세요',
-    badge: '📚 전자책 분야 1위',
-  },
-};
-
-/* ─── FAQ 아이템 ─── */
-function FaqItem({ q, a }: { q: string; a: string }) {
-  const [open, setOpen] = useState(false);
-  return (
-    <div className="border-b border-white/8">
-      <button
-        onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between py-4 px-0 text-left cursor-pointer border-none bg-transparent"
-      >
-        <span className="text-white/80 text-[14px] font-semibold pr-4">{q}</span>
-        <ChevronDown size={15} className={`text-white/30 shrink-0 transition-transform ${open ? 'rotate-180' : ''}`} />
-      </button>
-      {open && (
-        <p className="text-white/55 text-[13.5px] leading-relaxed pb-4">{a}</p>
-      )}
-    </div>
-  );
-}
-
-/* ─── 메인 컴포넌트 ─── */
 export default function ToolSalesPage() {
-  const { toolId = 'ebook-writer' } = useParams<{ toolId: string }>();
   const navigate = useNavigate();
-  const { user, profile } = useAuth();
-  const [payError, setPayError] = useState<string | null>(null);
 
-  const data = TOOL_SALES[toolId] ?? TOOL_SALES['ebook-writer'];
+  const [selectedPlan, setSelectedPlan] = useState<'standard' | 'pro'>('pro');
+  const [isOrdering, setIsOrdering] = useState(false);
+  const [orderComplete, setOrderComplete] = useState(false);
 
-  const handlePayPalSuccess = async (details: any) => {
-    try {
-      if (user) {
-        await createOrder({
-          id: details.id || `pp_${Date.now()}`,
-          userId: user.uid,
-          productId: toolId,
-          productName: data.title,
-          amount: 49000,
-          currency: 'KRW',
-          status: 'completed',
-          paypalOrderId: details.id ?? '',
-        });
-      }
-      navigate('/course/ai');
-    } catch {
-      setPayError('결제 처리 중 오류가 발생했습니다. 고객센터에 문의해주세요.');
-    }
-  };
-
-  const fadeUp = {
-    hidden: { opacity: 0, y: 20 },
-    visible: (i = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.5, delay: i * 0.07 } }),
+  const handleOrder = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsOrdering(true);
+    setTimeout(() => {
+      setIsOrdering(false);
+      setOrderComplete(true);
+    }, 1200);
   };
 
   return (
-    <div className="min-h-screen bg-black text-white pt-16">
-      <Seo
-        title={`${data.title} 구매 | GrowthAI`}
-        description={data.tagline}
-        canonical={`/product/${toolId}`}
-        image={DEFAULT_OG_IMAGE}
-        keywords={[data.title, '상품 상세', '구매', 'GrowthAI']}
-      />
+    <div className="min-h-screen bg-[#000000] text-white pt-28 pb-24 px-6 sm:px-10 md:px-12 lg:px-16 font-sans">
+      <Seo title="AI PLF 동영상 마스터클래스 | GrowthAI" description="변호사, 의사, 트레이너, 인테리어 등 내 노하우만 파는 3시간 퍼널 구축" />
+      <div className="max-w-4xl mx-auto">
+        
+        <div className="text-center mb-12">
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold bg-white/10 text-[#C9A84C] border border-white/15 mb-4 backdrop-blur-md">
+            <Sparkles className="w-3.5 h-3.5 text-[#C9A84C]" />
+            2026 대한민국 12인 거장 프레임워크 × AI 세일즈 시스템
+          </span>
+          <h1 className="text-3xl sm:text-5xl font-extrabold mb-4 leading-tight break-keep text-white tracking-tight">
+            내 서비스/제품명만 입력하면 3시간 만에 완성!<br />
+            <span className="bg-gradient-to-r from-[#C9A84C] via-[#E5C365] to-amber-200 bg-clip-text text-transparent">
+              AI PLF 동영상 런치 마스터클래스 (VOD + 골조 프롬프트)
+            </span>
+          </h1>
+          <p className="text-white/70 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+            변호사, 의사, 트레이너, 골퍼, 인테리어, 설비, 마사지, 네트워크 마케터 등 내 노하우를 24시간 파는 <strong className="text-white font-bold">온라인 자동 세일즈 퍼널 구축</strong>
+          </p>
+        </div>
 
-      {/* ══════════════════════════════════
-          1. HERO — 카피라이팅 헤드라인
-      ══════════════════════════════════ */}
-      <section className="relative py-20 md:py-28 overflow-hidden border-b border-white/8">
-        <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,168,76,0.10) 0%, transparent 70%)' }} />
-        <div className="relative max-w-3xl mx-auto px-6 text-center">
-          {data.badge && (
-            <motion.div
-              variants={fadeUp} initial="hidden" animate="visible" custom={0}
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[11px] font-bold tracking-wider uppercase mb-6 border"
-              style={{ color: '#C9A84C', borderColor: 'rgba(201,168,76,0.3)', background: 'rgba(201,168,76,0.07)' }}
-            >
-              <Zap size={10} />
-              {data.badge}
-            </motion.div>
+        <div className="bg-[#161617] border border-white/10 rounded-3xl p-6 sm:p-10 mb-12 shadow-2xl">
+          <h2 className="text-xl font-bold text-white mb-6 flex items-center gap-2 border-b border-white/10 pb-4">
+            <BookOpen className="w-5 h-5 text-[#C9A84C]" />
+            <span>📚 실전 VOD 4단계 커리큘럼 & 패키지 포함 내역</span>
+          </h2>
+
+          <div className="space-y-4 mb-8">
+            <div className="p-5 rounded-2xl bg-black/40 border border-white/10 hover:border-white/20 transition-colors">
+              <div className="flex items-center gap-2 mb-1.5">
+                <span className="bg-[#C9A84C] text-black font-bold text-xs px-2.5 py-0.5 rounded-full">Module 1</span>
+                <h3 className="font-bold text-white text-base">한국형 PLF 런치 이론 & 12인 거장 성공 사례</h3>
+              </div>
+              <p className="text-xs text-white/60 leading-relaxed ml-1">
+                제프 워커의 런치 구조를 대한민국 <strong className="text-white font-semibold">문자/카카오톡 90% 열람 실정</strong>에 맞춰 재해석. 잠재고객의 심리를 예열하는 3단계 질문 공식.
+              </p>
+            </div>
+
+            <div className="p-5 rounded-2xl bg-black/40 border border-white/10 hover:border-white/20 transition-colors">
+              <div className="flex items-center gap-2 mb-1.5">
+                <span className="bg-[#C9A84C] text-black font-bold text-xs px-2.5 py-0.5 rounded-full">Module 2</span>
+                <h3 className="font-bold text-white text-base">카메라 노출 없이 10분 만에 만드는 VSL 구현법</h3>
+              </div>
+              <p className="text-xs text-white/60 leading-relaxed ml-1">
+                얼굴 노출 부담 없이 타격형 런치 동영상을 제작하는 비유 화법과, <strong className="text-white font-semibold">물고기 잡는 법(퍼널 스스로 만들기 및 다듬기)</strong> 전수.
+              </p>
+            </div>
+
+            <div className="p-5 rounded-2xl bg-black/40 border border-white/10 hover:border-white/20 transition-colors">
+              <div className="flex items-center gap-2 mb-1.5">
+                <span className="bg-[#C9A84C] text-black font-bold text-xs px-2.5 py-0.5 rounded-full">Module 3</span>
+                <h3 className="font-bold text-white text-base">실습 숙제 템플릿 (Workbook) 워크시트</h3>
+              </div>
+              <p className="text-xs text-white/60 leading-relaxed ml-1">
+                강의만 듣고 끝나지 않도록 제공되는 단계별 실습 과제 sheet. 내 서비스의 타겟, 셀링 포인트, 런치 일정을 빈칸만 채우며 정리.
+              </p>
+            </div>
+
+            <div className="p-6 rounded-2xl bg-gradient-to-r from-[#C9A84C]/20 via-black to-black border-2 border-[#C9A84C] shadow-lg">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-2 gap-1">
+                <div className="flex items-center gap-2">
+                  <span className="bg-amber-400 text-black font-extrabold text-xs px-2.5 py-0.5 rounded-full">핵심 보너스</span>
+                  <h3 className="font-bold text-white text-base">초스피드 제작 마스터 골조 프롬프트 (Skeleton Prompts)</h3>
+                </div>
+                <span className="text-xs text-[#C9A84C] font-bold">정가 450,000원 ➔ 무료 증정</span>
+              </div>
+              <p className="text-xs text-white/80 leading-relaxed">
+                🚀 <strong>{`"{대표님의 서비스/상품명}"`} 1개만 괄호 안에 입력하면 끝!</strong> AI가 제프 워커 1-2-3 동영상 스크립트, 문자 문구, 세일즈 카피를 <strong className="text-white font-bold">3초 만에 초스피드로 완출</strong>해 냅니다. 초보자/연로자도 100% 실행 가능!
+              </p>
+            </div>
+          </div>
+
+          <div className="p-6 rounded-2xl bg-[#C9A84C]/10 border border-[#C9A84C]/40 flex items-start gap-4">
+            <ShieldCheck className="w-8 h-8 text-[#C9A84C] shrink-0 mt-1" />
+            <div>
+              <h4 className="font-bold text-white text-base mb-1">
+                댄 케네디식 100% 무위험 강력 역보증 (Better-Than-Risk-Free Guarantee)
+              </h4>
+              <p className="text-xs text-white/70 leading-relaxed">
+                강의를 수강하시고 30일 동안 실행해보세요. 만약 제공된 골조 프롬프트와 템플릿으로 본인 서비스의 런치 스크립트와 퍼널을 구축하지 못하시거나 만족스럽지 않다면 100% 조건 없이 환불해 드립니다. 환불하시더라도 보너스로 제공된 모든 템플릿과 프롬프트는 소장하셔도 좋습니다.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-[#161617] border border-white/10 rounded-3xl p-6 sm:p-10 mb-12 shadow-2xl">
+          <h3 className="text-xl font-bold text-white mb-8 text-center">수강 플랜 선택 및 즉시 수강 신청</h3>
+
+          {!orderComplete ? (
+            <form onSubmit={handleOrder} className="space-y-6">
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div 
+                  onClick={() => setSelectedPlan('standard')}
+                  className={`p-6 rounded-3xl border cursor-pointer transition-all flex flex-col justify-between ${
+                    selectedPlan === 'standard'
+                      ? 'border-[#C9A84C] bg-[#C9A84C]/10 shadow-[0_0_20px_rgba(201,168,76,0.15)]'
+                      : 'border-white/10 bg-black/40 hover:border-white/20'
+                  }`}
+                >
+                  <div>
+                    <h4 className="font-bold text-white text-lg mb-1">VOD 단독 수강권</h4>
+                    <p className="text-xs text-white/50 mb-6">VOD 4모듈 + 실습 숙제 템플릿 열람권</p>
+                  </div>
+                  <div className="text-3xl font-extrabold text-[#C9A84C]">99,000원</div>
+                </div>
+
+                <div 
+                  onClick={() => setSelectedPlan('pro')}
+                  className={`p-6 rounded-3xl border cursor-pointer relative transition-all flex flex-col justify-between ${
+                    selectedPlan === 'pro'
+                      ? 'border-[#C9A84C] bg-[#C9A84C]/15 shadow-[0_0_25px_rgba(201,168,76,0.25)]'
+                      : 'border-white/10 bg-black/40 hover:border-white/20'
+                  }`}
+                >
+                  <div className="absolute top-0 right-0 bg-[#C9A84C] text-black font-bold text-[10px] px-3.5 py-1 rounded-bl-xl uppercase tracking-wider">
+                    추천 95% 선택
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-white text-lg mb-1">풀 패키지 마스터 패스</h4>
+                    <p className="text-xs text-white/50 mb-6">VOD 4모듈 + 숙제 템플릿 + <strong className="text-[#C9A84C]">마스터 골조 프롬프트</strong></p>
+                  </div>
+                  <div className="text-3xl font-extrabold text-[#C9A84C]">199,000원</div>
+                </div>
+              </div>
+
+              <div className="space-y-4 pt-4 border-t border-white/10 max-w-xl mx-auto">
+                <div>
+                  <label className="block text-xs font-semibold text-white/80 mb-1.5">수강생 성함 *</label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-white/40">
+                      <User size={16} />
+                    </div>
+                    <input 
+                      type="text" 
+                      required 
+                      placeholder="홍길동" 
+                      className="w-full pl-10 pr-4 py-3.5 rounded-xl bg-black/50 border border-white/20 text-white text-sm focus:outline-none focus:border-[#C9A84C] transition-colors"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-white/80 mb-1.5">이메일 주소 (VOD 강의실 계정 발송용) *</label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-white/40">
+                      <Mail size={16} />
+                    </div>
+                    <input 
+                      type="email" 
+                      required 
+                      placeholder="name@company.com" 
+                      className="w-full pl-10 pr-4 py-3.5 rounded-xl bg-black/50 border border-white/20 text-white text-sm focus:outline-none focus:border-[#C9A84C] transition-colors"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-white/80 mb-1.5">휴대폰 번호 (수강 접속 문자 알림용) *</label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-white/40">
+                      <Phone size={16} />
+                    </div>
+                    <input 
+                      type="tel" 
+                      required 
+                      placeholder="010-1234-5678" 
+                      className="w-full pl-10 pr-4 py-3.5 rounded-xl bg-black/50 border border-white/20 text-white text-sm focus:outline-none focus:border-[#C9A84C] transition-colors"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                disabled={isOrdering}
+                className="w-full max-w-xl mx-auto py-4.5 rounded-full bg-[#C9A84C] hover:bg-[#d9b85c] text-black font-bold text-base transition-all duration-200 shadow-2xl shadow-[#C9A84C]/25 flex items-center justify-center gap-2 cursor-pointer border-none block"
+              >
+                {isOrdering ? (
+                  <span>수강 신청 수속 중...</span>
+                ) : (
+                  <>
+                    <Lock className="w-4 h-4" />
+                    <span>30일 100% 무위험 즉시 수강 신청하기</span>
+                    <ArrowRight className="w-5 h-5" />
+                  </>
+                )}
+              </button>
+            </form>
+          ) : (
+            <div className="text-center py-8">
+              <div className="w-16 h-16 rounded-full bg-green-500/20 border border-green-500/40 text-green-500 flex items-center justify-center mx-auto mb-4">
+                <CheckCircle2 className="w-10 h-10" />
+              </div>
+              <h4 className="text-2xl font-bold text-white mb-2">수강 신청이 완료되었습니다!</h4>
+              <p className="text-sm text-white/60 max-w-md mx-auto mb-6">
+                입력하신 휴대폰 번호와 이메일로 3분 이내에 VOD 강의실 접속 링크 및 마스터 골조 프롬프트 다운로드 안내가 전송됩니다.
+              </p>
+              <button
+                onClick={() => navigate('/')}
+                className="px-6 py-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white text-sm font-semibold transition cursor-pointer border-none"
+              >
+                메인으로 이동
+              </button>
+            </div>
           )}
-
-          <motion.h1
-            variants={fadeUp} initial="hidden" animate="visible" custom={1}
-            className="font-extrabold tracking-tight leading-[1.12] mb-6 whitespace-pre-line"
-            style={{ fontSize: 'clamp(30px, 5.5vw, 64px)' }}
-          >
-            {data.heroHeadline.split('\n').map((line, i) => (
-              <span key={i}>
-                {i === 1 ? <span style={{ color: '#C9A84C' }}>{line}</span> : line}
-                {i < 2 && <br />}
-              </span>
-            ))}
-          </motion.h1>
-
-          <motion.p
-            variants={fadeUp} initial="hidden" animate="visible" custom={2}
-            className="text-white/55 text-[16px] sm:text-[20px] font-semibold mb-4"
-          >
-            {data.heroSub}
-          </motion.p>
-
-          {/* 고통 포인트 */}
-          <motion.div
-            variants={fadeUp} initial="hidden" animate="visible" custom={3}
-            className="inline-block text-left mt-4 mb-8"
-          >
-            <div className="rounded-2xl border border-white/8 bg-white/[0.02] p-5 space-y-2">
-              {data.pains.map((pain, i) => (
-                <div key={i} className="flex items-center gap-2.5">
-                  <span className="text-[13px]">•</span>
-                  <span className="text-white/60 text-[14px]">{pain}</span>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-
-          <motion.button
-            variants={fadeUp} initial="hidden" animate="visible" custom={4}
-            onClick={() => document.getElementById('purchase')?.scrollIntoView({ behavior: 'smooth' })}
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl text-[14px] font-extrabold cursor-pointer border-none transition-all hover:scale-105"
-            style={{ backgroundColor: '#C9A84C', color: '#000' }}
-          >
-            지금 바로 시작하기
-            <ArrowRight size={16} />
-          </motion.button>
         </div>
-      </section>
-
-      {/* ══════════════════════════════════
-          2. 서비스 소개 영상 (3분)
-      ══════════════════════════════════ */}
-      <section className="py-16 border-b border-white/8">
-        <div className="max-w-3xl mx-auto px-6">
-          <motion.div
-            variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
-            className="text-center mb-8"
-          >
-            <p className="text-[11px] font-bold tracking-[0.25em] uppercase mb-3" style={{ color: '#C9A84C' }}>서비스 소개</p>
-            <h2 className="text-[24px] sm:text-[30px] font-extrabold tracking-tight">3분 안에 전부 보여드립니다</h2>
-          </motion.div>
-
-          {/* 영상 플레이스홀더 */}
-          <motion.div
-            variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
-            className="relative rounded-2xl overflow-hidden border border-white/10 aspect-video bg-gradient-to-br from-[#0d0a00] to-[#0a0a0a] cursor-pointer group"
-            onClick={() => {/* YouTube 연결 예정 */}}
-          >
-            <div className="absolute inset-0 flex flex-col items-center justify-center">
-              <div className="w-18 h-18 w-[4.5rem] h-[4.5rem] rounded-full flex items-center justify-center mb-4 border-2 border-white/20 group-hover:scale-110 transition-transform" style={{ backgroundColor: 'rgba(201,168,76,0.25)' }}>
-                <Play size={28} fill="#C9A84C" className="text-[#C9A84C] ml-1" />
-              </div>
-              <p className="text-white/60 text-[13px] font-semibold">서비스 소개 영상 (3분)</p>
-              <p className="text-white/30 text-[11px] mt-1">클릭하여 재생</p>
-            </div>
-            {/* 장식 */}
-            <div className="absolute top-4 right-4 text-[11px] px-2.5 py-1 rounded-full font-bold" style={{ backgroundColor: 'rgba(201,168,76,0.15)', color: '#C9A84C' }}>
-              3:00
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════
-          3. 기존 방식의 한계
-      ══════════════════════════════════ */}
-      <section className="py-16 border-b border-white/8">
-        <div className="max-w-3xl mx-auto px-6">
-          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-8 text-center">
-            <p className="text-[11px] font-bold tracking-[0.25em] uppercase mb-3 text-white/30">✍ The Problem</p>
-            <h2 className="text-[24px] sm:text-[30px] font-extrabold tracking-tight">{data.oldWayTitle}</h2>
-          </motion.div>
-          <div className="grid sm:grid-cols-2 gap-3">
-            {data.oldWayItems.map((item, i) => (
-              <motion.div
-                key={i}
-                variants={fadeUp} initial="hidden" whileInView="visible" custom={i}
-                viewport={{ once: true }}
-                className="flex items-start gap-3 p-4 rounded-xl border border-white/8 bg-white/[0.01]"
-              >
-                <X size={14} className="shrink-0 mt-0.5 text-red-400/60" />
-                <p className="text-white/55 text-[13.5px] leading-snug">{item}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════
-          4. 해결 방식
-      ══════════════════════════════════ */}
-      <section className="py-16 border-b border-white/8" style={{ background: 'rgba(201,168,76,0.02)' }}>
-        <div className="max-w-3xl mx-auto px-6">
-          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-8 text-center">
-            <p className="text-[11px] font-bold tracking-[0.25em] uppercase mb-3" style={{ color: '#C9A84C' }}>💡 The Solution</p>
-            <h2 className="text-[24px] sm:text-[30px] font-extrabold tracking-tight mb-3">{data.solutionTitle}</h2>
-            <p className="text-white/50 text-[15px] leading-relaxed">{data.solutionDesc}</p>
-          </motion.div>
-          <div className="space-y-3">
-            {data.solutionItems.map((item, i) => (
-              <motion.div
-                key={i}
-                variants={fadeUp} initial="hidden" whileInView="visible" custom={i}
-                viewport={{ once: true }}
-                className="flex items-start gap-3 p-4 rounded-xl border"
-                style={{ borderColor: 'rgba(201,168,76,0.18)', backgroundColor: 'rgba(201,168,76,0.04)' }}
-              >
-                <Check size={15} className="shrink-0 mt-0.5" style={{ color: '#C9A84C' }} />
-                <p className="text-white/70 text-[14px] leading-snug">{item}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════
-          5. 실제로 무엇을 해주나요 (총 12단계)
-      ══════════════════════════════════ */}
-      <section className="py-16 border-b border-white/8">
-        <div className="max-w-3xl mx-auto px-6">
-          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-8 text-center">
-            <p className="text-[11px] font-bold tracking-[0.25em] uppercase mb-3 text-white/30">🧩 How It Works</p>
-            <h2 className="text-[24px] sm:text-[30px] font-extrabold tracking-tight">{data.howTitle}</h2>
-            <p className="text-white/40 text-[13px] mt-2">총 {data.howItems.length}단계로 책 한 권을 완성합니다</p>
-          </motion.div>
-          <div className="space-y-3">
-            {data.howItems.map((item, i) => (
-              <motion.div
-                key={i}
-                variants={fadeUp} initial="hidden" whileInView="visible" custom={i * 0.5}
-                viewport={{ once: true }}
-                className="flex items-start gap-4"
-              >
-                <div className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-[12px] font-extrabold text-black mt-0.5" style={{ backgroundColor: '#C9A84C' }}>
-                  {i + 1}
-                </div>
-                <div className="flex-1 py-2.5 border-b border-white/6">
-                  <p className="text-white/70 text-[14px] leading-snug">{item}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════
-          6. 얻는 결과
-      ══════════════════════════════════ */}
-      <section className="py-16 border-b border-white/8" style={{ background: 'rgba(201,168,76,0.02)' }}>
-        <div className="max-w-3xl mx-auto px-6">
-          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-8 text-center">
-            <p className="text-[11px] font-bold tracking-[0.25em] uppercase mb-3" style={{ color: '#C9A84C' }}>🚀 Results</p>
-            <h2 className="text-[24px] sm:text-[30px] font-extrabold tracking-tight">얻는 결과</h2>
-          </motion.div>
-          <div className="grid sm:grid-cols-2 gap-3">
-            {data.resultsItems.map((item, i) => (
-              <motion.div
-                key={i}
-                variants={fadeUp} initial="hidden" whileInView="visible" custom={i}
-                viewport={{ once: true }}
-                className="flex items-start gap-3 p-4 rounded-xl border border-white/8 bg-white/[0.02] hover:border-white/15 transition-colors"
-              >
-                <Star size={14} className="shrink-0 mt-0.5" style={{ color: '#C9A84C' }} />
-                <p className="text-white/70 text-[13.5px] leading-snug">{item}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════
-          7. 이 시스템이 다른 이유
-      ══════════════════════════════════ */}
-      <section className="py-16 border-b border-white/8">
-        <div className="max-w-3xl mx-auto px-6">
-          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-8 text-center">
-            <p className="text-[11px] font-bold tracking-[0.25em] uppercase mb-3 text-white/30">✅ Why Different</p>
-            <h2 className="text-[24px] sm:text-[30px] font-extrabold tracking-tight">{data.whyTitle}</h2>
-          </motion.div>
-          <div className="space-y-2.5">
-            {data.whyItems.map((item, i) => (
-              <motion.div
-                key={i}
-                variants={fadeUp} initial="hidden" whileInView="visible" custom={i}
-                viewport={{ once: true }}
-                className="flex items-start gap-3 p-4 rounded-xl border border-white/8 bg-white/[0.01]"
-              >
-                <Check size={14} className="shrink-0 mt-0.5" style={{ color: '#C9A84C' }} />
-                <p className="text-white/65 text-[14px] leading-snug">{item}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════
-          8. Before / After
-      ══════════════════════════════════ */}
-      <section className="py-16 border-b border-white/8" style={{ background: 'rgba(255,255,255,0.01)' }}>
-        <div className="max-w-3xl mx-auto px-6">
-          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-8 text-center">
-            <h2 className="text-[24px] sm:text-[30px] font-extrabold tracking-tight">Before / After</h2>
-          </motion.div>
-          <div className="grid sm:grid-cols-2 gap-4">
-            {/* Before */}
-            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" custom={0} viewport={{ once: true }}>
-              <p className="text-[12px] font-extrabold tracking-widest uppercase mb-3 text-red-400/60 text-center">Before</p>
-              <div className="rounded-2xl border border-red-400/10 bg-red-950/10 p-5 space-y-2.5">
-                {data.beforeItems.map((item, i) => (
-                  <div key={i} className="flex items-start gap-2.5">
-                    <X size={12} className="shrink-0 mt-0.5 text-red-400/50" />
-                    <p className="text-white/45 text-[13px]">{item}</p>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-            {/* After */}
-            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" custom={1} viewport={{ once: true }}>
-              <p className="text-[12px] font-extrabold tracking-widest uppercase mb-3 text-center" style={{ color: '#C9A84C' }}>After</p>
-              <div className="rounded-2xl border p-5 space-y-2.5" style={{ borderColor: 'rgba(201,168,76,0.2)', background: 'rgba(201,168,76,0.04)' }}>
-                {data.afterItems.map((item, i) => (
-                  <div key={i} className="flex items-start gap-2.5">
-                    <Check size={12} className="shrink-0 mt-0.5" style={{ color: '#C9A84C' }} />
-                    <p className="text-white/75 text-[13px]">{item}</p>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════
-          9. FAQ
-      ══════════════════════════════════ */}
-      <section className="py-16 border-b border-white/8">
-        <div className="max-w-2xl mx-auto px-6">
-          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-8 text-center">
-            <p className="text-[11px] font-bold tracking-[0.25em] uppercase mb-3 text-white/30">🙋 FAQ</p>
-            <h2 className="text-[24px] sm:text-[30px] font-extrabold tracking-tight">많이 하는 고민들</h2>
-          </motion.div>
-          <div>
-            {data.faqs.map((faq, i) => (
-              <FaqItem key={i} q={faq.q} a={faq.a} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════
-          10. 구매 / CTA 섹션
-      ══════════════════════════════════ */}
-      <section id="purchase" className="py-20">
-        <div className="max-w-2xl mx-auto px-6">
-          <motion.div
-            variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
-            className="text-center mb-10"
-          >
-            <p className="text-[11px] font-bold tracking-[0.25em] uppercase mb-4" style={{ color: '#C9A84C' }}>🚀 {data.ctaText}</p>
-            <h2 className="text-[28px] sm:text-[38px] font-extrabold tracking-tight mb-3">
-              망설일 필요 없습니다.<br />
-              <span style={{ color: '#C9A84C' }}>지금 실행해보면 바로 차이를 느낍니다.</span>
-            </h2>
-            <p className="text-white/40 text-[14px]">지금 클릭해서 직접 경험해보세요.</p>
-          </motion.div>
-
-          {/* 가격 카드 */}
-          <motion.div
-            variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
-            className="rounded-2xl border p-7 mb-8"
-            style={{ borderColor: 'rgba(201,168,76,0.3)', background: 'linear-gradient(135deg, rgba(201,168,76,0.06) 0%, rgba(0,0,0,0) 100%)' }}
-          >
-            <div className="flex items-start justify-between mb-5">
-              <div>
-                <p className="text-white font-extrabold text-[20px] tracking-tight">{data.title}</p>
-                <p className="text-white/40 text-[12px] mt-0.5">{data.tagline}</p>
-              </div>
-              <div className="text-right">
-                <p className="text-[28px] font-extrabold tracking-tight" style={{ color: '#C9A84C' }}>{data.price}</p>
-                <p className="text-white/35 text-[11px]">{data.priceNote}</p>
-              </div>
-            </div>
-
-            <div className="space-y-2 mb-6">
-              {[
-                'ChatGPT 전용 GPT 프롬프트 도구 즉시 사용',
-                '업데이트 시 추가 비용 없음',
-                '구매 즉시 사용 가능',
-                '30일 환불 보장',
-              ].map((item, i) => (
-                <div key={i} className="flex items-center gap-2">
-                  <Check size={13} style={{ color: '#C9A84C' }} className="shrink-0" />
-                  <span className="text-white/65 text-[13px]">{item}</span>
-                </div>
-              ))}
-            </div>
-
-            {/* 결제 버튼 */}
-            <div className="space-y-3">
-              {/* 토스 결제 */}
-              <div>
-                <p className="text-white/30 text-[10.5px] font-bold tracking-widest uppercase mb-2">국내 결제 (토스)</p>
-                {TOSS_PRODUCTS[0] && (
-                  <TossCheckoutButton
-                    product={TOSS_PRODUCTS[0]}
-                    customerEmail={profile?.email ?? undefined}
-                    customerName={profile?.displayName ?? undefined}
-                    onError={(e) => setPayError(String(e))}
-                    className="w-full py-3.5 rounded-xl font-bold text-[14px]"
-                  />
-                )}
-              </div>
-              {/* PayPal 결제 */}
-              <div>
-                <p className="text-white/30 text-[10.5px] font-bold tracking-widest uppercase mb-2">해외 결제 (PayPal)</p>
-                {PRODUCTS[0] && (
-                  <PayPalCheckoutButton
-                    product={PRODUCTS[0]}
-                    onSuccess={handlePayPalSuccess}
-                    onError={(e) => setPayError(String(e))}
-                  />
-                )}
-              </div>
-              {/* 구글폼 대안 */}
-              <div className="flex items-center gap-3">
-                <div className="flex-1 h-px bg-white/8" />
-                <span className="text-white/25 text-[11px]">또는</span>
-                <div className="flex-1 h-px bg-white/8" />
-              </div>
-              <a
-                href="https://forms.gle/kVzNby2ZjNL8bPUR9"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl text-[14px] font-semibold border border-white/15 bg-white/5 text-white hover:bg-white/10 transition-all"
-              >
-                👉 멤버십 신청하기 (구글폼)
-              </a>
-            </div>
-
-            {payError && (
-              <p className="mt-3 text-red-400/70 text-[12px] text-center">{payError}</p>
-            )}
-          </motion.div>
-
-          {/* 보장 */}
-          <div className="flex items-center justify-center gap-2 text-white/30 text-[12px]">
-            <Shield size={13} />
-            30일 무조건 환불 보장 · 결제 후 즉시 이용 가능
-          </div>
-        </div>
-      </section>
+      </div>
     </div>
   );
 }

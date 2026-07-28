@@ -1,107 +1,141 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, CheckCircle2, Gift, Mail, Loader2 } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Gift, Mail, User, Phone, Loader2, Lock, ShieldCheck, Sparkles } from 'lucide-react';
 import { Seo, SITE_NAME } from '../components/Seo';
 import { Navbar } from '../components/Navbar';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const QUESTIONS = [
   {
     id: 1,
-    text: "웹사이트나 SNS를 통해 유입되는 한 달 방문자 수가 얼마나 되나요?",
-    options: ["100명 미만 (거의 없다)", "100명 ~ 1,000명 (가끔 온다)", "1,000명 이상 (꽤 온다)"]
+    text: "대표님의 현재 전문 분야/업종은 무엇인가요?",
+    options: [
+      "전문직 / 서비스업 (변호사, 의사, 약사, 인테리어, 설비, 마사지, 헬스트레이너, 프로골퍼 등)",
+      "지식 창업 / 교육업 (강사, 코치, 전자책 저자, 컨설턴트 등)",
+      "네트워크 마케팅 / 유통 / 커머스 / 기타 1인 기업"
+    ]
   },
   {
     id: 2,
-    text: "방문자가 사이트에 들어왔을 때, 결제나 문의로 이어지는 전환율은 어느 정도인가요?",
-    options: ["1% 미만 (거의 없다)", "1% ~ 5% (가끔 결제한다)", "모르겠다 / 측정 안 함"]
+    text: "현재 대표님의 온라인 세일즈 배관(리드 수집 ➔ 결제) 상태는 어떠한가요?",
+    options: [
+      "자산 제로: 내 노하우는 있으나, 고객 DB 수집 및 자동 판매 배관이 전혀 없다.",
+      "트래픽 보유: 블로그/유튜브/SNS/기존 고객 등 트래픽은 있으나 결제 전환율이 미비하다."
+    ]
   },
   {
     id: 3,
-    text: "가장 최신 트렌드의 AI 도구(GPT, Midjourney 등)를 비즈니스에 얼마나 활용 중이신가요?",
-    options: ["자주 배우지만 실전 적용은 못함", "콘텐츠 생산에 적극 활용 중", "전혀 사용하지 않음"]
+    text: "기존의 AI 도구(ChatGPT, 클로드 등)를 마케팅에 주로 어떻게 사용하고 계신가요?",
+    options: [
+      "유튜브 보고 따라 하는 짜깁기용 단순 콘텐츠 생성 수준",
+      "구체적인 구매 전환 퍼널과 자동화 배관이 연결된 상태",
+      "아직 실무 마케팅에 제대로 활용하지 못하고 있음"
+    ]
   }
 ];
 
 export default function DiagnosePage() {
-  const [step, setStep] = useState(0); // 0~2: Questions, 3: Loading, 4: Result/Lead Form
+  const navigate = useNavigate();
+  const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<number[]>([]);
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [agree, setAgree] = useState(true);
   const [submitted, setSubmitted] = useState(false);
 
   const handleAnswer = (optionIdx: number) => {
-    setAnswers([...answers, optionIdx]);
+    const updated = [...answers, optionIdx];
+    setAnswers(updated);
     if (step < QUESTIONS.length - 1) {
       setStep(step + 1);
     } else {
-      setStep(3); // Go to loading
+      setStep(3);
       setTimeout(() => {
-        setStep(4); // Go to result after 2.5s
-      }, 2500);
+        setStep(4);
+      }, 1800);
     }
   };
 
-  const handleEmailSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email) return;
+    if (!name || !email || !phone || !agree) return;
     
-    // TODO: Connect to Stibee or Backend API
     setSubmitted(true);
+    const isNoAsset = answers[1] === 0;
+    setTimeout(() => {
+      navigate('/guide/day1', { 
+        state: { 
+          name, 
+          email, 
+          phone, 
+          profession: QUESTIONS[0].options[answers[0]],
+          segment: isNoAsset ? 'no-asset' : 'has-traffic' 
+        } 
+      });
+    }, 1500);
   };
+
+  const isNoAsset = answers[1] === 0;
 
   return (
     <>
       <Seo
-        title="5단계 무료 진단 | GrowthAI"
-        description="내 사이트의 결제가 막힌 진짜 이유를 3분 안에 진단해 드립니다."
+        title="2026 업종별 AI PLF 3분 무료 진단 | GrowthAI"
+        description="노하우를 가진 누구나 {00} 입력으로 자동 판매 퍼널 진단"
         canonical="/diagnose"
         siteName={SITE_NAME}
       />
-      <div className="bg-[#050505] text-[#f7f7f5] min-h-screen font-sans flex flex-col">
+      <div className="bg-[#07090E] text-[#f7f7f5] min-h-screen font-sans flex flex-col">
         <Navbar entranceComplete={true} lang="ko" setLang={() => {}} />
 
-        <main className="flex-1 flex items-center justify-center pt-24 pb-12 px-6">
+        <main className="flex-1 flex items-center justify-center pt-28 pb-16 px-6 sm:px-10 md:px-12 lg:px-16">
           <div className="max-w-2xl w-full">
             
             <AnimatePresence mode="wait">
-              {/* QUESTIONS STAGE */}
               {step < QUESTIONS.length && (
                 <motion.div 
                   key={`question-${step}`}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  className="bg-white/[0.02] border border-white/10 rounded-3xl p-8 md:p-12 shadow-2xl"
+                  initial={{ opacity: 0, scale: 0.98, y: 10 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.98, y: -10 }}
+                  transition={{ duration: 0.35 }}
+                  className="bg-black/60 border border-white/10 rounded-3xl p-6 sm:p-10 shadow-2xl backdrop-blur-xl"
                 >
                   <div className="flex items-center gap-2 mb-8">
                     {QUESTIONS.map((_, i) => (
-                      <div key={i} className={`h-2 flex-1 rounded-full ${i <= step ? 'bg-[#C9A84C]' : 'bg-white/10'}`} />
+                      <div 
+                        key={i} 
+                        className={`h-2 flex-1 rounded-full transition-all duration-500 ${
+                          i <= step ? 'bg-[#C9A84C] shadow-[0_0_10px_rgba(201,168,76,0.4)]' : 'bg-white/10'
+                        }`} 
+                      />
                     ))}
                   </div>
                   
-                  <span className="text-[#C9A84C] font-bold text-sm tracking-widest uppercase mb-4 block">
-                    진단 질문 {step + 1} / {QUESTIONS.length}
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#C9A84C]/10 text-[#C9A84C] font-bold text-xs border border-[#C9A84C]/30 mb-4">
+                    <Sparkles className="w-3.5 h-3.5" /> 진단 질문 {step + 1} / {QUESTIONS.length}
                   </span>
-                  <h2 className="text-2xl md:text-3xl font-bold mb-8 leading-relaxed">
+                  
+                  <h2 className="text-xl sm:text-2xl font-bold mb-6 leading-snug break-keep text-white">
                     {QUESTIONS[step].text}
                   </h2>
                   
-                  <div className="space-y-4">
+                  <div className="space-y-3.5">
                     {QUESTIONS[step].options.map((opt, idx) => (
                       <button
                         key={idx}
                         onClick={() => handleAnswer(idx)}
-                        className="w-full text-left p-5 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 hover:border-[#C9A84C]/50 transition-all text-lg font-medium group flex justify-between items-center"
+                        className="w-full text-left p-4.5 sm:p-5 rounded-2xl border border-white/10 bg-white/[0.03] hover:bg-[#C9A84C]/10 hover:border-[#C9A84C]/60 transition-all text-sm sm:text-base font-medium group flex justify-between items-center cursor-pointer text-white/90"
                       >
-                        {opt}
-                        <ArrowRight size={20} className="text-[#C9A84C] opacity-0 group-hover:opacity-100 transition-opacity" />
+                        <span className="pr-4 leading-relaxed">{opt}</span>
+                        <ArrowRight size={18} className="text-[#C9A84C] opacity-0 group-hover:opacity-100 transition-opacity shrink-0 group-hover:translate-x-1 duration-200" />
                       </button>
                     ))}
                   </div>
                 </motion.div>
               )}
 
-              {/* LOADING STAGE */}
               {step === 3 && (
                 <motion.div 
                   key="loading"
@@ -110,86 +144,146 @@ export default function DiagnosePage() {
                   exit={{ opacity: 0 }}
                   className="text-center py-20"
                 >
-                  <Loader2 size={64} className="animate-spin text-[#C9A84C] mx-auto mb-8" />
-                  <h2 className="text-2xl font-bold mb-4">대표님의 비즈니스 구조를 분석 중입니다...</h2>
-                  <p className="text-white/60">트래픽, 전환율, 심리적 병목 지점 계산 중</p>
+                  <Loader2 size={56} className="animate-spin text-[#C9A84C] mx-auto mb-6" />
+                  <h2 className="text-2xl font-bold mb-3 text-white">대표님의 업종별 세그먼트를 분석 중입니다...</h2>
+                  <p className="text-white/60 text-sm">마케팅 거장 12인 뼈대 & {`{내 업종}`} 마스터 골조 프롬프트 매핑 중</p>
                 </motion.div>
               )}
 
-              {/* RESULT & LEAD FORM STAGE */}
               {step === 4 && (
                 <motion.div 
                   key="result"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="bg-white/[0.02] border border-white/10 rounded-3xl overflow-hidden shadow-2xl"
+                  className="bg-black/60 border border-white/10 rounded-3xl overflow-hidden shadow-2xl backdrop-blur-xl"
                 >
-                  <div className="bg-red-500/10 border-b border-red-500/20 p-8 text-center">
-                    <h2 className="text-2xl md:text-3xl font-bold mb-2">🚨 진단 결과: <span className="text-red-400">3단계(결제/전환) 누수 심각</span></h2>
-                    <p className="text-white/80">
-                      대표님의 사이트는 들어와도 '왜 사야 하는지' 심리를 건드리지 못하고 이탈하고 있습니다.
+                  <div className="bg-gradient-to-r from-amber-500/20 via-red-500/10 to-amber-500/20 border-b border-amber-500/30 p-6 sm:p-8 text-center">
+                    <h2 className="text-lg sm:text-xl font-bold mb-2 text-white">🚨 진단 결과: 
+                      {isNoAsset ? (
+                        <span className="text-amber-400"> [초기 DB 수집 및 세일즈 배관 누수] 단계</span>
+                      ) : (
+                        <span className="text-amber-400"> [전환 배관 부재 및 오퍼 저항] 단계</span>
+                      )}
+                    </h2>
+                    <p className="text-white/80 text-xs sm:text-sm mt-2 leading-relaxed max-w-xl mx-auto">
+                      {isNoAsset 
+                        ? "대표님의 독보적인 노하우가 있으나, 24시간 자동으로 고객 DB를 모으고 결제시키는 퍼널 시스템이 부재합니다. 3초 만에 완출되는 마스터 골조 프롬프트로 배관을 잡아야 합니다."
+                        : "방문자나 트래픽은 있으나 가격 저항을 없애는 하모지식 가치 오퍼 배관이 막혔습니다. AI PLF 동영상 퍼널을 이식해야 합니다."
+                      }
                     </p>
                   </div>
 
                   {!submitted ? (
-                    <div className="p-8 md:p-12">
-                      <div className="flex flex-col md:flex-row gap-8 items-center mb-10">
-                        <div className="w-full md:w-1/3 aspect-[3/4] bg-gradient-to-br from-[#C9A84C] to-yellow-700 rounded-xl flex items-center justify-center p-6 text-center shadow-lg transform -rotate-2 border-4 border-white/10">
-                          <div className="bg-black/50 p-4 rounded-lg backdrop-blur-sm w-full h-full flex flex-col justify-center">
-                            <span className="text-xs font-bold text-[#C9A84C] mb-2 uppercase">PDF E-Book</span>
-                            <h3 className="font-bold text-lg mb-2">세계 마케팅 거장 12인의 구매 전환 시크릿</h3>
-                            <p className="text-xs text-white/50 line-through mt-auto">정가 99,000원</p>
+                    <div className="p-6 sm:p-10">
+                      <div className="flex flex-col sm:flex-row gap-6 items-center mb-8">
+                        <div className="w-full sm:w-1/3 aspect-[3/4] bg-gradient-to-br from-[#C9A84C] to-amber-700 rounded-2xl flex items-center justify-center p-5 text-center shadow-2xl transform -rotate-1 border border-white/20">
+                          <div className="bg-black/70 p-4 rounded-xl backdrop-blur-sm w-full h-full flex flex-col justify-center border border-white/10">
+                            <span className="text-[10px] font-bold text-[#C9A84C] mb-1.5 uppercase">2026 VOD + Prompt</span>
+                            <h3 className="font-bold text-xs sm:text-sm mb-2 text-white">업종별 {`{00}`} 마스터 골조 프롬프트</h3>
+                            <p className="text-[10px] text-white/50 line-through mt-auto">정가 99,000원</p>
                           </div>
                         </div>
-                        <div className="w-full md:w-2/3 space-y-4">
-                          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-500/20 text-green-400 text-sm font-bold border border-green-500/30">
-                            <Gift size={16} /> 특별 혜택
+                        <div className="w-full sm:w-2/3 space-y-3">
+                          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#C9A84C]/10 text-[#C9A84C] text-xs font-bold border border-[#C9A84C]/30">
+                            <Gift size={14} /> 무료 진단 솔루션 즉시 발송
                           </div>
-                          <h3 className="text-xl font-bold">이 누수를 지금 당장 막아야 합니다.</h3>
-                          <p className="text-white/70 text-sm leading-relaxed">
-                            이 문제를 당장 해결할 수 있도록, <strong>현재 크몽에서 99,000원에 실제 판매 중인 [세계 마케팅 거장 12인의 구매 전환 시크릿] 전자책(PDF)</strong>과 맞춤형 진단 리포트를 입력하시는 이메일로 즉시 무료 발송해 드립니다.
+                          <h3 className="text-lg font-bold text-white">대표님의 노하우를 24시간 파는 VOD 특강과 골조 템플릿을 드립니다.</h3>
+                          <p className="text-white/70 text-xs leading-relaxed">
+                            아래에 **성함, 이메일, 휴대폰 번호**를 입력하시면 10분 마스터클래스 영상 링크와 PDF 가이드북이 문자와 이메일로 3초 만에 발송됩니다.
                           </p>
                         </div>
                       </div>
 
-                      <form onSubmit={handleEmailSubmit} className="space-y-4">
+                      <form onSubmit={handleSubmit} className="space-y-4">
                         <div>
-                          <label className="block text-sm font-medium text-white/60 mb-2">이메일 주소</label>
+                          <label className="block text-xs font-semibold text-white/80 mb-1.5">대표님 성함 *</label>
                           <div className="relative">
-                            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                              <Mail size={18} className="text-white/40" />
+                            <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-white/40">
+                              <User size={16} />
+                            </div>
+                            <input 
+                              type="text" 
+                              required
+                              value={name}
+                              onChange={(e) => setName(e.target.value)}
+                              className="w-full bg-black/50 border border-white/20 rounded-xl py-3 pl-10 pr-4 text-white text-sm focus:outline-none focus:border-[#C9A84C] transition-colors"
+                              placeholder="홍길동"
+                            />
+                          </div>
+                        </div>
+
+                        <div>
+                          <label className="block text-xs font-semibold text-white/80 mb-1.5">이메일 주소 (PDF 리포트 발송용) *</label>
+                          <div className="relative">
+                            <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-white/40">
+                              <Mail size={16} />
                             </div>
                             <input 
                               type="email" 
                               required
                               value={email}
                               onChange={(e) => setEmail(e.target.value)}
-                              className="w-full bg-black/50 border border-white/20 rounded-xl py-4 pl-12 pr-4 text-white focus:outline-none focus:border-[#C9A84C] transition-colors"
-                              placeholder="PDF 리포트를 받을 이메일을 입력하세요"
+                              className="w-full bg-black/50 border border-white/20 rounded-xl py-3 pl-10 pr-4 text-white text-sm focus:outline-none focus:border-[#C9A84C] transition-colors"
+                              placeholder="name@company.com"
                             />
                           </div>
                         </div>
+
+                        <div>
+                          <label className="block text-xs font-semibold text-white/80 mb-1.5">휴대폰 번호 (무료 특강 & 템플릿 문자 발송용) *</label>
+                          <div className="relative">
+                            <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-white/40">
+                              <Phone size={16} />
+                            </div>
+                            <input 
+                              type="tel" 
+                              required
+                              value={phone}
+                              onChange={(e) => setPhone(e.target.value)}
+                              className="w-full bg-black/50 border border-white/20 rounded-xl py-3 pl-10 pr-4 text-white text-sm focus:outline-none focus:border-[#C9A84C] transition-colors"
+                              placeholder="010-1234-5678"
+                            />
+                          </div>
+                        </div>
+
+                        <div className="flex items-center gap-2 pt-1">
+                          <input 
+                            type="checkbox" 
+                            id="agree"
+                            checked={agree}
+                            onChange={(e) => setAgree(e.target.checked)}
+                            className="rounded accent-[#C9A84C]"
+                          />
+                          <label htmlFor="agree" className="text-xs text-white/60 cursor-pointer">
+                            [필수] 개인정보 수집 및 혜택·특강 안내 문자/이메일 수신 동의
+                          </label>
+                        </div>
+
                         <button 
                           type="submit"
-                          className="w-full py-4 rounded-xl bg-gradient-to-r from-red-600 to-[#C9A84C] text-white font-bold text-lg hover:scale-[1.02] transition-transform shadow-[0_0_20px_rgba(201,168,76,0.3)]"
+                          className="w-full py-4 rounded-xl bg-[#C9A84C] hover:bg-[#d9b85c] text-black font-bold text-base transition-all duration-200 shadow-xl shadow-[#C9A84C]/20 flex items-center justify-center gap-2 mt-3 cursor-pointer border-none"
                         >
-                          🎁 99,000원 전자책 + 리포트 즉시 받기
+                          <Lock size={16} />
+                          <span>🎁 99,000원 템플릿 문자로 받고 특강 보기</span>
+                          <ArrowRight size={18} />
                         </button>
                       </form>
+
+                      <div className="mt-4 flex items-center justify-center gap-2 text-xs text-white/40">
+                        <ShieldCheck size={14} className="text-[#C9A84C]" />
+                        <span>수집된 정보는 특강 안내 외에 제3자에게 제공되지 않습니다.</span>
+                      </div>
                     </div>
                   ) : (
-                    <div className="p-8 md:p-16 text-center">
-                      <div className="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <CheckCircle2 size={40} className="text-green-500" />
+                    <div className="p-8 sm:p-12 text-center">
+                      <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4 border border-green-500/40">
+                        <CheckCircle2 size={36} className="text-green-500" />
                       </div>
-                      <h3 className="text-2xl font-bold mb-4">성공적으로 발송되었습니다!</h3>
-                      <p className="text-white/70 mb-8">
-                        입력하신 이메일({email})로 전자책과 진단 리포트가 발송되었습니다.<br/>
-                        메일함(또는 스팸함)을 확인해주세요.
+                      <h3 className="text-xl font-bold mb-2 text-white">진단 및 문자 발송이 완료되었습니다!</h3>
+                      <p className="text-white/70 text-sm mb-4 leading-relaxed">
+                        입력하신 휴대폰 번호({phone})로 특강 링크와 전자책이 즉시 발송되었습니다.<br/>
+                        잠시 후 <strong>{name}님 전용 10분 무료 마스터클래스 VOD 페이지</strong>로 이동합니다...
                       </p>
-                      <Link to="/" className="inline-flex items-center gap-2 text-[#C9A84C] font-bold hover:underline">
-                        메인 화면으로 돌아가기 <ArrowRight size={18} />
-                      </Link>
                     </div>
                   )}
 
