@@ -209,15 +209,15 @@ export default function LeadBookPage() {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full py-4.5 rounded-full bg-[#C9A84C] hover:bg-[#d9b85c] text-black font-extrabold text-base transition duration-200 shadow-2xl shadow-[#C9A84C]/30 flex items-center justify-center gap-2 cursor-pointer border-none mt-2"
+                      className="w-full py-5 sm:py-6 rounded-full bg-[#C9A84C] hover:bg-[#d9b85c] text-black font-extrabold text-base sm:text-lg transition duration-200 shadow-[0_0_30px_rgba(201,168,76,0.35)] flex items-center justify-center gap-2 cursor-pointer border-none mt-4"
                     >
                       {isSubmitting ? (
                         <span>소책자 발송 수속 중...</span>
                       ) : (
                         <>
-                          <Lock size={16} />
+                          <Lock size={18} />
                           <span>🎁 마케팅 바이블 소책자 문자로 받기</span>
-                          <ArrowRight size={18} />
+                          <ArrowRight size={20} />
                         </>
                       )}
                     </button>
