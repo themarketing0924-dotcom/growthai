@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, CheckCircle2, Gift, Mail, User, Phone, Loader2, Lock, ShieldCheck } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Gift, Mail, User, Phone, Loader2, Lock, ShieldCheck, Sparkles } from 'lucide-react';
 import { Seo, SITE_NAME } from '../components/Seo';
 import { Navbar } from '../components/Navbar';
 import { useNavigate } from 'react-router-dom';
@@ -53,7 +53,7 @@ export default function DiagnosePageExp() {
       setStep(3);
       setTimeout(() => {
         setStep(4);
-      }, 2000);
+      }, 1800);
     }
   };
 
@@ -86,31 +86,39 @@ export default function DiagnosePageExp() {
         canonical="/experimental/diagnose"
         siteName={SITE_NAME}
       />
-      <div className="bg-[#050505] text-[#f7f7f5] min-h-screen font-sans flex flex-col">
+      <div className="bg-[#07090E] text-[#f7f7f5] min-h-screen font-sans flex flex-col">
         <Navbar entranceComplete={true} lang="ko" setLang={() => {}} />
 
-        <main className="flex-1 flex items-center justify-center pt-24 pb-12 px-4 sm:px-6">
+        <main className="flex-1 flex items-center justify-center pt-28 pb-16 px-4 sm:px-6">
           <div className="max-w-2xl w-full">
             
             <AnimatePresence mode="wait">
               {step < QUESTIONS.length && (
                 <motion.div 
                   key={`question-${step}`}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  className="bg-white/[0.02] border border-white/10 rounded-3xl p-6 sm:p-10 shadow-2xl"
+                  initial={{ opacity: 0, scale: 0.98, y: 10 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.98, y: -10 }}
+                  transition={{ duration: 0.35 }}
+                  className="bg-black/60 border border-white/10 rounded-3xl p-6 sm:p-10 shadow-2xl backdrop-blur-xl"
                 >
+                  {/* 프로그레스 바 */}
                   <div className="flex items-center gap-2 mb-8">
                     {QUESTIONS.map((_, i) => (
-                      <div key={i} className={`h-2 flex-1 rounded-full ${i <= step ? 'bg-[#C9A84C]' : 'bg-white/10'}`} />
+                      <div 
+                        key={i} 
+                        className={`h-2 flex-1 rounded-full transition-all duration-500 ${
+                          i <= step ? 'bg-[#C9A84C] shadow-[0_0_10px_rgba(201,168,76,0.4)]' : 'bg-white/10'
+                        }`} 
+                      />
                     ))}
                   </div>
                   
-                  <span className="text-[#C9A84C] font-bold text-xs sm:text-sm tracking-widest uppercase mb-3 block">
-                    업종별 퍼널 진단 질문 {step + 1} / {QUESTIONS.length}
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#C9A84C]/10 text-[#C9A84C] font-bold text-xs border border-[#C9A84C]/30 mb-4">
+                    <Sparkles className="w-3.5 h-3.5" /> 진단 질문 {step + 1} / {QUESTIONS.length}
                   </span>
-                  <h2 className="text-xl sm:text-2xl font-bold mb-6 leading-relaxed">
+                  
+                  <h2 className="text-xl sm:text-2xl font-bold mb-6 leading-snug break-keep text-white">
                     {QUESTIONS[step].text}
                   </h2>
                   
@@ -119,10 +127,10 @@ export default function DiagnosePageExp() {
                       <button
                         key={idx}
                         onClick={() => handleAnswer(idx)}
-                        className="w-full text-left p-4 sm:p-5 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 hover:border-[#C9A84C]/50 transition-all text-sm sm:text-base font-medium group flex justify-between items-center"
+                        className="w-full text-left p-4.5 sm:p-5 rounded-2xl border border-white/10 bg-white/[0.03] hover:bg-[#C9A84C]/10 hover:border-[#C9A84C]/60 transition-all text-sm sm:text-base font-medium group flex justify-between items-center cursor-pointer text-white/90"
                       >
-                        <span className="pr-4">{opt}</span>
-                        <ArrowRight size={18} className="text-[#C9A84C] opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
+                        <span className="pr-4 leading-relaxed">{opt}</span>
+                        <ArrowRight size={18} className="text-[#C9A84C] opacity-0 group-hover:opacity-100 transition-opacity shrink-0 group-hover:translate-x-1 duration-200" />
                       </button>
                     ))}
                   </div>
@@ -138,7 +146,7 @@ export default function DiagnosePageExp() {
                   className="text-center py-20"
                 >
                   <Loader2 size={56} className="animate-spin text-[#C9A84C] mx-auto mb-6" />
-                  <h2 className="text-2xl font-bold mb-3">대표님의 업종별 세그먼트를 분석 중입니다...</h2>
+                  <h2 className="text-2xl font-bold mb-3 text-white">대표님의 업종별 세그먼트를 분석 중입니다...</h2>
                   <p className="text-white/60 text-sm">마케팅 거장 12인 뼈대 & {`{내 업종}`} 마스터 골조 프롬프트 매핑 중</p>
                 </motion.div>
               )}
@@ -148,17 +156,18 @@ export default function DiagnosePageExp() {
                   key="result"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="bg-white/[0.02] border border-white/10 rounded-3xl overflow-hidden shadow-2xl"
+                  className="bg-black/60 border border-white/10 rounded-3xl overflow-hidden shadow-2xl backdrop-blur-xl"
                 >
-                  <div className="bg-red-500/10 border-b border-red-500/20 p-6 sm:p-8 text-center">
-                    <h2 className="text-lg sm:text-xl font-bold mb-2">🚨 진단 결과: 
+                  {/* 결과 상단 테두리 */}
+                  <div className="bg-gradient-to-r from-amber-500/20 via-red-500/10 to-amber-500/20 border-b border-amber-500/30 p-6 sm:p-8 text-center">
+                    <h2 className="text-lg sm:text-xl font-bold mb-2 text-white">🚨 진단 결과: 
                       {isNoAsset ? (
-                        <span className="text-red-400"> [초기 잠재고객 DB 수집 및 세일즈 배관 누수] 단계</span>
+                        <span className="text-amber-400"> [초기 DB 수집 및 세일즈 배관 누수] 단계</span>
                       ) : (
-                        <span className="text-red-400"> [전환 배관 부재 및 오퍼 저항] 단계</span>
+                        <span className="text-amber-400"> [전환 배관 부재 및 오퍼 저항] 단계</span>
                       )}
                     </h2>
-                    <p className="text-white/80 text-xs sm:text-sm mt-2 leading-relaxed">
+                    <p className="text-white/80 text-xs sm:text-sm mt-2 leading-relaxed max-w-xl mx-auto">
                       {isNoAsset 
                         ? "대표님의 독보적인 노하우가 있으나, 24시간 자동으로 고객 DB를 모으고 결제시키는 퍼널 시스템이 부재합니다. 3초 만에 완출되는 마스터 골조 프롬프트로 배관을 잡아야 합니다."
                         : "방문자나 트래픽은 있으나 가격 저항을 없애는 하모지식 가치 오퍼 배관이 막혔습니다. AI PLF 동영상 퍼널을 이식해야 합니다."
@@ -169,18 +178,18 @@ export default function DiagnosePageExp() {
                   {!submitted ? (
                     <div className="p-6 sm:p-10">
                       <div className="flex flex-col sm:flex-row gap-6 items-center mb-8">
-                        <div className="w-full sm:w-1/3 aspect-[3/4] bg-gradient-to-br from-[#C9A84C] to-yellow-700 rounded-xl flex items-center justify-center p-5 text-center shadow-lg transform -rotate-1 border border-white/20">
-                          <div className="bg-black/60 p-3 rounded-lg backdrop-blur-sm w-full h-full flex flex-col justify-center">
-                            <span className="text-[10px] font-bold text-[#C9A84C] mb-1 uppercase">2026 VOD + Prompt Package</span>
-                            <h3 className="font-bold text-xs sm:text-sm mb-1">업종별 {`{00}`} 마스터 골조 프롬프트 & VOD</h3>
+                        <div className="w-full sm:w-1/3 aspect-[3/4] bg-gradient-to-br from-[#C9A84C] to-amber-700 rounded-2xl flex items-center justify-center p-5 text-center shadow-2xl transform -rotate-1 border border-white/20">
+                          <div className="bg-black/70 p-4 rounded-xl backdrop-blur-sm w-full h-full flex flex-col justify-center border border-white/10">
+                            <span className="text-[10px] font-bold text-[#C9A84C] mb-1.5 uppercase">2026 VOD + Prompt</span>
+                            <h3 className="font-bold text-xs sm:text-sm mb-2 text-white">업종별 {`{00}`} 마스터 골조 프롬프트</h3>
                             <p className="text-[10px] text-white/50 line-through mt-auto">정가 99,000원</p>
                           </div>
                         </div>
                         <div className="w-full sm:w-2/3 space-y-3">
-                          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-yellow-500/20 text-yellow-400 text-xs font-bold border border-yellow-500/30">
-                            <Gift size={14} /> 맞춤 진단 솔루션 즉시 발송
+                          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#C9A84C]/10 text-[#C9A84C] text-xs font-bold border border-[#C9A84C]/30">
+                            <Gift size={14} /> 무료 진단 솔루션 즉시 발송
                           </div>
-                          <h3 className="text-lg font-bold">대표님의 노하우를 24시간 파는 VOD 특강과 골조 템플릿을 드립니다.</h3>
+                          <h3 className="text-lg font-bold text-white">대표님의 노하우를 24시간 파는 VOD 특강과 골조 템플릿을 드립니다.</h3>
                           <p className="text-white/70 text-xs leading-relaxed">
                             아래에 **성함, 이메일, 휴대폰 번호**를 입력하시면 10분 마스터클래스 영상 링크와 PDF 가이드북이 문자와 이메일로 3초 만에 발송됩니다.
                           </p>
@@ -190,7 +199,7 @@ export default function DiagnosePageExp() {
                       {/* 성함 + 이메일 + 휴대폰 번호 3종 리드 수집 폼 */}
                       <form onSubmit={handleSubmit} className="space-y-4">
                         <div>
-                          <label className="block text-xs font-semibold text-white/70 mb-1.5">대표님 성함 *</label>
+                          <label className="block text-xs font-semibold text-white/80 mb-1.5">대표님 성함 *</label>
                           <div className="relative">
                             <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-white/40">
                               <User size={16} />
@@ -200,14 +209,14 @@ export default function DiagnosePageExp() {
                               required
                               value={name}
                               onChange={(e) => setName(e.target.value)}
-                              className="w-full bg-black/60 border border-white/20 rounded-xl py-3 pl-10 pr-4 text-white text-sm focus:outline-none focus:border-[#C9A84C] transition-colors"
+                              className="w-full bg-black/50 border border-white/20 rounded-xl py-3 pl-10 pr-4 text-white text-sm focus:outline-none focus:border-[#C9A84C] transition-colors"
                               placeholder="홍길동"
                             />
                           </div>
                         </div>
 
                         <div>
-                          <label className="block text-xs font-semibold text-white/70 mb-1.5">이메일 주소 (PDF 리포트 발송용) *</label>
+                          <label className="block text-xs font-semibold text-white/80 mb-1.5">이메일 주소 (PDF 리포트 발송용) *</label>
                           <div className="relative">
                             <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-white/40">
                               <Mail size={16} />
@@ -217,14 +226,14 @@ export default function DiagnosePageExp() {
                               required
                               value={email}
                               onChange={(e) => setEmail(e.target.value)}
-                              className="w-full bg-black/60 border border-white/20 rounded-xl py-3 pl-10 pr-4 text-white text-sm focus:outline-none focus:border-[#C9A84C] transition-colors"
+                              className="w-full bg-black/50 border border-white/20 rounded-xl py-3 pl-10 pr-4 text-white text-sm focus:outline-none focus:border-[#C9A84C] transition-colors"
                               placeholder="name@company.com"
                             />
                           </div>
                         </div>
 
                         <div>
-                          <label className="block text-xs font-semibold text-white/70 mb-1.5">휴대폰 번호 (무료 특강 & 템플릿 문자 발송용) *</label>
+                          <label className="block text-xs font-semibold text-white/80 mb-1.5">휴대폰 번호 (무료 특강 & 템플릿 문자 발송용) *</label>
                           <div className="relative">
                             <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-white/40">
                               <Phone size={16} />
@@ -234,7 +243,7 @@ export default function DiagnosePageExp() {
                               required
                               value={phone}
                               onChange={(e) => setPhone(e.target.value)}
-                              className="w-full bg-black/60 border border-white/20 rounded-xl py-3 pl-10 pr-4 text-white text-sm focus:outline-none focus:border-[#C9A84C] transition-colors"
+                              className="w-full bg-black/50 border border-white/20 rounded-xl py-3 pl-10 pr-4 text-white text-sm focus:outline-none focus:border-[#C9A84C] transition-colors"
                               placeholder="010-1234-5678"
                             />
                           </div>
@@ -255,7 +264,7 @@ export default function DiagnosePageExp() {
 
                         <button 
                           type="submit"
-                          className="w-full py-4 rounded-xl bg-[#C9A84C] hover:bg-[#d9b85c] text-black font-bold text-base transition-all duration-200 shadow-xl shadow-[#C9A84C]/20 flex items-center justify-center gap-2 mt-2"
+                          className="w-full py-4 rounded-xl bg-[#C9A84C] hover:bg-[#d9b85c] text-black font-bold text-base transition-all duration-200 shadow-xl shadow-[#C9A84C]/20 flex items-center justify-center gap-2 mt-3 cursor-pointer border-none"
                         >
                           <Lock size={16} />
                           <span>🎁 99,000원 템플릿 문자로 받고 특강 보기</span>
@@ -273,7 +282,7 @@ export default function DiagnosePageExp() {
                       <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4 border border-green-500/40">
                         <CheckCircle2 size={36} className="text-green-500" />
                       </div>
-                      <h3 className="text-xl font-bold mb-2">진단 및 문자 발송이 완료되었습니다!</h3>
+                      <h3 className="text-xl font-bold mb-2 text-white">진단 및 문자 발송이 완료되었습니다!</h3>
                       <p className="text-white/70 text-sm mb-4 leading-relaxed">
                         입력하신 휴대폰 번호({phone})로 특강 링크와 전자책이 즉시 발송되었습니다.<br/>
                         잠시 후 <strong>{name}님 전용 10분 무료 마스터클래스 VOD 페이지</strong>로 이동합니다...
