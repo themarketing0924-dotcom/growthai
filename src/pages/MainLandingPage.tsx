@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
-import { CheckCircle2, ChevronRight, BarChart3, Users, Zap, ShieldCheck } from 'lucide-react';
+import { CheckCircle2, ChevronRight, BarChart3, Users, Zap, ShieldCheck, Sparkles } from 'lucide-react';
 import { Seo, DEFAULT_OG_IMAGE, SITE_NAME } from '../components/Seo';
 import { Footer } from '../components/Footer';
 import { Navbar } from '../components/Navbar';
@@ -301,7 +301,8 @@ export default function MainLandingPage() {
                 { step: '02', title: '신뢰 설계', desc: '누가 왜 가르치는지 한눈에 증명하기', icon: <ShieldCheck size={20} strokeWidth={1.5} /> },
                 { step: '03', title: '교육 설계', desc: '무료 가이드와 맛보기 강의로 이해시키기', icon: <BarChart3 size={20} strokeWidth={1.5} /> },
                 { step: '04', title: '상품 설계', desc: '입문, 실전, VVIP로 선택지를 분명히 나누기', icon: <CheckCircle2 size={20} strokeWidth={1.5} /> },
-                { step: '05', title: '자동화 설계', desc: '문의, 과제, 구독, 재구매를 반복 시스템으로 묶기', icon: <Zap size={20} strokeWidth={1.5} /> },
+                { step: '05', title: '자동화 설계', desc: '문의, 과제, 구독, 시스템으로 자동 연결', icon: <Zap size={20} strokeWidth={1.5} /> },
+                { step: '06', title: '팬덤·재구매 설계', desc: '후기, 지인 추천, 커뮤니티 팬덤으로 순환 유도', icon: <Sparkles size={20} strokeWidth={1.5} /> },
               ].map((item, i) => (
                 <FadeUp key={item.step} delay={i * 0.07}>
                     <div className="h-full p-6 sm:p-7 rounded-2xl border transition-all duration-300 hover:border-[rgba(201,168,76,0.3)] border-white/8 bg-white/[0.02]">
