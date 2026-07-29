@@ -1,49 +1,54 @@
-import { useRef, useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { Sparkles, ArrowRight, ShieldCheck, ChevronDown } from 'lucide-react';
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { Sparkles, ArrowRight, CheckSquare, Square, Quote, AlertTriangle } from 'lucide-react';
 import { Seo, DEFAULT_OG_IMAGE, SITE_NAME } from '../components/Seo';
 import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
 import { useNavigate } from 'react-router-dom';
 
-const PROFESSIONS = [
-  '변호사', '의사/약사', '헬스트레이너', '프로골퍼', '마사지/테라피스트', 
-  '인테리어/설비', '네트워크 마케터', '지식 강사/코치', '1인 전문 서비스'
+const CHECKLIST_ITEMS = [
+  { id: 1, text: "홈페이지를 만들었는데, 한 달 방문자가 100명도 안 된다." },
+  { id: 2, text: "유튜브 영상을 올려도, 이번 달 수익이 5만 원도 안 된다." },
+  { id: 3, text: "인스타 피드를 매일 올리지만, '좋아요'만 달리고 결제는 0건이다." },
+  { id: 4, text: "새 AI 툴이 나올 때마다 배우지만, 작심삼일로 끝난다." },
+  { id: 5, text: "대행사 비용은 아깝고, 혼자 하자니 뭘 해야 할지 막막하다." }
 ];
 
-const FAQS = [
-  {
-    q: "컴퓨터나 AI를 잘 모르는 초보자도 구축할 수 있나요?",
-    a: "네, 100% 가능합니다. 강의나 복잡한 코딩 없이 대표님의 서비스명 1개만 입력하면 3초 만에 세일즈 스크립트와 문자 문구가 완출되는 {00} 마스터 골조 프롬프트를 드립니다."
-  },
-  {
-    q: "제 업종(변호사, 의사, 트레이너, 인테리어, 약사 등)에도 적용이 되나요?",
-    a: "제프 워커의 PLF 퍼널과 12인 마케팅 거장의 본질은 '고객의 심리를 예열하고 구매 저항을 없애는 온라인 세일즈 배관'입니다. 자신만의 노하우나 서비스를 가진 모든 업종에 100% 적용됩니다."
-  },
-  {
-    q: "유료 광고나 SNS 홍보도 대신 해주나요?",
-    a: "아닙니다. 외부 유료 광고 집행은 대표님의 영역이며, GrowthAI는 고객이 유입되었을 때 24시간 자동으로 수집·예열·결제시키는 최상위 세일즈 퍼널 파이프라인 구축을 완전 보장합니다."
-  },
-  {
-    q: "수강 후 환불이 가능한가요?",
-    a: "네, 댄 케네디식 100% 무조건 환불 보증을 적용합니다. 30일 동안 수강하고 실행해보신 뒤 만족스럽지 않으시다면 100% 환불해 드리며, 제공된 골조 프롬프트는 소장하셔도 됩니다."
-  }
+const FIVE_STEPS = [
+  { step: "STEP 01", title: "유입 막힘", desc: "길도 없는데 가게 문만 열어둔 상태 (트래픽 부재)" },
+  { step: "STEP 02", title: "전환 막힘", desc: "'왜 사야 하는지' 가치 입증 및 신뢰 예열 설득 실패" },
+  { step: "STEP 03", title: "결제 막힘", desc: "고객의 구매 충동이 일었을 때 즉시 결제할 배관 부재" },
+  { step: "STEP 04", title: "재구매 막힘", desc: "한 번 온 고객을 단골로 묶어주는 CRM 시스템 부재" },
+  { step: "STEP 05", title: "도구의 늪", desc: "수익과 상관없이 새로운 AI 툴만 공부하느라 시간 낭비" }
 ];
 
 export default function MainLandingPageExp() {
   const navigate = useNavigate();
-  const heroRef = useRef<HTMLElement>(null);
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [checkedItems, setCheckedItems] = useState<number[]>([]);
+  const [showStory, setShowStory] = useState(false);
 
-  const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
-  const heroY = useTransform(scrollYProgress, [0, 1], ['0%', '15%']);
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+  // 체크박스 토글
+  const toggleCheck = (id: number) => {
+    if (checkedItems.includes(id)) {
+      setCheckedItems(checkedItems.filter(item => item !== id));
+    } else {
+      setCheckedItems([...checkedItems, id]);
+    }
+  };
+
+  // 진단 문구 계산
+  const getDiagnosisMessage = () => {
+    const count = checkedItems.length;
+    if (count === 0) return "체크하여 현재 대표님의 상태를 진단해보세요.";
+    if (count <= 2) return `⚠️ 주의: 세일즈 배관 누수 조짐 감지 (5개 중 ${count}개 해당)`;
+    return `🚨 경고: 세일즈 배관 누수 심각 단계 (5개 중 ${count}개 해당) - 즉시 조치 필요`;
+  };
 
   return (
     <>
       <Seo
-        title="GrowthAI — 애플 스타일 2026 AI 자동 세일즈 퍼널"
-        description="변호사, 의사, 트레이너, 인테리어 등 노하우를 가진 누구나 {00} 입력으로 24시간 자동 판매 시스템 구축"
+        title="GrowthAI — 100개의 AI 도구보다 1개의 구매전환 퍼널이 낫다 (체험판)"
+        description="홈페이지는 만들었지만 매출이 없는 1인 창업가·소상공인을 위한 12인 거장 융합 세일즈 퍼널"
         canonical="/experimental"
         siteName={SITE_NAME}
         image={DEFAULT_OG_IMAGE}
@@ -52,292 +57,325 @@ export default function MainLandingPageExp() {
       <div className="bg-[#000000] text-[#F5F5F7] min-h-screen font-sans selection:bg-[#C9A84C] selection:text-black">
         <Navbar entranceComplete={true} lang="ko" setLang={() => {}} />
 
-        {/* ══════════════════════════════════════════
-            [SECTION 1] HERO — 애플 스타일 헤드카피 & 강조
-        ══════════════════════════════════════════ */}
-        <section ref={heroRef} className="relative pt-36 pb-28 px-6 sm:px-10 md:px-12 lg:px-16 overflow-hidden border-b border-white/10">
-          <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-[#C9A84C]/10 rounded-full blur-[160px] pointer-events-none" />
+        {/* 1. HERO SECTION (99,000원 전자책 인센티브 강조) */}
+        <section className="relative pt-40 pb-28 px-6 sm:px-10 md:px-12 lg:px-16 overflow-hidden border-b border-white/10">
+          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[450px] bg-[#C9A84C]/10 rounded-full blur-[170px] pointer-events-none" />
 
-          <motion.div style={{ y: heroY, opacity: heroOpacity }} className="max-w-4xl mx-auto text-center relative z-10">
-            
-            {/* 애플 상단 소제목 캡션 */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/15 text-[#C9A84C] text-xs sm:text-sm font-bold tracking-widest uppercase mb-8 backdrop-blur-md"
-            >
-              <Sparkles className="w-4 h-4 text-[#C9A84C]" />
-              <span>2026 KOREAN AI SALES FUNNEL SYSTEM</span>
-            </motion.div>
+          <div className="max-w-6xl mx-auto relative z-10 text-center">
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold bg-[#C9A84C]/10 text-[#C9A84C] border border-[#C9A84C]/30 mb-6 shadow-[0_0_15px_rgba(201,168,76,0.15)]">
+              <Sparkles className="w-3.5 h-3.5 text-[#C9A84C]" />
+              🎁 무료 진단 완료 시 [거장 12인 시크릿 전자책(99,000원 상당)] 한시 무료 증정
+            </span>
 
-            {/* 메인 헤드카피 (Apple Heavy Typography) */}
-            <motion.h1
-              className="text-4xl sm:text-6xl md:text-7xl font-extrabold text-white leading-[1.12] mb-6 break-keep tracking-tight"
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.75, delay: 0.1 }}
-            >
-              3분 만에 당신의 노하우가<br />
+            <h1 className="text-4xl sm:text-6xl font-extrabold text-white leading-tight mb-6 break-keep tracking-tight">
+              남들 다 한다는 AI, 홈페이지까지 만들었는데<br />
               <span className="bg-gradient-to-r from-[#C9A84C] via-[#E5C365] to-amber-200 bg-clip-text text-transparent">
-                24시간 자동 판매되는 이유를
-              </span> 보여드립니다.
-            </motion.h1>
+                왜 내 통장엔 아직도 0원일까요?
+              </span>
+            </h1>
 
-            {/* 스탯 강조 */}
-            <motion.div 
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.18 }}
-              className="my-6 text-xl sm:text-2xl font-bold text-[#C9A84C]"
-            >
-              기존 마케팅 대비 <span className="text-white underline decoration-[#C9A84C]">최대 8배 더 빠른 AI 구축 성능</span>
-            </motion.div>
-
-            {/* 서브 카피 */}
-            <motion.p
-              className="text-white/70 text-base sm:text-lg mb-10 leading-relaxed break-keep max-w-2xl mx-auto font-normal"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-            >
-              상세페이지 글귀 100번 고치는 것은 매출에 아무 도움이 안 됩니다.<br />
-              <strong className="text-white font-bold">{`"{내 업종/서비스명}"`} 1개만 입력하면 3초 만에 스크립트가 완출되는 마스터 골조 프롬프트</strong>로 내 사업에 24시간 자동화 배관을 구축하세요.
-            </motion.p>
-
-            {/* 업종 태그 칩 */}
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.25 }}
-              className="flex flex-wrap items-center justify-center gap-2.5 mb-10 max-w-3xl mx-auto"
-            >
-              {PROFESSIONS.map((p) => (
-                <span key={p} className="px-4 py-1.5 rounded-full bg-[#161617] border border-white/10 text-xs font-medium text-white/80">
-                  ✓ {p}
-                </span>
-              ))}
-            </motion.div>
-
-            {/* 애플 캡슐 버튼 */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.3 }}
-              className="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto"
-            >
-              <button
-                onClick={() => navigate('/experimental/diagnose')}
-                className="w-full px-8 py-4.5 rounded-full bg-[#C9A84C] hover:bg-[#d9b85c] text-black font-bold text-base transition-all duration-200 shadow-2xl shadow-[#C9A84C]/30 flex items-center justify-center gap-2 cursor-pointer border-none"
-              >
-                <span>3분 무료 진단 & 특강 문자로 받기</span>
-                <ArrowRight className="w-5 h-5" />
-              </button>
-            </motion.div>
-
-            <p className="text-xs text-white/40 mt-5 flex items-center justify-center gap-1.5">
-              <ShieldCheck className="w-4 h-4 text-[#C9A84C]" />
-              신청 즉시 문자로 10분 마스터클래스 특강과 PDF 가이드북이 발송됩니다.
-            </p>
-          </motion.div>
-        </section>
-
-        {/* ══════════════════════════════════════════
-            [SECTION 2] 2x2 대칭 번호 카드 — 레퍼런스 스타일
-        ══════════════════════════════════════════ */}
-        <section className="py-24 sm:py-32 px-6 sm:px-10 md:px-12 lg:px-16 border-b border-white/10 bg-[#000000]">
-          <div className="max-w-4xl mx-auto">
-            
-            <div className="text-center mb-16">
-              <span className="text-[#C9A84C] font-bold text-xs uppercase tracking-widest block mb-3">CORE ARCHITECTURE</span>
-              <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight break-keep">
-                왜 노하우가 있어도<br />
-                <span className="text-[#C9A84C]">수입으로 연결되지 못했을까요?</span>
-              </h2>
-              <p className="text-white/60 text-sm sm:text-base mt-4 max-w-xl mx-auto leading-relaxed break-keep">
-                답은 콘텐츠 부족이 아니라, 24시간 모으고 예열하고 결제시키는 [온라인 세일즈 배관]이 부재했기 때문입니다.
-              </p>
-            </div>
-
-            {/* 2x2 대칭 번호 카드 레퍼런스 모듈 */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              
-              <div className="p-8 rounded-3xl bg-[#161617] border border-white/10 hover:border-white/20 transition-all flex flex-col justify-between">
-                <div>
-                  <div className="w-9 h-9 rounded-xl bg-red-500/20 border border-red-500/40 text-red-400 font-extrabold text-sm flex items-center justify-center mb-6">
-                    01
-                  </div>
-                  <h3 className="text-xl font-bold text-white mb-3">유입 배관 누수</h3>
-                  <p className="text-sm text-white/60 leading-relaxed font-normal">
-                    블로그나 유튜브에 노하우를 올려도 잠재고객의 연락처(DB)를 수집하는 이체 장치가 없습니다.
-                  </p>
-                </div>
-              </div>
-
-              <div className="p-8 rounded-3xl bg-[#161617] border border-white/10 hover:border-white/20 transition-all flex flex-col justify-between">
-                <div>
-                  <div className="w-9 h-9 rounded-xl bg-red-500/20 border border-red-500/40 text-red-400 font-extrabold text-sm flex items-center justify-center mb-6">
-                    02
-                  </div>
-                  <h3 className="text-xl font-bold text-white mb-3">설득 스크립트 부재</h3>
-                  <p className="text-sm text-white/60 leading-relaxed font-normal">
-                    고객이 들어와도 마음을 열지 않습니다. 제프 워커 3단계 예열 동영상 공식으로 신뢰를 쌓아야 합니다.
-                  </p>
-                </div>
-              </div>
-
-              <div className="p-8 rounded-3xl bg-[#161617] border border-white/10 hover:border-white/20 transition-all flex flex-col justify-between">
-                <div>
-                  <div className="w-9 h-9 rounded-xl bg-red-500/20 border border-red-500/40 text-red-400 font-extrabold text-sm flex items-center justify-center mb-6">
-                    03
-                  </div>
-                  <h3 className="text-xl font-bold text-white mb-3">가격 저항 발생</h3>
-                  <p className="text-sm text-white/60 leading-relaxed font-normal">
-                    가치 오퍼(Value Offer) 구성이 부족해 수강생이 가격 부담을 느끼고 결제를 주저하게 됩니다.
-                  </p>
-                </div>
-              </div>
-
-              <div className="p-8 rounded-3xl bg-[#161617] border border-white/10 hover:border-white/20 transition-all flex flex-col justify-between">
-                <div>
-                  <div className="w-9 h-9 rounded-xl bg-red-500/20 border border-red-500/40 text-red-400 font-extrabold text-sm flex items-center justify-center mb-6">
-                    04
-                  </div>
-                  <h3 className="text-xl font-bold text-white mb-3">자동화 구축의 한계</h3>
-                  <p className="text-sm text-white/60 leading-relaxed font-normal">
-                    매번 일일이 상담하고 설명하느라 시간이 부족해 본업과 비즈니스 확장에 차질이 생깁니다.
-                  </p>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </section>
-
-        {/* ══════════════════════════════════════════
-            [SECTION 3] 3단계 해결 솔루션 — 파란색/골드 하이라이트
-        ══════════════════════════════════════════ */}
-        <section className="py-24 sm:py-32 px-6 sm:px-10 md:px-12 lg:px-16 border-b border-white/10 bg-[#000000]">
-          <div className="max-w-4xl mx-auto">
-            
-            <div className="text-center mb-16">
-              <span className="text-[#C9A84C] font-bold text-xs uppercase tracking-widest block mb-3">SOLUTION</span>
-              <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight break-keep">
-                어떤 전문 직종이든<br />
-                <span className="bg-gradient-to-r from-[#C9A84C] via-[#E5C365] to-amber-200 bg-clip-text text-transparent">
-                  실행 가능한 세일즈 배관을 구축합니다.
-                </span>
-              </h2>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              
-              <div className="p-8 rounded-3xl bg-[#161617] border border-white/10 flex flex-col justify-between">
-                <div>
-                  <div className="w-9 h-9 rounded-xl bg-[#C9A84C]/20 border border-[#C9A84C]/40 text-[#C9A84C] font-extrabold text-sm flex items-center justify-center mb-6">
-                    01
-                  </div>
-                  <h3 className="text-lg font-bold text-white mb-3">VOD 마스터클래스 코스</h3>
-                  <p className="text-xs text-white/60 leading-relaxed">
-                    제프 워커 PLF + 12인 거장의 세일즈 퍼널을 AI 에이전트로 직접 만들고 다듬는 방법 완전 전수.
-                  </p>
-                </div>
-              </div>
-
-              <div className="p-8 rounded-3xl bg-gradient-to-b from-[#C9A84C]/20 via-[#161617] to-[#161617] border-2 border-[#C9A84C] flex flex-col justify-between">
-                <div>
-                  <div className="w-9 h-9 rounded-xl bg-[#C9A84C] text-black font-extrabold text-sm flex items-center justify-center mb-6">
-                    02
-                  </div>
-                  <h3 className="text-lg font-bold text-white mb-3">{`"{00}"`} 골조 프롬프트</h3>
-                  <p className="text-xs text-white/80 leading-relaxed">
-                    내 서비스명 1개만 입력하면 3초 만에 세일즈 스크립트와 문자 문구가 자동 완출되는 마스터 무기.
-                  </p>
-                </div>
-              </div>
-
-              <div className="p-8 rounded-3xl bg-[#161617] border border-white/10 flex flex-col justify-between">
-                <div>
-                  <div className="w-9 h-9 rounded-xl bg-[#C9A84C]/20 border border-[#C9A84C]/40 text-[#C9A84C] font-extrabold text-sm flex items-center justify-center mb-6">
-                    03
-                  </div>
-                  <h3 className="text-lg font-bold text-white mb-3">24시간 자동화 배관</h3>
-                  <p className="text-xs text-white/60 leading-relaxed">
-                    DB 수집 ➔ 문자/알림톡 숏링크 ➔ VOD 릴리즈 ➔ 카운트다운 결제창 연결 배관 전격 제공.
-                  </p>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </section>
-
-        {/* ══════════════════════════════════════════
-            [SECTION 4] 자주 묻는 질문 FAQ (Apple Style Accordion)
-        ══════════════════════════════════════════ */}
-        <section className="py-24 sm:py-32 px-6 sm:px-10 md:px-12 lg:px-16 border-b border-white/10 bg-[#000000]">
-          <div className="max-w-3xl mx-auto">
-            
-            <div className="text-center mb-16">
-              <span className="text-[#C9A84C] font-bold text-xs uppercase tracking-widest block mb-3">FAQ</span>
-              <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight break-keep">
-                궁금한 점을 미리 확인해보세요.
-              </h2>
-            </div>
-
-            <div className="space-y-4">
-              {FAQS.map((faq, idx) => (
-                <div 
-                  key={idx}
-                  className="rounded-2xl bg-[#161617] border border-white/10 overflow-hidden transition-colors"
-                >
-                  <button
-                    onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
-                    className="w-full p-6 text-left flex justify-between items-center text-white font-bold text-base sm:text-lg cursor-pointer border-none bg-transparent"
-                  >
-                    <span>{faq.q}</span>
-                    <ChevronDown className={`w-5 h-5 text-[#C9A84C] transition-transform duration-300 ${openFaq === idx ? 'rotate-180' : ''}`} />
-                  </button>
-                  {openFaq === idx && (
-                    <div className="px-6 pb-6 text-xs sm:text-sm text-white/70 leading-relaxed border-t border-white/5 pt-4">
-                      {faq.a}
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-
-          </div>
-        </section>
-
-        {/* ══════════════════════════════════════════
-            [SECTION 5] 최후의 CTA — 애플 스타일 거대 타이포 및 캡슐 버튼
-        ══════════════════════════════════════════ */}
-        <section className="py-28 sm:py-36 px-6 sm:px-10 md:px-12 lg:px-16 bg-[#000000]">
-          <div className="max-w-3xl mx-auto text-center">
-            
-            <span className="text-[#C9A84C] font-bold text-xs uppercase tracking-widest block mb-4">GET STARTED TODAY</span>
-            <h2 className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-white leading-tight mb-6 break-keep">
-              지금 바로 당신의 노하우를<br />
-              <span className="bg-gradient-to-r from-[#C9A84C] via-[#E5C365] to-amber-200 bg-clip-text text-transparent">
-                24시간 자동 세일즈 시스템으로
-              </span> 전환해보세요.
-            </h2>
-            <p className="text-white/60 text-sm sm:text-base mb-10 max-w-lg mx-auto leading-relaxed">
-              3분 무료 진단을 완료하시면 성함과 연락처로 10분 마스터클래스 특강과 골조 템플릿 안내문이 문자로 발송됩니다.
+            <p className="text-white/70 text-base sm:text-lg mb-10 leading-relaxed break-keep max-w-3xl mx-auto font-normal">
+              실행력이 부족해서가 아닙니다. 돈이 벌리는 '숨겨진 5가지 구조'를 놓치고 있을 뿐입니다.<br />
+              단 3분 만에 무료로 내 비즈니스의 세일즈 배관 누수를 진단해 드립니다.
             </p>
 
             <button
               onClick={() => navigate('/experimental/diagnose')}
-              className="px-10 py-5 rounded-full bg-[#C9A84C] hover:bg-[#d9b85c] text-black font-extrabold text-lg transition-all duration-200 shadow-2xl shadow-[#C9A84C]/30 inline-flex items-center justify-center gap-2.5 cursor-pointer border-none"
+              className="px-10 py-5 rounded-full bg-[#C9A84C] hover:bg-[#d9b85c] text-black font-extrabold text-lg transition-all duration-200 shadow-[0_0_35px_rgba(201,168,76,0.35)] inline-flex items-center justify-center gap-2.5 cursor-pointer border-none"
             >
-              <span>3분 무료 진단받기</span>
+              <span>🔥 내 사이트 무료 진단받기</span>
+              <ArrowRight className="w-5 h-5" />
+            </button>
+
+            <p className="text-xs text-white/40 mt-5">
+              🔥 오늘 127명의 대표님이 진단을 완료했습니다.
+            </p>
+          </div>
+        </section>
+
+        {/* 2. 공감 체크 (인터랙티브 자가 진단 컴포넌트) */}
+        <section className="py-24 sm:py-32 px-6 sm:px-10 md:px-12 lg:px-16 border-b border-white/10 bg-[#000000]">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12">
+              <span className="text-[#C9A84C] font-bold text-xs uppercase tracking-widest block mb-3">SELF DIAGNOSIS</span>
+              <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight break-keep leading-tight">
+                혹시 지금, 이런 상황 아니신가요?
+              </h2>
+              <p className="text-white/60 text-sm sm:text-base mt-4 max-w-xl mx-auto leading-relaxed">
+                현재 대표님 사업에 해당되는 항목을 직접 체크해보세요.
+              </p>
+            </div>
+
+            {/* 체크박스 카드 */}
+            <div className="bg-[#121316] border border-white/15 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-4">
+              {CHECKLIST_ITEMS.map((item) => {
+                const isChecked = checkedItems.includes(item.id);
+                return (
+                  <div 
+                    key={item.id}
+                    onClick={() => toggleCheck(item.id)}
+                    className={`p-5 rounded-2xl border transition-all duration-200 flex items-center gap-4 cursor-pointer select-none ${
+                      isChecked 
+                        ? 'border-[#C9A84C] bg-[#C9A84C]/5 shadow-[0_0_15px_rgba(201,168,76,0.1)]' 
+                        : 'border-white/10 bg-black/40 hover:border-white/20'
+                    }`}
+                  >
+                    {isChecked ? (
+                      <CheckSquare className="w-6 h-6 text-[#C9A84C] shrink-0" />
+                    ) : (
+                      <Square className="w-6 h-6 text-white/30 shrink-0" />
+                    )}
+                    <span className={`text-sm sm:text-base font-semibold ${isChecked ? 'text-white' : 'text-white/70'}`}>
+                      {item.text}
+                    </span>
+                  </div>
+                );
+              })}
+
+              {/* 실시간 자가진단 분석 결과창 */}
+              <div className="mt-8 p-5 rounded-2xl bg-black/80 border border-white/10 flex items-center justify-between gap-4">
+                <div className="flex items-center gap-3">
+                  <AlertTriangle className={`w-6 h-6 ${checkedItems.length > 2 ? 'text-red-500' : 'text-[#C9A84C]'}`} />
+                  <span className="text-xs sm:text-sm font-bold text-white leading-relaxed">
+                    {getDiagnosisMessage()}
+                  </span>
+                </div>
+                {checkedItems.length > 0 && (
+                  <button
+                    onClick={() => navigate('/experimental/diagnose', { state: { score: checkedItems.length } })}
+                    className="px-4 py-2.5 rounded-xl bg-[#C9A84C] hover:bg-[#d9b85c] text-black font-extrabold text-xs transition cursor-pointer border-none shrink-0"
+                  >
+                    정밀 진단서 보기
+                  </button>
+                )}
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        {/* 3. 문제 진단 (5대 막힘 STEP) */}
+        <section className="py-24 sm:py-32 px-6 sm:px-10 md:px-12 lg:px-16 border-b border-white/10 bg-[#000000]">
+          <div className="max-w-6xl mx-auto">
+            
+            <div className="text-center mb-16">
+              <span className="text-[#C9A84C] font-bold text-xs uppercase tracking-widest block mb-3">PROBLEM DIAGNOSIS</span>
+              <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight break-keep leading-tight">
+                당신이 게을러서 실패한 게 아닙니다.<br />
+                <span className="text-[#C9A84C]">결제가 일어나는 구조가 끊겨 있기 때문입니다.</span>
+              </h2>
+              <p className="text-white/70 text-sm sm:text-base mt-4 max-w-2xl mx-auto leading-relaxed">
+                이 5가지 중 단 하나만 막혀도, 대표님 비즈니스의 수익은 0으로 수렴합니다.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
+              {FIVE_STEPS.map((step, idx) => (
+                <div key={idx} className="p-6 rounded-3xl bg-[#121316] border border-white/10 flex flex-col justify-between hover:border-white/20 transition-all">
+                  <div>
+                    <span className="text-[10px] font-extrabold text-[#C9A84C] tracking-widest uppercase block mb-3">
+                      {step.step}
+                    </span>
+                    <h3 className="text-base font-bold text-white mb-2">{step.title}</h3>
+                    <p className="text-xs text-white/50 leading-relaxed font-normal">
+                      {step.desc}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+          </div>
+        </section>
+
+        {/* 4. 운영자 스토리 */}
+        <section className="py-24 sm:py-32 px-6 sm:px-10 md:px-12 lg:px-16 border-b border-white/10 bg-[#121316]">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+              
+              <div className="md:col-span-5 flex justify-center">
+                <div className="relative group max-w-xs w-full">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-[#C9A84C] to-amber-200 rounded-3xl blur opacity-25" />
+                  <div className="relative bg-black rounded-3xl overflow-hidden border border-white/15">
+                    <img 
+                      src="/profile_placeholder.png" 
+                      alt="이형민 대표" 
+                      className="w-full h-auto object-cover aspect-square"
+                    />
+                    <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black via-black/80 to-transparent p-6 pt-12">
+                      <span className="text-[9px] font-extrabold text-[#C9A84C] block mb-0.5">GrowthAI Founder</span>
+                      <h4 className="text-base font-bold text-white">이형민 (KOI LEE)</h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="md:col-span-7 text-left space-y-6">
+                <span className="text-[#C9A84C] font-bold text-xs uppercase tracking-widest block">FOUNDER STORY</span>
+                
+                <h3 className="text-3xl font-extrabold text-white leading-tight">
+                  "저 역시 '이게 왜 안 될까' 절망했던<br />
+                  <span className="text-[#C9A84C]">평범한 1인 창업가였습니다.</span>"
+                </h3>
+
+                <div className="relative pl-5 border-l-2 border-[#C9A84C] py-1">
+                  <Quote className="absolute top-0 left-0.5 w-3 h-3 text-[#C9A84C]/30" />
+                  <p className="text-xs sm:text-sm text-white/90 leading-relaxed font-semibold italic">
+                    "처음엔 새로운 AI 툴의 사용법만 익히면 돈이 복사되는 줄 알았습니다. 수백 시간을 날린 후에야 깨달았습니다. 기술보다 '설득과 결제의 구조'가 먼저라는 것을요."
+                  </p>
+                </div>
+
+                <div className="space-y-4 text-xs sm:text-sm text-white/70 leading-relaxed font-normal">
+                  <p>
+                    대부분의 소상공인은 홈페이지를 만든 뒤 어떻게 트래픽을 모으고 전환을 일으킬지 모릅니다. GrowthAI는 12인 거장의 세일즈 비결을 입혀 24시간 자동으로 작동하는 파이프라인을 연결합니다.
+                  </p>
+                </div>
+
+                {!showStory ? (
+                  <button
+                    onClick={() => setShowStory(true)}
+                    className="text-xs font-bold text-[#C9A84C] flex items-center gap-1 cursor-pointer bg-transparent border-none"
+                  >
+                    진짜 이야기 전체 보기 <ArrowRight size={14} />
+                  </button>
+                ) : (
+                  <motion.p 
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className="text-xs text-white/50 leading-relaxed bg-black/40 p-4 rounded-xl border border-white/5 font-normal"
+                  >
+                    많은 이들이 새로운 툴을 배우기 위해 소중한 시간과 수십만 원의 강의료를 지불합니다. 하지만 뼈대가 어긋난 시스템은 유입된 고객마저 전부 밖으로 흘려보냅니다. 저는 12인 마케팅 거장들의 프레임워크를 융합하여 1인 기업가도 3분 만에 실전 판매 배관을 완출하는 방식을 완성했고, 이 바이블을 한국 시장에 전수하고자 합니다.
+                  </motion.p>
+                )}
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        {/* 5. K.S.P. 프레임워크 */}
+        <section className="py-24 sm:py-32 px-6 sm:px-10 md:px-12 lg:px-16 border-b border-white/10 bg-[#000000]">
+          <div className="max-w-6xl mx-auto">
+            
+            <div className="text-center mb-16">
+              <span className="text-[#C9A84C] font-bold text-xs uppercase tracking-widest block mb-3">K.S.P FRAMEWORK</span>
+              <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight break-keep leading-tight">
+                단 3단계만 기억하세요.<br />
+                <span className="bg-gradient-to-r from-[#C9A84C] via-[#E5C365] to-amber-200 bg-clip-text text-transparent">
+                  Know → Structure → Profit
+                </span>
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="p-8 rounded-3xl bg-[#121316] border border-white/10 flex flex-col justify-between">
+                <div>
+                  <div className="w-10 h-10 rounded-xl bg-[#C9A84C]/20 border border-[#C9A84C]/40 text-[#C9A84C] font-extrabold text-sm flex items-center justify-center mb-6">01</div>
+                  <h3 className="text-lg font-bold text-white mb-3">Know. 내 문제 알기</h3>
+                  <p className="text-xs text-white/60 leading-relaxed font-normal">
+                    무료 자가 진단을 통해 5단계 세일즈 파이프라인 중 어디에서 잠재고객과 매출이 새고 있는지 정확히 파악합니다.
+                  </p>
+                </div>
+              </div>
+
+              <div className="p-8 rounded-3xl bg-[#121316] border border-[#C9A84C] flex flex-col justify-between">
+                <div>
+                  <div className="w-10 h-10 rounded-xl bg-[#C9A84C] text-black font-extrabold text-sm flex items-center justify-center mb-6">02</div>
+                  <h3 className="text-lg font-bold text-white mb-3 font-extrabold">Structure. 구조 세우기</h3>
+                  <p className="text-xs text-white/80 leading-relaxed font-normal">
+                    파편화된 최신 AI 도구를 과감히 버리고, 고객이 페이지에 들어와 결제할 수밖에 없는 심리적 구매 동선을 정교하게 조립합니다.
+                  </p>
+                </div>
+              </div>
+
+              <div className="p-8 rounded-3xl bg-[#121316] border border-white/10 flex flex-col justify-between">
+                <div>
+                  <div className="w-10 h-10 rounded-xl bg-[#C9A84C]/20 border border-[#C9A84C]/40 text-[#C9A84C] font-extrabold text-sm flex items-center justify-center mb-6">03</div>
+                  <h3 className="text-lg font-bold text-white mb-3 font-bold">Profit. 수익 자동화</h3>
+                  <p className="text-xs text-white/60 leading-relaxed font-normal">
+                    완성된 파이프라인 배관에 무료 옴니채널 트래픽을 쏟아붓고, 데이터를 검증하며 비즈니스 수익을 스케일업합니다.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        {/* 6. 성과 사례 */}
+        <section className="py-24 sm:py-32 px-6 sm:px-10 md:px-12 lg:px-16 border-b border-white/10 bg-[#000000]">
+          <div className="max-w-6xl mx-auto">
+            
+            <div className="text-center mb-16">
+              <span className="text-[#C9A84C] font-bold text-xs uppercase tracking-widest block mb-3">SUCCESS STORIES</span>
+              <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight break-keep leading-tight">
+                이미 구조를 바꾼 분들은<br />
+                <span className="text-[#C9A84C]">통장 숫자가 달라지고 있습니다.</span>
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="p-8 rounded-3xl bg-[#121316] border border-white/10 flex flex-col justify-between">
+                <div>
+                  <span className="text-xs font-bold text-yellow-400">★★★★★</span>
+                  <p className="text-xs sm:text-sm text-white/80 leading-relaxed font-normal my-4 break-keep">
+                    "AI로 홈페지만 만들고 6개월째 매출 0원이었습니다. 진단받고 구조 하나 바꿨더니 3주 만에 첫 수강생 결제가 들어왔습니다."
+                  </p>
+                </div>
+                <div className="text-[10px] text-white/40 font-bold border-t border-white/5 pt-4">O카페 사장님</div>
+              </div>
+
+              <div className="p-8 rounded-3xl bg-[#121316] border border-white/10 flex flex-col justify-between">
+                <div>
+                  <span className="text-xs font-bold text-yellow-400">★★★★★</span>
+                  <p className="text-xs sm:text-sm text-white/80 leading-relaxed font-normal my-4 break-keep">
+                    "여기서 뼈대를 잡고 나니 복잡하게 매달리던 여러 도구들을 버리고, 딱 필요한 툴 2개로 자동화시켰습니다. 시간이 엄청 남습니다."
+                  </p>
+                </div>
+                <div className="text-[10px] text-white/40 font-bold border-t border-white/5 pt-4">1인 에이전시 대표</div>
+              </div>
+
+              <div className="p-8 rounded-3xl bg-[#121316] border border-white/10 flex flex-col justify-between">
+                <div>
+                  <span className="text-xs font-bold text-yellow-400">★★★★★</span>
+                  <p className="text-xs sm:text-sm text-white/80 leading-relaxed font-normal my-4 break-keep">
+                    "고객의 저항 심리를 허물고 10분 VSL 공식에 따른 카피라이팅 구조를 적용하자마자, 문의가 즉시 3건이나 입금으로 이어졌습니다."
+                  </p>
+                </div>
+                <div className="text-[10px] text-white/40 font-bold border-t border-white/5 pt-4">프리랜서 강사</div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        {/* 7. FINAL CTA */}
+        <section className="py-28 sm:py-36 px-6 sm:px-10 md:px-12 lg:px-16 bg-[#000000]">
+          <div className="max-w-5xl mx-auto text-center bg-gradient-to-b from-[#121316] to-[#0A0B0D] border border-white/15 rounded-3xl p-10 sm:p-16 shadow-2xl relative">
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-1 bg-[#C9A84C]" />
+
+            <span className="text-[#C9A84C] font-bold text-xs uppercase tracking-widest block mb-4">GET STARTED TODAY</span>
+            <h2 className="text-3xl sm:text-5xl font-extrabold text-white leading-tight mb-6 break-keep">
+              계속 모르는 척 하시겠습니까,<br />
+              <span className="bg-gradient-to-r from-[#C9A84C] via-[#E5C365] to-amber-200 bg-clip-text text-transparent">
+                지금 3분 투자로 원인을 찾으시겠습니까?
+              </span>
+            </h2>
+            <p className="text-white/60 text-sm sm:text-base mb-10 max-w-xl mx-auto leading-relaxed break-keep">
+              이 구조를 모른 채 내일도 새로운 AI 툴을 배운다면, 6개월 뒤에도 수익은 오늘과 똑같을 것입니다.<br />
+              * 맞춤형 진단 리포트 및 [거장 12인 시크릿 전자책(99,000원 상당)]은 한시적으로 무료 공개됩니다.
+            </p>
+
+            <button
+              onClick={() => navigate('/experimental/diagnose')}
+              className="px-10 py-5 rounded-full bg-[#C9A84C] hover:bg-[#d9b85c] text-black font-extrabold text-lg transition-all duration-200 shadow-[0_0_30px_rgba(201,168,76,0.3)] inline-flex items-center justify-center gap-2.5 cursor-pointer border-none"
+            >
+              <span>🚀 지금 바로 무료 진단 시작하기</span>
               <ArrowRight className="w-5 h-5" />
             </button>
           </div>
         </section>
 
-        {/* Footer */}
         <Footer lang="ko" />
       </div>
     </>
