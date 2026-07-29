@@ -206,7 +206,7 @@ export default function AboutPage() {
         }}
       />
       <div
-        className="bg-black text-white min-h-screen"
+        className="bg-[#060B16] text-white min-h-screen"
         style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Pretendard", sans-serif', letterSpacing: '-0.01em' }}
       >
         <Navbar entranceComplete={true} lang="ko" setLang={() => {}} />
@@ -215,7 +215,7 @@ export default function AboutPage() {
             [1] HERO — 후킹 헤드라인
         ══════════════════════════════════ */}
         <section className="relative min-h-screen flex flex-col items-center justify-center pt-24 pb-20 px-5 text-center overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_#1a1205_0%,_#000_65%)] pointer-events-none" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_#0b132b_0%,_#060b16_65%)] pointer-events-none" />
 
           {/* 프로필 이미지 */}
           <motion.div
@@ -224,9 +224,9 @@ export default function AboutPage() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, ease: EASE }}
           >
-            <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-full overflow-hidden border-2 border-[#C9A84C]/50 shadow-[0_0_40px_rgba(201,168,76,0.25)] mx-auto">
+            <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-full overflow-hidden border-2 border-[#C5A880]/50 shadow-[0_0_40px_rgba(197,168,128,0.25)] mx-auto">
               <img
-                src="/IMG_5545.PNG"
+                src="/profile_placeholder.png"
                 alt="KOI LEE"
                 className="w-full h-full object-cover object-top"
               />
@@ -234,26 +234,29 @@ export default function AboutPage() {
           </motion.div>
 
           <motion.div
-            className="relative z-10 max-w-2xl mx-auto"
+            className="relative z-10 max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2, ease: EASE }}
           >
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#C9A84C]/40 bg-[#C9A84C]/10 mb-6">
-              <span className="text-xs font-bold tracking-widest text-[#C9A84C] uppercase">AI 마케팅 구조 설계자</span>
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#C5A880]/40 bg-[#C5A880]/10 mb-6">
+              <span className="text-xs font-bold tracking-widest text-[#C5A880] uppercase">AI 마케팅 구조 설계자</span>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.2] mb-5 break-keep">
-              저는 <span className="text-[#C9A84C]">KOI LEE</span>입니다.<br />
+            {/* 헤드카피 2단계 확대 (text-3xl -> text-5xl, sm:text-4xl -> sm:text-6xl, md:text-5xl -> md:text-7xl) */}
+            <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold leading-[1.15] mb-6 break-keep text-white tracking-tight">
+              저는 <span className="text-[#C5A880]">KOI LEE</span>입니다.<br />
               한때 매달 0원을 버는<br />평범한 창업가였습니다.
             </h1>
-            <p className="text-sm sm:text-base text-[#a0a0a0] leading-relaxed mb-8 break-keep">
+
+            {/* 서브카피 2단계 확대 (text-sm -> text-base, sm:text-base -> sm:text-lg, lg:text-xl 추가) */}
+            <p className="text-base sm:text-lg lg:text-xl text-[#a0a0a0] leading-relaxed mb-8 break-keep">
               수백 시간을 AI 툴 공부에 쏟았지만 아무것도 안 됐습니다.<br />
               그리고 마침내 <strong className="text-white font-semibold">진짜 이유</strong>를 알게 됐습니다.
             </p>
 
-            <a href="#journey" className="inline-flex items-center gap-2 text-[#C9A84C] font-semibold text-sm hover:gap-3 transition-all">
-              제 이야기를 읽어보세요 <ChevronRight size={16} />
+            <a href="#journey" className="inline-flex items-center gap-2 text-[#C5A880] font-semibold text-base hover:gap-3 transition-all">
+              제 이야기를 읽어보세요 <ChevronRight size={18} />
             </a>
           </motion.div>
         </section>
