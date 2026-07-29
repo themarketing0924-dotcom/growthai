@@ -38,13 +38,13 @@ export default function ToolSalesPageExp() {
         {/* 최외곽 마진: 모바일 16px (px-4) / 데스크톱 lg:px-16 */}
         <main className="pt-16 sm:pt-24 pb-24 px-4 sm:px-8 lg:px-16 max-w-6xl mx-auto w-full">
           
-          {/* 상단 오퍼 헤더 (모바일 반응형 타이포그라피 튜닝) */}
+          {/* 상단 오퍼 헤더 (B2B salesscore 스타일 타이포그라피 튜닝) */}
           <div className="text-center mb-10 sm:mb-16">
             <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] sm:text-xs font-semibold bg-[#C5A880]/10 text-[#C5A880] border border-[#C5A880]/30 mb-4 shadow-[0_0_15px_rgba(197,168,128,0.15)]">
               <Sparkles className="w-3.5 h-3.5 text-[#C5A880]" />
               2026 대한민국 12인 거장 프레임워크 × AI 세일즈 시스템
             </span>
-            <h1 className="text-xl sm:text-3xl lg:text-5xl font-extrabold mb-4 leading-normal sm:leading-tight break-keep text-white tracking-tight">
+            <h1 className="text-2xl sm:text-3xl lg:text-5xl font-extrabold mb-4 leading-normal sm:leading-tight break-keep text-white tracking-tight">
               내 서비스명만 입력하면 3시간 만에 완출!<br />
               <span className="bg-gradient-to-r from-[#C5A880] via-[#DBC5A8] to-amber-200 bg-clip-text text-transparent">
                 AI PLF 동영상 런치 마스터클래스 VOD 패키지
@@ -60,7 +60,7 @@ export default function ToolSalesPageExp() {
             
             {/* 👈 좌측 (lg:col-span-7) */}
             <div className="lg:col-span-7 space-y-6">
-              <div className="bg-[#101726] border border-white/10 rounded-[28px] p-5 sm:p-8 shadow-xl">
+              <div className="bg-[#101726] border border-white/10 rounded-3xl p-5 sm:p-8 shadow-xl">
                 <h2 className="text-base sm:text-lg font-bold text-white mb-6 flex items-center gap-2 border-b border-white/10 pb-4">
                   <BookOpen className="w-5 h-5 text-[#C5A880]" />
                   <span>📚 실전 VOD 4단계 커리큘럼 & 구성 내역</span>
@@ -113,7 +113,7 @@ export default function ToolSalesPageExp() {
               </div>
 
               {/* 어뷰징 방지 공정 미션 수행 조건부 실행 보증 카드 */}
-              <div className="p-5 sm:p-6 rounded-[28px] bg-[#101726] border border-white/10 flex items-start gap-3 sm:gap-4">
+              <div className="p-5 sm:p-6 rounded-3xl bg-[#101726] border border-white/10 flex items-start gap-3 sm:gap-4">
                 <ShieldCheck className="w-6 h-6 sm:w-8 sm:h-8 text-[#C5A880] shrink-0 mt-0.5" />
                 <div>
                   <h4 className="font-bold text-white text-xs sm:text-sm mb-1.5">
@@ -128,7 +128,7 @@ export default function ToolSalesPageExp() {
 
             {/* 👉 우측 (lg:col-span-5 - Sticky Card) */}
             <div className="lg:col-span-5 lg:sticky lg:top-24 w-full">
-              <div className="bg-[#101726] border-2 border-[#C5A880] rounded-[28px] p-5 sm:p-6 shadow-2xl relative overflow-hidden">
+              <div className="bg-[#101726] border-2 border-[#C5A880] rounded-3xl p-5 sm:p-6 shadow-2xl relative overflow-hidden">
                 <div className="absolute top-0 right-0 bg-[#C5A880] text-black font-extrabold text-[9px] px-3.5 py-1.5 rounded-bl-xl uppercase tracking-wider">
                   추천 95% 선택
                 </div>
@@ -173,7 +173,7 @@ export default function ToolSalesPageExp() {
                       <div className="text-lg sm:text-xl font-extrabold text-[#C5A880] shrink-0">199,000원</div>
                     </div>
 
-                    {/* 입력 3필드 (터치 반경 최적화) */}
+                    {/* 입력 3필드 */}
                     <div className="space-y-3.5 pt-3.5 border-t border-white/10">
                       <div>
                         <label className="block text-[10px] font-semibold text-white/70 mb-1">수강생 성함 *</label>
@@ -227,10 +227,11 @@ export default function ToolSalesPageExp() {
                       </div>
                     </div>
 
+                    {/* B2B salesscore 규격 버튼: h-12 rounded-full text-[14px] */}
                     <button
                       type="submit"
                       disabled={isOrdering}
-                      className="w-full py-4 rounded-full bg-[#C5A880] hover:bg-[#dBC5A8] text-black font-extrabold text-sm sm:text-base transition duration-200 shadow-xl shadow-[#C5A880]/25 flex items-center justify-center gap-2 cursor-pointer border-none mt-2"
+                      className="w-full h-12 rounded-full bg-[#C5A880] hover:bg-[#dBC5A8] text-black font-semibold text-[14px] transition-colors flex items-center justify-center gap-2 cursor-pointer border-none mt-2"
                     >
                       {isOrdering ? (
                         <span>신청 수속 중...</span>
