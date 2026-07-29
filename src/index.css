@@ -8,17 +8,19 @@
    Toss-style Korean typography
 ═══════════════════════════════════════ */
 :root {
-  /* Font stacks — Apple System & Pretendard fallback */
+  /* Font stacks — Apple System & Pretendard (PRESERVED AS APPLE STYLE) */
   --font-sans:    -apple-system, BlinkMacSystemFont, 'SF Pro KR', 'SF Pro Display', 'SF Pro Text', 'Pretendard', system-ui, sans-serif;
   --font-display: -apple-system, BlinkMacSystemFont, 'SF Pro KR', 'SF Pro Display', 'SF Pro Text', 'Pretendard', system-ui, sans-serif;
 
-  /* Gold palette */
-  --gold:         #C9A84C;
-  --gold-light:   #D4BA6A;
-  --gold-dark:    #A88330;
-  --gold-subtle:  rgba(201, 168, 76, 0.10);
-  --gold-border:  rgba(201, 168, 76, 0.25);
-  --gold-hover:   rgba(201, 168, 76, 0.35);
+  /* Jay Abraham Prestige Palette (Oxford Navy & Bronze Gold) */
+  --navy-deep:    #060B16;          /* Deep Oxford Navy */
+  --navy-card:    #101726;          /* Rich Oxford Navy for Cards */
+  --gold:         #C5A880;          /* Warm Bronze Gold */
+  --gold-light:   #DBC5A8;          /* Light Bronze Gold */
+  --gold-dark:    #A68962;          /* Rich Dark Bronze Gold */
+  --gold-subtle:  rgba(197, 168, 128, 0.08);
+  --gold-border:  rgba(197, 168, 128, 0.20);
+  --gold-hover:   rgba(197, 168, 128, 0.35);
 
   /* Apple-style fluid typography scale (MacBook Pro page standards) */
   --text-hero:        clamp(2.5rem, 6vw, 5rem);          /* 40px–80px */
@@ -43,7 +45,7 @@
 }
 
 html, body {
-  background: #000;
+  background: var(--navy-deep);
   color: #fff;
   overflow-x: hidden;
   overflow-y: auto;

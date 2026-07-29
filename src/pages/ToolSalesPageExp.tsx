@@ -34,20 +34,20 @@ export default function ToolSalesPageExp() {
         title="VOD 마스터클래스 & 골조 프롬프트 오퍼 신청 | GrowthAI" 
         description="변호사, 의사, 트레이너, 인테리어 등 내 노하우만 파는 3시간 퍼널 구축" 
       />
-      <div className="bg-[#000000] text-[#F5F5F7] min-h-screen font-sans selection:bg-[#C9A84C] selection:text-black">
+      <div className="bg-[#060B16] text-[#F5F5F7] min-h-screen font-sans selection:bg-[#C5A880] selection:text-black">
         <Navbar entranceComplete={true} lang="ko" setLang={() => {}} />
 
         <main className="pt-36 pb-24 px-6 sm:px-10 md:px-12 lg:px-16 max-w-6xl mx-auto w-full">
           
           {/* 상단 오퍼 헤더 */}
           <div className="text-center mb-14">
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold bg-[#C9A84C]/10 text-[#C9A84C] border border-[#C9A84C]/30 mb-4 shadow-[0_0_15px_rgba(201,168,76,0.15)]">
-              <Sparkles className="w-3.5 h-3.5 text-[#C9A84C]" />
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold bg-[#C5A880]/10 text-[#C5A880] border border-[#C5A880]/30 mb-4 shadow-[0_0_15px_rgba(197,168,128,0.15)]">
+              <Sparkles className="w-3.5 h-3.5 text-[#C5A880]" />
               2026 대한민국 12인 거장 프레임워크 × AI 세일즈 시스템
             </span>
             <h1 className="text-3xl sm:text-5xl font-extrabold mb-4 leading-tight break-keep text-white tracking-tight">
               내 서비스명만 입력하면 3시간 만에 완출!<br />
-              <span className="bg-gradient-to-r from-[#C9A84C] via-[#E5C365] to-amber-200 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#C5A880] via-[#DBC5A8] to-amber-200 bg-clip-text text-transparent">
                 AI PLF 동영상 런치 마스터클래스 VOD 패키지
               </span>
             </h1>
@@ -61,16 +61,16 @@ export default function ToolSalesPageExp() {
             
             {/* 👈 좌측 (lg:col-span-7) */}
             <div className="lg:col-span-7 space-y-6">
-              <div className="bg-[#121316] border border-white/10 rounded-3xl p-6 sm:p-8 shadow-xl">
+              <div className="bg-[#101726] border border-white/10 rounded-3xl p-6 sm:p-8 shadow-xl">
                 <h2 className="text-lg font-bold text-white mb-6 flex items-center gap-2 border-b border-white/10 pb-4">
-                  <BookOpen className="w-5 h-5 text-[#C9A84C]" />
+                  <BookOpen className="w-5 h-5 text-[#C5A880]" />
                   <span>📚 실전 VOD 4단계 커리큘럼 & 구성 내역</span>
                 </h2>
 
                 <div className="space-y-4">
                   <div className="p-5 rounded-2xl bg-black/40 border border-white/10 hover:border-white/20 transition-colors">
                     <div className="flex items-center gap-2 mb-1.5">
-                      <span className="bg-[#C9A84C] text-black font-bold text-xs px-2.5 py-0.5 rounded-full">Module 1</span>
+                      <span className="bg-[#C5A880] text-black font-bold text-xs px-2.5 py-0.5 rounded-full">Module 1</span>
                       <h3 className="font-bold text-white text-sm sm:text-base">한국형 PLF 런치 이론 & 12인 거장 성공 사례</h3>
                     </div>
                     <p className="text-xs text-white/60 leading-relaxed">
@@ -80,7 +80,7 @@ export default function ToolSalesPageExp() {
 
                   <div className="p-5 rounded-2xl bg-black/40 border border-white/10 hover:border-white/20 transition-colors">
                     <div className="flex items-center gap-2 mb-1.5">
-                      <span className="bg-[#C9A84C] text-black font-bold text-xs px-2.5 py-0.5 rounded-full">Module 2</span>
+                      <span className="bg-[#C5A880] text-black font-bold text-xs px-2.5 py-0.5 rounded-full">Module 2</span>
                       <h3 className="font-bold text-white text-sm sm:text-base">카메라 노출 없이 10분 만에 만드는 VSL 구현법</h3>
                     </div>
                     <p className="text-xs text-white/60 leading-relaxed">
@@ -90,7 +90,7 @@ export default function ToolSalesPageExp() {
 
                   <div className="p-5 rounded-2xl bg-black/40 border border-white/10 hover:border-white/20 transition-colors">
                     <div className="flex items-center gap-2 mb-1.5">
-                      <span className="bg-[#C9A84C] text-black font-bold text-xs px-2.5 py-0.5 rounded-full">Module 3</span>
+                      <span className="bg-[#C5A880] text-black font-bold text-xs px-2.5 py-0.5 rounded-full">Module 3</span>
                       <h3 className="font-bold text-white text-sm sm:text-base">실습 숙제 템플릿 (Workbook) 워크시트</h3>
                     </div>
                     <p className="text-xs text-white/60 leading-relaxed">
@@ -98,13 +98,13 @@ export default function ToolSalesPageExp() {
                     </p>
                   </div>
 
-                  <div className="p-6 rounded-2xl bg-gradient-to-r from-[#C9A84C]/20 via-black to-black border-2 border-[#C9A84C] shadow-lg">
+                  <div className="p-6 rounded-2xl bg-gradient-to-r from-[#C5A880]/20 via-black to-black border-2 border-[#C5A880] shadow-lg">
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-2 gap-1">
                       <div className="flex items-center gap-2">
                         <span className="bg-amber-400 text-black font-extrabold text-xs px-2.5 py-0.5 rounded-full">핵심 보너스</span>
                         <h3 className="font-bold text-white text-sm sm:text-base">초스피드 제작 마스터 골조 프롬프트 (Skeleton Prompts)</h3>
                       </div>
-                      <span className="text-xs text-[#C9A84C] font-bold">무료 증정</span>
+                      <span className="text-xs text-[#C5A880] font-bold">무료 증정</span>
                     </div>
                     <p className="text-xs text-white/80 leading-relaxed">
                       🚀 <strong>{`"{내 업종/서비스명}"`} 1개만 입력하면 끝!</strong> AI가 제프 워커 1-2-3 동영상 스크립트, 문자 문구, 세일즈 카피를 3초 만에 완출해 냅니다. 초보자/연로자도 100% 실행 가능!
@@ -114,8 +114,8 @@ export default function ToolSalesPageExp() {
               </div>
 
               {/* 어뷰징 방지 공정 미션 수행 조건부 실행 보증 카드 */}
-              <div className="p-6 rounded-3xl bg-[#121316] border border-white/10 flex items-start gap-4">
-                <ShieldCheck className="w-8 h-8 text-[#C9A84C] shrink-0 mt-0.5" />
+              <div className="p-6 rounded-3xl bg-[#101726] border border-white/10 flex items-start gap-4">
+                <ShieldCheck className="w-8 h-8 text-[#C5A880] shrink-0 mt-0.5" />
                 <div>
                   <h4 className="font-bold text-white text-sm sm:text-base mb-1">
                     🛡️ 100% 미션 수행 조건부 실행 보증 (Action-Based Guarantee)
@@ -129,8 +129,8 @@ export default function ToolSalesPageExp() {
 
             {/* 👉 우측 (lg:col-span-5 - Sticky Card) */}
             <div className="lg:col-span-5 lg:sticky lg:top-24">
-              <div className="bg-[#121316] border-2 border-[#C9A84C] rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
-                <div className="absolute top-0 right-0 bg-[#C9A84C] text-black font-extrabold text-[10px] px-4 py-1.5 rounded-bl-xl uppercase tracking-wider">
+              <div className="bg-[#101726] border-2 border-[#C5A880] rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
+                <div className="absolute top-0 right-0 bg-[#C5A880] text-black font-extrabold text-[10px] px-4 py-1.5 rounded-bl-xl uppercase tracking-wider">
                   추천 95% 선택
                 </div>
 
@@ -147,7 +147,7 @@ export default function ToolSalesPageExp() {
                       onClick={() => setSelectedPlan('standard')}
                       className={`p-4.5 rounded-2xl border cursor-pointer transition-all flex flex-col justify-between ${
                         selectedPlan === 'standard'
-                          ? 'border-[#C9A84C] bg-[#C9A84C]/10 shadow-[0_0_15px_rgba(201,168,76,0.1)]'
+                          ? 'border-[#C5A880] bg-[#C5A880]/10 shadow-[0_0_15px_rgba(197,168,128,0.1)]'
                           : 'border-white/10 bg-black/40 hover:border-white/15'
                       }`}
                     >
@@ -155,7 +155,7 @@ export default function ToolSalesPageExp() {
                         <h4 className="font-bold text-white text-sm mb-0.5">VOD 단독 수강권</h4>
                         <p className="text-[10px] text-white/50 mb-3">VOD 4모듈 + 실습 숙제 템플릿 열람권</p>
                       </div>
-                      <div className="text-xl font-extrabold text-[#C9A84C]">99,000원</div>
+                      <div className="text-xl font-extrabold text-[#C5A880]">99,000원</div>
                     </div>
 
                     {/* 플랜 2 */}
@@ -163,7 +163,7 @@ export default function ToolSalesPageExp() {
                       onClick={() => setSelectedPlan('pro')}
                       className={`p-4.5 rounded-2xl border cursor-pointer relative transition-all flex flex-col justify-between ${
                         selectedPlan === 'pro'
-                          ? 'border-[#C9A84C] bg-[#C9A84C]/15 shadow-[0_0_20px_rgba(201,168,76,0.2)]'
+                          ? 'border-[#C5A880] bg-[#C5A880]/15 shadow-[0_0_20px_rgba(197,168,128,0.2)]'
                           : 'border-white/10 bg-black/40 hover:border-white/15'
                       }`}
                     >
@@ -171,7 +171,7 @@ export default function ToolSalesPageExp() {
                         <h4 className="font-bold text-white text-sm mb-0.5">풀 패키지 마스터 패스</h4>
                         <p className="text-[10px] text-white/50 mb-3">VOD 4모듈 + 숙제 템플릿 + 마스터 골조 프롬프트</p>
                       </div>
-                      <div className="text-xl font-extrabold text-[#C9A84C]">199,000원</div>
+                      <div className="text-xl font-extrabold text-[#C5A880]">199,000원</div>
                     </div>
 
                     {/* 입력 3필드 */}
@@ -188,7 +188,7 @@ export default function ToolSalesPageExp() {
                             value={buyerName}
                             onChange={(e) => setBuyerName(e.target.value)}
                             placeholder="홍길동" 
-                            className="w-full pl-9 pr-4 py-2.5 rounded-lg bg-black/50 border border-white/25 text-white text-xs focus:outline-none focus:border-[#C9A84C]"
+                            className="w-full pl-9 pr-4 py-2.5 rounded-lg bg-[#060B16] border border-white/25 text-white text-xs focus:outline-none focus:border-[#C5A880]"
                           />
                         </div>
                       </div>
@@ -205,7 +205,7 @@ export default function ToolSalesPageExp() {
                             value={buyerEmail}
                             onChange={(e) => setBuyerEmail(e.target.value)}
                             placeholder="name@company.com" 
-                            className="w-full pl-9 pr-4 py-2.5 rounded-lg bg-black/50 border border-white/25 text-white text-xs focus:outline-none focus:border-[#C9A84C]"
+                            className="w-full pl-9 pr-4 py-2.5 rounded-lg bg-[#060B16] border border-white/25 text-white text-xs focus:outline-none focus:border-[#C5A880]"
                           />
                         </div>
                       </div>
@@ -222,7 +222,7 @@ export default function ToolSalesPageExp() {
                             value={buyerPhone}
                             onChange={(e) => setBuyerPhone(e.target.value)}
                             placeholder="010-1234-5678" 
-                            className="w-full pl-9 pr-4 py-2.5 rounded-lg bg-black/50 border border-white/25 text-white text-xs focus:outline-none focus:border-[#C9A84C]"
+                            className="w-full pl-9 pr-4 py-2.5 rounded-lg bg-[#060B16] border border-white/25 text-white text-xs focus:outline-none focus:border-[#C5A880]"
                           />
                         </div>
                       </div>
@@ -231,7 +231,7 @@ export default function ToolSalesPageExp() {
                     <button
                       type="submit"
                       disabled={isOrdering}
-                      className="w-full py-4.5 rounded-full bg-[#C9A84C] hover:bg-[#d9b85c] text-black font-extrabold text-sm transition duration-200 shadow-xl shadow-[#C9A84C]/25 flex items-center justify-center gap-2 cursor-pointer border-none mt-2"
+                      className="w-full py-4.5 rounded-full bg-[#C5A880] hover:bg-[#d9b85c] text-black font-extrabold text-sm transition duration-200 shadow-xl shadow-[#C5A880]/25 flex items-center justify-center gap-2 cursor-pointer border-none mt-2"
                     >
                       {isOrdering ? (
                         <span>신청 수속 중...</span>
