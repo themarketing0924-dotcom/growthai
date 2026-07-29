@@ -84,15 +84,15 @@ export default function MainLandingPage() {
                 <div className="flex flex-col sm:flex-row items-center gap-4 pt-2">
                   <button
                     onClick={() => navigate('/diagnose')}
-                    className="w-full sm:w-auto px-8 py-5 rounded-full bg-[#C5A880] hover:bg-[#d9b85c] text-black font-extrabold text-base transition-all duration-200 shadow-[0_0_35px_rgba(197,168,128,0.35)] flex items-center justify-center gap-2.5 cursor-pointer border-none"
+                    className="w-full sm:w-auto h-12 px-8 rounded-full bg-[#C5A880] hover:bg-[#dBC5A8] text-black font-semibold text-[14px] transition-all duration-200 shadow-[0_0_20px_rgba(197,168,128,0.25)] flex items-center justify-center gap-2.5 cursor-pointer border-none"
                   >
                     <span>🔥 내 사이트 무료 진단받기</span>
-                    <ArrowRight className="w-5 h-5" />
+                    <ArrowRight className="w-4 h-4" />
                   </button>
 
                   <button
                     onClick={() => navigate('/book')}
-                    className="w-full sm:w-auto px-6 py-5 rounded-full bg-white/10 hover:bg-white/20 text-white font-bold text-sm transition cursor-pointer border border-white/15"
+                    className="w-full sm:w-auto h-12 px-6 rounded-full bg-white/10 hover:bg-white/20 text-white font-semibold text-[14px] transition cursor-pointer border border-white/15"
                   >
                     <span>📘 무료 소책자 받기</span>
                   </button>
@@ -431,7 +431,7 @@ export default function MainLandingPage() {
 
             <button
               onClick={() => navigate('/diagnose')}
-              className="px-10 py-5 rounded-full bg-[#C5A880] hover:bg-[#d9b85c] text-black font-extrabold text-base sm:text-lg transition-all duration-200 shadow-[0_0_30px_rgba(197,168,128,0.3)] inline-flex items-center justify-center gap-2.5 cursor-pointer border-none"
+              className="h-12 px-10 rounded-full bg-[#C5A880] hover:bg-[#dBC5A8] text-black font-semibold text-[14px] transition-all duration-200 shadow-[0_0_20px_rgba(197,168,128,0.25)] inline-flex items-center justify-center gap-2.5 cursor-pointer border-none"
             >
               <span>🚀 지금 바로 무료 진단 시작하기</span>
               <ArrowRight className="w-5 h-5" />

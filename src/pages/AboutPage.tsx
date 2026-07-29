@@ -255,18 +255,23 @@ export default function AboutPage() {
               그리고 마침내 <strong className="text-white font-semibold">진짜 이유</strong>를 알게 됐습니다.
             </p>
 
-            <a href="#journey" className="inline-flex items-center gap-2 text-[#C5A880] font-semibold text-base hover:gap-3 transition-all">
+            <button 
+              onClick={() => {
+                document.getElementById('journey')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="inline-flex items-center gap-2 text-[#C5A880] font-semibold text-base hover:gap-3 transition-all cursor-pointer bg-transparent border-none"
+            >
               제 이야기를 읽어보세요 <ChevronRight size={18} />
-            </a>
+            </button>
           </motion.div>
         </section>
 
         {/* ══════════════════════════════════
             [2] 성과 지표 — 권위 확립
         ══════════════════════════════════ */}
-        <section className="py-16 px-5 bg-[#080808] border-t border-[#2a2a2a]">
+        <section className="py-16 px-5 bg-[#101726] border-t border-white/10">
           <div className="max-w-2xl mx-auto">
-            <p className="text-center text-xs font-semibold tracking-widest text-[#C9A84C] uppercase mb-10">검증된 성과</p>
+            <p className="text-center text-xs font-semibold tracking-widest text-[#C5A880] uppercase mb-10">검증된 성과</p>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
               {RESULTS.map((r, i) => <StatCard key={r.label} {...r} index={i} />)}
             </div>
@@ -276,16 +281,16 @@ export default function AboutPage() {
         {/* ══════════════════════════════════
             [3] 영웅의 여정 — 스토리텔링 4챕터
         ══════════════════════════════════ */}
-        <section id="journey" className="py-20 px-5 bg-black border-t border-[#2a2a2a]">
+        <section id="journey" className="py-20 px-5 bg-[#060B16] border-t border-white/10">
           <div className="max-w-2xl mx-auto">
             <div className="text-center mb-14">
-              <p className="text-xs font-semibold tracking-widest text-[#C9A84C] uppercase mb-3">나의 여정</p>
+              <p className="text-xs font-semibold tracking-widest text-[#C5A880] uppercase mb-3">나의 여정</p>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold break-keep">실패에서 시스템까지,<br />솔직한 이야기</h2>
             </div>
 
             <div className="relative">
               {/* 수직 타임라인 선 */}
-              <div className="absolute left-4 sm:left-5 top-0 bottom-0 w-px bg-gradient-to-b from-[#C9A84C]/60 via-[#C9A84C]/20 to-transparent" />
+              <div className="absolute left-4 sm:left-5 top-0 bottom-0 w-px bg-gradient-to-b from-[#C5A880]/60 via-[#C5A880]/20 to-transparent" />
 
               <div className="space-y-10 pl-12 sm:pl-14">
                 {JOURNEY.map((item, i) => (
@@ -298,9 +303,9 @@ export default function AboutPage() {
                     className="relative"
                   >
                     {/* 타임라인 닷 */}
-                    <div className="absolute -left-[42px] sm:-left-[50px] top-1 w-3 h-3 rounded-full bg-[#C9A84C] border-2 border-black shadow-[0_0_8px_rgba(201,168,76,0.6)]" />
+                    <div className="absolute -left-[42px] sm:-left-[50px] top-1 w-3 h-3 rounded-full bg-[#C5A880] border-2 border-black shadow-[0_0_8px_rgba(197,168,128,0.6)]" />
 
-                    <span className="text-[10px] font-bold tracking-widest text-[#C9A84C] uppercase block mb-1">
+                    <span className="text-[10px] font-bold tracking-widest text-[#C5A880] uppercase block mb-1">
                       {item.chapter} — {item.label}
                     </span>
                     <h3 className="text-base sm:text-lg font-bold text-white mb-2 leading-snug break-keep">{item.title}</h3>
@@ -315,17 +320,17 @@ export default function AboutPage() {
         {/* ══════════════════════════════════
             [4] 스승과 책 — 권위 극대화
         ══════════════════════════════════ */}
-        <section className="py-20 px-5 bg-[#080808] border-t border-[#2a2a2a]">
+        <section className="py-20 px-5 bg-[#101726] border-t border-white/10">
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-14">
-              <p className="text-xs font-semibold tracking-widest text-[#C9A84C] uppercase mb-3">스승과 멘토십</p>
+              <p className="text-xs font-semibold tracking-widest text-[#C5A880] uppercase mb-3">스승과 멘토십</p>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 break-keep">국내 AI 분야 최고 권위자<br />민진홍 소장님께 직접 사사받았습니다.</h2>
               <p className="text-sm text-[#a0a0a0] break-keep">매경출판사 베스트셀러 다수를 집필하신 대한민국 대표 AI 전문가</p>
             </div>
 
             {/* 멘토 사진 */}
             <div className="flex flex-col sm:flex-row gap-8 items-center mb-12">
-              <div className="w-28 h-28 sm:w-36 sm:h-36 rounded-2xl overflow-hidden border border-[#C9A84C]/30 shrink-0 mx-auto sm:mx-0">
+              <div className="w-28 h-28 sm:w-36 sm:h-36 rounded-2xl overflow-hidden border border-[#C5A880]/30 shrink-0 mx-auto sm:mx-0">
                 <img
                   src="/IMG_3774.JPG"
                   alt="민진홍 소장"
@@ -333,9 +338,9 @@ export default function AboutPage() {
                 />
               </div>
               <div>
-                <p className="text-sm font-bold text-[#C9A84C] mb-1">민진홍 소장</p>
+                <p className="text-sm font-bold text-[#C5A880] mb-1">민진홍 소장</p>
                 <p className="text-xs text-[#606060] mb-3">AI 전략 연구소 · 매경출판사 베스트셀러 작가</p>
-                <blockquote className="text-sm sm:text-base text-[#a0a0a0] italic leading-relaxed border-l-2 border-[#C9A84C]/40 pl-4 break-keep">
+                <blockquote className="text-sm sm:text-base text-[#a0a0a0] italic leading-relaxed border-l-2 border-[#C5A880]/40 pl-4 break-keep">
                   "AI는 인간의 사고 방식을 증폭시키는 도구입니다. 제대로 된 구조와 전략 없이는 아무리 좋은 AI도 소음에 불과합니다."
                 </blockquote>
               </div>
@@ -344,7 +349,7 @@ export default function AboutPage() {
             {/* 책 그리드 */}
             <div className="grid grid-cols-4 sm:grid-cols-4 md:grid-cols-8 gap-3">
               {MENTOR_BOOKS.map((book) => (
-                <div key={book.title} className="group relative aspect-[2/3] rounded-lg overflow-hidden border border-[#2a2a2a] hover:border-[#C9A84C]/40 transition-colors">
+                <div key={book.title} className="group relative aspect-[2/3] rounded-lg overflow-hidden border border-white/10 hover:border-[#C5A880]/40 transition-colors">
                   <img
                     src={book.image}
                     alt={book.title}
@@ -362,10 +367,10 @@ export default function AboutPage() {
         {/* ══════════════════════════════════
             [5] 공감 페인 포인트 — 관계 형성
         ══════════════════════════════════ */}
-        <section className="py-20 px-5 bg-black border-t border-[#2a2a2a]">
+        <section className="py-20 px-5 bg-[#060B16] border-t border-white/10">
           <div className="max-w-2xl mx-auto">
             <div className="text-center mb-12">
-              <p className="text-xs font-semibold tracking-widest text-[#C9A84C] uppercase mb-3">당신의 고민</p>
+              <p className="text-xs font-semibold tracking-widest text-[#C5A880] uppercase mb-3">당신의 고민</p>
               <h2 className="text-2xl sm:text-3xl font-bold mb-3 break-keep">저도 똑같이 겪었습니다.</h2>
               <p className="text-sm text-[#a0a0a0]">5가지 고민, 터치해서 답을 확인하세요.</p>
             </div>
@@ -385,16 +390,16 @@ export default function AboutPage() {
         {/* ══════════════════════════════════
             [6] 공감 약속 — 나도 거기 있었고, 당신도 성공시키겠다
         ══════════════════════════════════ */}
-        <section className="py-20 px-5 bg-black border-t border-[#2a2a2a]">
+        <section className="py-20 px-5 bg-[#060B16] border-t border-white/10">
           <div className="max-w-2xl mx-auto">
-            <div className="bg-[#111] border border-[#C9A84C]/20 rounded-3xl p-8 sm:p-10">
-              <p className="text-xs font-semibold tracking-widest text-[#C9A84C] uppercase mb-5">당신에게 드리는 약속</p>
+            <div className="bg-[#101726]/80 border border-[#C5A880]/20 rounded-3xl p-8 sm:p-10">
+              <p className="text-xs font-semibold tracking-widest text-[#C5A880] uppercase mb-5">당신에게 드리는 약속</p>
               <blockquote className="text-xl sm:text-2xl md:text-3xl font-bold text-white leading-tight mb-6 break-keep">
                 "저도 오랫동안 그 자리에 있었습니다.<br />
                 매달 폐업을 고민하고,<br />
                 방법을 몰라 혼자 울었던 밤들이 있었습니다."
               </blockquote>
-              <div className="space-y-4 text-sm sm:text-base text-[#a0a0a0] leading-relaxed break-keep border-t border-[#2a2a2a] pt-6">
+              <div className="space-y-4 text-sm sm:text-base text-[#a0a0a0] leading-relaxed break-keep border-t border-white/10 pt-6">
                 <p>
                   그래서 저는 압니다. 지금 대표님이 얼마나 지쳐 있는지.
                   얼마나 많은 것을 시도해 봤는지. 그리고 얼마나 <strong className="text-white font-semibold">결과 없는 노력</strong>에 지쳐 있는지를요.
@@ -415,12 +420,12 @@ export default function AboutPage() {
         {/* ══════════════════════════════════
             [7] 소명 선언 + CTA
         ══════════════════════════════════ */}
-        <section className="py-24 px-5 bg-[#080808] border-t border-[#2a2a2a] text-center">
+        <section className="py-24 px-5 bg-[#101726] border-t border-white/10 text-center">
           <div className="max-w-2xl mx-auto">
-            <p className="text-xs font-semibold tracking-widest text-[#C9A84C] uppercase mb-5">나의 소명</p>
+            <p className="text-xs font-semibold tracking-widest text-[#C5A880] uppercase mb-5">나의 소명</p>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 leading-tight break-keep">
               제가 성공한 이 구조,<br />
-              <span className="text-[#C9A84C]">이제 당신에게 그대로 드리겠습니다.</span>
+              <span className="text-[#C5A880]">이제 당신에게 그대로 드리겠습니다.</span>
             </h2>
             <p className="text-sm sm:text-base text-[#a0a0a0] leading-relaxed mb-10 max-w-xl mx-auto break-keep">
               수년의 실패, 수백 시간의 연구, 스승의 가르침이 응축된 이 시스템을.<br />
@@ -430,13 +435,13 @@ export default function AboutPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Link
                 to="/diagnose"
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#C9A84C] text-black font-bold text-sm sm:text-base hover:bg-[#e0bf60] transition-all hover:scale-105 shadow-[0_0_24px_rgba(201,168,76,0.3)]"
+                className="w-full sm:w-auto h-12 px-7 rounded-full bg-[#C5A880] text-black font-semibold text-[14px] hover:bg-[#dBC5A8] transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(197,168,128,0.25)]"
               >
                 🚀 무료 진단으로 시작하기 <ArrowRight size={16} />
               </Link>
               <Link
                 to="/"
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-[#2a2a2a] text-[#a0a0a0] text-sm font-medium hover:border-[#C9A84C]/40 hover:text-white transition-all"
+                className="w-full sm:w-auto h-12 px-7 rounded-full border border-white/15 text-[#a0a0a0] text-[14px] font-semibold hover:border-[#C5A880]/40 hover:text-white transition-all flex items-center justify-center gap-2"
               >
                 메인 페이지로 <ChevronRight size={16} />
               </Link>
