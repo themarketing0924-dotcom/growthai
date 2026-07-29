@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ShieldCheck, CheckCircle2, Sparkles, Lock, ArrowRight, BookOpen, User, Mail, Phone } from 'lucide-react';
 import { Seo } from '../components/Seo';
-import { Navbar } from '../components/Navbar';
-import { Footer } from '../components/Footer';
 
 export default function ToolSalesPageExp() {
   const navigate = useNavigate();
@@ -35,10 +33,10 @@ export default function ToolSalesPageExp() {
         description="변호사, 의사, 트레이너, 인테리어 등 내 노하우만 파는 3시간 퍼널 구축" 
       />
       <div className="bg-[#060B16] text-[#F5F5F7] min-h-screen font-sans selection:bg-[#C5A880] selection:text-black">
-        <Navbar entranceComplete={true} lang="ko" setLang={() => {}} />
+        {/* Navbar removed for standalone squeeze/conversion layout */}
 
         {/* 최외곽 마진: 모바일 16px (px-4) / 데스크톱 lg:px-16 */}
-        <main className="pt-32 pb-24 px-4 sm:px-8 lg:px-16 max-w-6xl mx-auto w-full">
+        <main className="pt-16 sm:pt-24 pb-24 px-4 sm:px-8 lg:px-16 max-w-6xl mx-auto w-full">
           
           {/* 상단 오퍼 헤더 (모바일 반응형 타이포그라피 튜닝) */}
           <div className="text-center mb-10 sm:mb-16">
@@ -268,8 +266,6 @@ export default function ToolSalesPageExp() {
           </div>
 
         </main>
-
-        <Footer lang="ko" />
       </div>
     </>
   );
