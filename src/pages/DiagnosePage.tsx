@@ -86,7 +86,7 @@ export default function DiagnosePage() {
         canonical="/diagnose"
         siteName={SITE_NAME}
       />
-      <div className="bg-[#060B16] text-[#f7f7f5] min-h-screen font-sans flex flex-col">
+      <div className="bg-[#07090E] text-[#f7f7f5] min-h-screen font-sans flex flex-col">
         <Navbar entranceComplete={true} lang="ko" setLang={() => {}} />
 
         <main className="flex-1 flex items-center justify-center pt-28 pb-16 px-6 sm:px-10 md:px-12 lg:px-16">
@@ -107,13 +107,13 @@ export default function DiagnosePage() {
                       <div 
                         key={i} 
                         className={`h-2 flex-1 rounded-full transition-all duration-500 ${
-                          i <= step ? 'bg-[#C5A880] shadow-[0_0_10px_rgba(197,168,128,0.4)]' : 'bg-white/10'
+                          i <= step ? 'bg-[#C9A84C] shadow-[0_0_10px_rgba(201,168,76,0.4)]' : 'bg-white/10'
                         }`} 
                       />
                     ))}
                   </div>
                   
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#C5A880]/10 text-[#C5A880] font-bold text-xs border border-[#C5A880]/30 mb-4">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#C9A84C]/10 text-[#C9A84C] font-bold text-xs border border-[#C9A84C]/30 mb-4">
                     <Sparkles className="w-3.5 h-3.5" /> 진단 질문 {step + 1} / {QUESTIONS.length}
                   </span>
                   
@@ -126,10 +126,10 @@ export default function DiagnosePage() {
                       <button
                         key={idx}
                         onClick={() => handleAnswer(idx)}
-                        className="w-full text-left p-4.5 sm:p-5 rounded-2xl border border-white/10 bg-white/[0.03] hover:bg-[#C5A880]/10 hover:border-[#C5A880]/60 transition-all text-sm sm:text-base font-medium group flex justify-between items-center cursor-pointer text-white/90"
+                        className="w-full text-left p-4.5 sm:p-5 rounded-2xl border border-white/10 bg-white/[0.03] hover:bg-[#C9A84C]/10 hover:border-[#C9A84C]/60 transition-all text-sm sm:text-base font-medium group flex justify-between items-center cursor-pointer text-white/90"
                       >
                         <span className="pr-4 leading-relaxed">{opt}</span>
-                        <ArrowRight size={18} className="text-[#C5A880] opacity-0 group-hover:opacity-100 transition-opacity shrink-0 group-hover:translate-x-1 duration-200" />
+                        <ArrowRight size={18} className="text-[#C9A84C] opacity-0 group-hover:opacity-100 transition-opacity shrink-0 group-hover:translate-x-1 duration-200" />
                       </button>
                     ))}
                   </div>
@@ -144,7 +144,7 @@ export default function DiagnosePage() {
                   exit={{ opacity: 0 }}
                   className="text-center py-20"
                 >
-                  <Loader2 size={56} className="animate-spin text-[#C5A880] mx-auto mb-6" />
+                  <Loader2 size={56} className="animate-spin text-[#C9A84C] mx-auto mb-6" />
                   <h2 className="text-2xl font-bold mb-3 text-white">대표님의 업종별 세그먼트를 분석 중입니다...</h2>
                   <p className="text-white/60 text-sm">마케팅 거장 12인 뼈대 & {`{내 업종}`} 마스터 골조 프롬프트 매핑 중</p>
                 </motion.div>
@@ -176,15 +176,15 @@ export default function DiagnosePage() {
                   {!submitted ? (
                     <div className="p-6 sm:p-10">
                       <div className="flex flex-col sm:flex-row gap-6 items-center mb-8">
-                        <div className="w-full sm:w-1/3 aspect-[3/4] bg-gradient-to-br from-[#C5A880] to-amber-700 rounded-2xl flex items-center justify-center p-5 text-center shadow-2xl transform -rotate-1 border border-white/20">
+                        <div className="w-full sm:w-1/3 aspect-[3/4] bg-gradient-to-br from-[#C9A84C] to-amber-700 rounded-2xl flex items-center justify-center p-5 text-center shadow-2xl transform -rotate-1 border border-white/20">
                           <div className="bg-black/70 p-4 rounded-xl backdrop-blur-sm w-full h-full flex flex-col justify-center border border-white/10">
-                            <span className="text-[10px] font-bold text-[#C5A880] mb-1.5 uppercase">2026 VOD + Prompt</span>
+                            <span className="text-[10px] font-bold text-[#C9A84C] mb-1.5 uppercase">2026 VOD + Prompt</span>
                             <h3 className="font-bold text-xs sm:text-sm mb-2 text-white">업종별 {`{00}`} 마스터 골조 프롬프트</h3>
                             <p className="text-[10px] text-white/50 line-through mt-auto">정가 99,000원</p>
                           </div>
                         </div>
                         <div className="w-full sm:w-2/3 space-y-3">
-                          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#C5A880]/10 text-[#C5A880] text-xs font-bold border border-[#C5A880]/30">
+                          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#C9A84C]/10 text-[#C9A84C] text-xs font-bold border border-[#C9A84C]/30">
                             <Gift size={14} /> 무료 진단 솔루션 즉시 발송
                           </div>
                           <h3 className="text-lg font-bold text-white">대표님의 노하우를 24시간 파는 VOD 특강과 골조 템플릿을 드립니다.</h3>
@@ -206,7 +206,7 @@ export default function DiagnosePage() {
                               required
                               value={name}
                               onChange={(e) => setName(e.target.value)}
-                              className="w-full bg-black/50 border border-white/20 rounded-xl py-3 pl-10 pr-4 text-white text-sm focus:outline-none focus:border-[#C5A880] transition-colors"
+                              className="w-full bg-black/50 border border-white/20 rounded-xl py-3 pl-10 pr-4 text-white text-sm focus:outline-none focus:border-[#C9A84C] transition-colors"
                               placeholder="홍길동"
                             />
                           </div>
@@ -223,7 +223,7 @@ export default function DiagnosePage() {
                               required
                               value={email}
                               onChange={(e) => setEmail(e.target.value)}
-                              className="w-full bg-black/50 border border-white/20 rounded-xl py-3 pl-10 pr-4 text-white text-sm focus:outline-none focus:border-[#C5A880] transition-colors"
+                              className="w-full bg-black/50 border border-white/20 rounded-xl py-3 pl-10 pr-4 text-white text-sm focus:outline-none focus:border-[#C9A84C] transition-colors"
                               placeholder="name@company.com"
                             />
                           </div>
@@ -240,7 +240,7 @@ export default function DiagnosePage() {
                               required
                               value={phone}
                               onChange={(e) => setPhone(e.target.value)}
-                              className="w-full bg-black/50 border border-white/20 rounded-xl py-3 pl-10 pr-4 text-white text-sm focus:outline-none focus:border-[#C5A880] transition-colors"
+                              className="w-full bg-black/50 border border-white/20 rounded-xl py-3 pl-10 pr-4 text-white text-sm focus:outline-none focus:border-[#C9A84C] transition-colors"
                               placeholder="010-1234-5678"
                             />
                           </div>
@@ -252,7 +252,7 @@ export default function DiagnosePage() {
                             id="agree"
                             checked={agree}
                             onChange={(e) => setAgree(e.target.checked)}
-                            className="rounded accent-[#C5A880]"
+                            className="rounded accent-[#C9A84C]"
                           />
                           <label htmlFor="agree" className="text-xs text-white/60 cursor-pointer">
                             [필수] 개인정보 수집 및 혜택·특강 안내 문자/이메일 수신 동의
@@ -261,7 +261,7 @@ export default function DiagnosePage() {
 
                         <button 
                           type="submit"
-                          className="w-full py-4 rounded-xl bg-[#C5A880] hover:bg-[#d9b85c] text-black font-bold text-base transition-all duration-200 shadow-xl shadow-[#C5A880]/20 flex items-center justify-center gap-2 mt-3 cursor-pointer border-none"
+                          className="w-full py-4 rounded-xl bg-[#C9A84C] hover:bg-[#d9b85c] text-black font-bold text-base transition-all duration-200 shadow-xl shadow-[#C9A84C]/20 flex items-center justify-center gap-2 mt-3 cursor-pointer border-none"
                         >
                           <Lock size={16} />
                           <span>🎁 99,000원 템플릿 문자로 받고 특강 보기</span>
@@ -270,7 +270,7 @@ export default function DiagnosePage() {
                       </form>
 
                       <div className="mt-4 flex items-center justify-center gap-2 text-xs text-white/40">
-                        <ShieldCheck size={14} className="text-[#C5A880]" />
+                        <ShieldCheck size={14} className="text-[#C9A84C]" />
                         <span>수집된 정보는 특강 안내 외에 제3자에게 제공되지 않습니다.</span>
                       </div>
                     </div>
