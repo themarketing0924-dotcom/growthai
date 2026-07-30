@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { Sun, Moon, Menu, X, ChevronRight, ChevronDown, Globe } from 'lucide-react';
 import { ConnectAILabLogo } from './ConnectAILabLogo';
 import { AuthModal } from './AuthModal';
@@ -107,12 +107,12 @@ export function Navbar({ entranceComplete, lang, setLang }: NavbarProps) {
         <div className="hidden lg:flex items-center justify-between w-full">
 
           {/* 로고 */}
-          <button onClick={goHome} className="flex items-center gap-2 cursor-pointer bg-transparent border-none p-0 shrink-0">
+          <Link to="/" onClick={goHome} className="flex items-center gap-2 cursor-pointer no-underline p-0 shrink-0">
             <ConnectAILabLogo size={20} className="text-white" />
             <span className="text-[17px] font-bold tracking-tight" style={{ color: '#C9A84C' }}>
               {content.brandName}
             </span>
-          </button>
+          </Link>
 
           {/* Nav Groups */}
           <nav className="flex items-center gap-0.5">
@@ -357,10 +357,10 @@ export function Navbar({ entranceComplete, lang, setLang }: NavbarProps) {
 
         {/* ─────────── MOBILE / TABLET ─────────── */}
         <div className="flex lg:hidden items-center justify-between w-full">
-          <button onClick={goHome} className="flex items-center gap-2 cursor-pointer bg-transparent border-none p-0">
+          <Link to="/" onClick={goHome} className="flex items-center gap-2 cursor-pointer no-underline p-0">
             <ConnectAILabLogo size={16} className="text-white" />
             <span className="text-[15px] font-bold tracking-tight" style={{ color: '#C9A84C' }}>{content.brandName}</span>
-          </button>
+          </Link>
 
           <button
             onClick={() => setMenuOpen(!menuOpen)}
